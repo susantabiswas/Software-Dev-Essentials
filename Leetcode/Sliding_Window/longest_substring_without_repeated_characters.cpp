@@ -54,4 +54,30 @@ public:
         
         return max_len;
     }
+    
+    
+    // Solution 2
+    int lengthOfLongestSubstring(string s) {
+        // marks one position before window start index
+        int start = -1;
+        // for storing first positions of each char
+        vector<int> pos(256, -1);
+        int max_len = 0;
+        
+        for(int i = 0; i < s.size(); i++) {
+            // when a character is repeated, its first position will be greater tahn window start
+            // so we take the start position at its first occurrence
+            if(pos[s[i]] > start) {
+                start = pos[s[i]];
+            }
+            // update first occurrence position of current char, since its first occurrence is 
+            // now one position before current window start
+            pos[s[i]] = i;
+            // update max len if required
+            max_len = max(max_len, i - start);
+        }
+        
+        
+        return max_len;
+    }
 };

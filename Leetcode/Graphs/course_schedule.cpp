@@ -33,12 +33,13 @@ public:
         for(int i = 0; i < indegrees.size(); i++)
             if(indegrees[i] == 0)
                 q.emplace(i);
-        // if there were no 0 degree nodes, not possible
-        if(q.empty())
-            return false;
+
         // total no. of nodes
         int N = indegrees.size();
         
+        // if there were no 0 degree nodes, not possible
+        if(q.empty() && N > 0)
+            return false;
         // Do BFS of graph 
         while(!q.empty()) {
             int curr = q.front();

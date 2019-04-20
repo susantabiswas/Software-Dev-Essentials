@@ -1,8 +1,9 @@
 /*
+    207. Course Schedule
+    https://leetcode.com/problems/course-schedule/submissions/
+    
     We just have to find whether there is a cycle in the prerequisites graph.
     If cycle is there then not possible else possible.
-    
-    https://leetcode.com/problems/course-schedule/submissions/
     
     BFS solution:
     1.First compute indegree of each node

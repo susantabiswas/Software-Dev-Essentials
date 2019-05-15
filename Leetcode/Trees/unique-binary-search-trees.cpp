@@ -10,22 +10,36 @@
 
 class Solution {
 public:
-    int uniqueBST(vector<int>& dp, int n) {
+    // Top down solution
+    int uniqueBSTMem(vector<int>& dp, int n) {
         // base case
         if(n <= 1)
             return 1;
 
         if(dp[n] == 0) 
             for(int i = 0; i < n; i++)
-                dp[n] += uniqueBST(dp, i) * uniqueBST(dp, n-i-1);
+                dp[n] += uniqueBSTMem(dp, i) * uniqueBSTMem(dp, n-i-1);
 
         return dp[n];
     }
 
+    // Bottom up solution
+    int uniqueBSTTab(vector<int>& dp, int n) {
+        dp[0] = dp[1] = 1;
+        
+        for(int i = 2; i <= n; i++) {
+            for(int j = 0; j < i; j++) {
+                dp[i] += dp[j] * dp[i-j-1];
+            }
+        }
+        return dp[n];
+    }
+    
     int numTrees(int n) {
         // memoization table
         vector<int> dp(n+1, 0);
 
-        return uniqueBST(dp, n);
+        //return uniqueBSTMem(dp, n);
+        return uniqueBSTTab(dp, n);
     }
 };

@@ -6,7 +6,7 @@
     keep track of previous element and check if at any time the value of current node
     becomes lesser than equal to previous or not.
     TC: O(n)
-    SC: O(1)
+    SC: O(n)
 */
 
 /**
@@ -20,6 +20,7 @@
  */
 class Solution {
 public:
+
     // checks if a BST is valid or not
     bool isValid(TreeNode* root, TreeNode*& prev) {
         // a null node is always valid
@@ -40,8 +41,37 @@ public:
         return true;
     }
 
+    // checks the validity using inorder traversal iteratively
+    bool isValidIter(TreeNode* root) {
+        TreeNode* prev = nullptr;
+        stack<TreeNode*> s;
+
+        TreeNode* curr = root;
+        while(curr || !s.empty()) {
+            // go left as much as possible
+            while(curr) {
+                s.emplace(curr);
+                curr = curr->left;
+            }
+
+            curr = s.top();
+            s.pop();
+
+            // process current node
+            if(prev && prev->val >= curr->val)
+                return false;
+            
+            prev = curr;
+            // go right as much as possible
+            curr = curr->right;
+        }
+
+        return true;
+    }
+
     bool isValidBST(TreeNode* root) {
         TreeNode* prev = nullptr;
-        return isValid(root, prev);
+        //return isValidRec(root, prev);
+        return isValidIter(root);
     }
 };

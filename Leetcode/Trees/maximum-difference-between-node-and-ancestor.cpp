@@ -2,11 +2,14 @@
     1026. Maximum Difference Between Node and Ancestor
     https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/submissions/
     
-    For this we just need to maximize the diff of root and child value. We do postorder traversal.
-    So for each root of a subtree we return a pair of max and min value in the subtree rooted
-    at current node. Then we just find the diff with current root, we check if that is the max diff 
-    value obtained so far. Then update the ma and min value ending at current subtree for its parent.
-    
+    Bottom up:
+        For this we just need to maximize the diff of root and child value. We do postorder traversal.
+        So for each root of a subtree we return a pair of max and min value in the subtree rooted
+        at current node. Then we just find the diff with current root, we check if that is the max diff 
+        value obtained so far. Then update the ma and min value ending at current subtree for its parent.
+    Top down:
+        We pass min and max value from top and once leaf is reached we return the max-min, also
+        while returning we return the max of left and right subtree calls.
     
 */
 
@@ -21,6 +24,7 @@
  */
 class Solution {
 public:
+    // bottom up
     pair<int, int> findMaxDiff(TreeNode* root, int& max_diff) {
         if(!root)
             return make_pair(INT_MIN, INT_MAX);
@@ -56,11 +60,20 @@ public:
         return make_pair(max_node, min_node);
     }
     
+    // top down:
+    int findMaxDiffTopDown(TreeNode* root, int l, int h) {
+        return !root ? h - l : max(findMaxDiffTopDown(root->left, min(root->val, l), max(root->val, h)),
+                                  findMaxDiffTopDown(root->right, min(root->val, l), max(root->val, h)));
+    }
+    
     int maxAncestorDiff(TreeNode* root) {
         int max_diff = numeric_limits<int> :: min();
         
-        pair<int, int> max_min;
-        findMaxDiff(root, max_diff);
-        return max_diff;
+    //    pair<int, int> max_min;
+        //findMaxDiff(root, max_diff);
+        //return max_diff;
+        int l = numeric_limits<int> :: max();
+        int h = numeric_limits<int> :: min();
+        return findMaxDiffTopDown(root, l, h);
     }
 };

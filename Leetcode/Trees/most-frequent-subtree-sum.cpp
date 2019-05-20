@@ -30,7 +30,7 @@ public:
             freq[curr_sum] = 0;
 
         ++freq[curr_sum];
-        max_freq = max(max_freq, freq[curr_sum]);
+        //max_freq = max(max_freq, freq[curr_sum]);
 
         return curr_sum;
     }
@@ -45,6 +45,10 @@ public:
         
         // find all those sum values with max frequency value
         unordered_map<int, int> :: iterator it;
+        for(it = freq.begin(); it != freq.end(); it++) {
+            max_freq = max(max_freq, it->second);
+        }
+        
         for(it = freq.begin(); it != freq.end(); it++) {
             if(it->second == max_freq) 
                 ans.emplace_back(it->first);

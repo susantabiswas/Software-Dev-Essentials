@@ -37,12 +37,10 @@ public:
             else
                 searchBound(arr, target, bound_idx, left, middle_idx + 1, end);
         }
-        else if(arr[middle_idx] < target) {
+        else if(arr[middle_idx] < target) 
             searchBound(arr, target, bound_idx, left, middle_idx + 1, end);
-        }
-        else {
+        else 
             searchBound(arr, target, bound_idx, left, start, middle_idx - 1);
-        }
     }
     
     /*
@@ -53,7 +51,7 @@ public:
                   int start, int end) {
         if(start > end)
             return;
-        // find the mid point
+       
         int middle_idx = start + (end - start) / 2;
         
         // when target is found, search for the lower and 
@@ -61,20 +59,13 @@ public:
         if(arr[middle_idx] == target) {
             // search in left and right sides for starting and 
             // ending indices of target
-            int lower = middle_idx, upper = middle_idx;
-            searchBound(arr, target, lower, true, start, middle_idx - 1);
-            searchBound(arr, target, upper, false, middle_idx + 1, end);
-            
-            // update the found indices 
-            result.front() = lower;
-            result.back() = upper;
+            searchBound(arr, target, result.front() = middle_idx, true, start, middle_idx - 1);
+            searchBound(arr, target, result.back() = middle_idx, false, middle_idx + 1, end);
         }
-        else if(arr[middle_idx] < target) {
+        else if(arr[middle_idx] < target) 
             findRange(arr, target, result, middle_idx + 1, end);
-        }
-        else {
+        else 
             findRange(arr, target, result, start, middle_idx - 1);
-        }
     }
     
     // driver function

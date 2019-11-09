@@ -37,6 +37,12 @@ public:
                 --dict[s[j]];
                 ++j;
                 // update changes required
+                // we don't update max_freq because any valid string 
+                // length created here will still be smaller, so
+                // we just increase the window from left by 1, knowing the
+                // fact that the skipped left char may or may not be the
+                // most freq char, (i-j) will still be same incase it is invalid 
+                // as j gets increased by 1 as well as i
                 flips_req = i - j - max_freq;
             }
             // update max length if applicable

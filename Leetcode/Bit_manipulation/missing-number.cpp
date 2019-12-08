@@ -19,6 +19,23 @@ public:
         // term will cancel each other except for the single term missing
         return xor_arr ^ xor_all;
     }
+  
+    /*
+      Solution 2: Optimized solution
+    */
+    int missingNumber(vector<int>& arr) {
+        int xor_all = 0;
+        for(int i = 1; i <= arr.size(); i++ ) {
+            // xor of element from [1:n]
+            xor_all ^= i;
+            // XOR value of array element
+            xor_all ^= arr[i-1];
+        }
+        
+        // if XOR of all the values from the array and [0:n] is taken, then each duplicate
+        // term will cancel each other except for the single term missing
+        return xor_all;
+    }
 };
 
     

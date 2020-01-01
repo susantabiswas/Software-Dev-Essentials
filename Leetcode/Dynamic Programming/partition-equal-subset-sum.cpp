@@ -41,7 +41,7 @@ public:
         this way can avoid addition of redundant terms in some problems
         for(const int& num: nums) {
             // we need to check if sum 'i' is possible 
-            for(int i = total / 2; i >= 1; i++) {
+            for(int i = total / 2; i >= num; i--) {
                 dp[i] = dp[i] || dp[i - num];
             }
         }

@@ -10,6 +10,54 @@
 
 class Solution {
 public:
+    // TC : O(n)
+    // SC: O(1)
+    int robTabular(vector<int>& nums) {
+        if(nums.empty())
+            return 0;
+        
+        const int N = nums.size();
+        // max value gained if the previous house was robbed and not robbed
+        int robbed_prev = 0, not_robbed_prev = 0;
+        // max value gaine if current house is robbed and not robbed
+        int robbed_curr = 0, not_robbed_curr = 0;
+        
+        for(int i = 0; i < N; i++) {
+            // if current house is robbed, then max value is 
+            // whatever gained till the previous house 
+            // by not robbing it + current house value
+            robbed_curr = nums[i] + not_robbed_prev;
+            // if current house is not robbed, max value is whichever
+            // is max out of robbing or not robbing the previous house
+            not_robbed_curr = max(not_robbed_prev, robbed_prev);
+            
+            // make the current values as previous for the next house
+            robbed_prev = robbed_curr, not_robbed_prev = not_robbed_curr;
+        }
+        return max(robbed_prev, not_robbed_prev);
+    }
+    
+    
+    // Using DP
+    // TC: O(N), SC:O(N)
+    int robTabular(vector<int>& nums) {
+        if(nums.empty())
+            return 0;
+        
+        const int N = nums.size();
+        vector<int> robbed(N, 0);
+        vector<int> not_robbed(N, 0);
+        
+        for(int i = 0; i < N; i++) {
+            // if the current house is robbed
+            robbed[i] = nums[i] + ((i >= 1) ? not_robbed[i-1] : 0);
+            // if the current house is not robbed
+            not_robbed[i] = (i >= 1) ? max(not_robbed[i-1], robbed[i-1]) : 0;
+        }
+        return max(robbed[N-1], not_robbed[N-1]);
+    }
+    
+    
     int maxRob(int curr, vector<int>& nums, vector<int>& dp,
               int& inc_curr, int& exc_curr) {
         // last house

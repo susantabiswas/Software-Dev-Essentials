@@ -1,6 +1,7 @@
 /*
     https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
     
+    https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/discuss/478218/Simple-C%2B%2B-O(n)-solution.-Detailed-Explanation
     // Solution 1
     We use state transition for this. Since there are two transactions, that means there are 4 states:
     

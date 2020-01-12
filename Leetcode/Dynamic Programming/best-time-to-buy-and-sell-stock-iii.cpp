@@ -1,6 +1,18 @@
 /*
     https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
     
+    // Solution 1
+    We use state transition for this. Since there are two transactions, that means there are 4 states:
+    
+    (Bought1)---sell---->(Sold1)-----buy----->(Bought2)------sell----->(Sold2)
+    
+    Also for each of the states, we can decide to not do anything, that would mean just using the
+    current state.
+    TC: O(N), SC: O(1)
+    
+    
+    
+    // Solution 2
     We keep track of the maximum profit that can be made if a stock is sold on ith day.
     This can be done by tracking the min stock price till i-th day by traversing from left.
     We store the above info, then we start traversing from right side keeping track of max price and max profit.
@@ -13,7 +25,34 @@
 */
 class Solution {
 public:
+    // Solution 1: Using state transitions
     int maxProfit(vector<int>& prices) {
+        if(prices.empty())
+            return 0;
+        
+        // All the variables below are in terms of profit we have 
+        // Bought for the first time
+        int bought1 = -1 * prices[0];
+        // Sold for the first time
+        int sold1 = 0;
+        // Bought for the second time
+        int bought2 = INT_MIN;
+        // Sold for the second time
+        int sold2 = 0;
+        
+        for(int i = 1; i < prices.size(); i++) {
+            bought1 = max(bought1, -1 * prices[i]);
+            sold1 = max(sold1, bought1 + prices[i]);
+            bought2 = max(bought2, sold1 - prices[i]);
+            sold2 = max(sold2, bought2 + prices[i]);
+        }
+        
+        return sold2;
+    }
+    
+    
+    // Solution 2
+    int maxProfit2(vector<int>& prices) {
         if(prices.empty())
             return 0;
         

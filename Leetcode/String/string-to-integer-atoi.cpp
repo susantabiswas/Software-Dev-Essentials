@@ -33,27 +33,19 @@ public:
         // if the final number is negative then each time we add negative digits
         // this makes it possible to save it in 32-bit int otherwise overflow occurs
         while(i < str.size() && isdigit(str[i])) {
-            // check if the number goees beyond negative LIMIT
-            if(negative && (result < INT_MIN/10))
-                return INT_MIN;
-            // check if the number goees beyond positive LIMIT
-            else if(!negative && (result > INT_MAX/ 10))
-                return INT_MAX;
-            
-            result *= 10;
             int curr_digit = str[i] - '0';
             
             // check if the number goees beyond negative LIMIT
-            if(negative && (result < (INT_MIN + curr_digit)))
+            if(negative && (result < (INT_MIN + curr_digit) / 10))
                 return INT_MIN;
             // check if the number goees beyond positive LIMIT
-            else if(!negative && (result > (INT_MAX - curr_digit)))
+            else if(!negative && (result > (INT_MAX - curr_digit)/10))
                 return INT_MAX;
             
             // make the current digit negative in case of negative number is final result
             if(negative)
                 curr_digit *= -1;
-            result += curr_digit;
+            result = result*10 + curr_digit;
             ++i;
         }
         return result;

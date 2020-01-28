@@ -9,10 +9,9 @@
     The idea is to create a Trie of the words to find, then for each position of grid
     check if the current char is in Trie and go further, we stop when there is no node in Trie
     for current char as that means there is anyways will be no such word to search.
-    
-    NOTE: current solution is a bit slower because of use of smart pointers, with raw pointers
-    it will be much faster.
 */
+
+
 class Solution {
 public:
     struct TrieNode {
@@ -52,31 +51,51 @@ public:
     
     void DFS(vector<vector<char> >& board, int i, int j, 
                     unordered_set<string>& result, string partial, TrieNode* root) {
+        
+        // if the current position has already been visited
+        if(board[i][j] == '#')
+            return;
+        
         partial += board[i][j];
         
         // check if the current char in board ends a string or not
         if(root->is_string) 
             result.insert(partial);
         
-        // traverse in 4 directions, we only travese if the next char is there in the Trie
-        // directions: down, left, top and right
-        vector<vector<int>> directions = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+        // mark it visited
+        char curr_char = board[i][j];
+        board[i][j] = '#';
         
-        for(const auto& direction: directions) {
-            int row = direction[0] + i, col = direction[1] + j;
-            
-            if(isValid(row, col, board.size(), board[0].size()) &&
-               root->leaves.find(board[row][col]) != root->leaves.end() &&
-               board[row][col] != '#') {
-                
-                // mark it visited
-                char curr_char = board[i][j];
-                board[i][j] = '#';
-                DFS(board, row, col, result, partial, root->leaves[board[row][col]].get());
-                // mark it unvisited 
-                board[i][j] = curr_char;
-            }
+        // traverse in 4 directions, we only travese if the next char is there in the Trie
+        int row = i + 1, col = j;
+        if(isValid(row, col, board.size(), board[0].size()) &&
+           root->leaves.find(board[row][col]) != root->leaves.end()) {
+
+            DFS(board, row, col, result, partial, root->leaves[board[row][col]].get());
         }
+        
+        row = i, col = j - 1;
+        if(isValid(row, col, board.size(), board[0].size()) &&
+           root->leaves.find(board[row][col]) != root->leaves.end()) {
+
+            DFS(board, row, col, result, partial, root->leaves[board[row][col]].get());
+        }
+        
+        row = i - 1, col = j;
+        if(isValid(row, col, board.size(), board[0].size()) &&
+           root->leaves.find(board[row][col]) != root->leaves.end()) {
+
+            DFS(board, row, col, result, partial, root->leaves[board[row][col]].get());
+        }
+        
+        row = i, col = j + 1;
+        if(isValid(row, col, board.size(), board[0].size()) &&
+           root->leaves.find(board[row][col]) != root->leaves.end()) {
+
+            DFS(board, row, col, result, partial, root->leaves[board[row][col]].get());
+        }
+        // mark it unvisited 
+        board[i][j] = curr_char;
     }
     
     vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {

@@ -29,6 +29,7 @@ public:
         // Using the combination of above two we can save the current as well as next state info
         for(int i = 0; i < M; i++)
             for(int j = 0; j < N; j++) {
+                int curr_state = board[i][j];
                 int num_ones = findOnes(board, M, N, i, j);
                 // rule 4
                 if(board[i][j] == 0)

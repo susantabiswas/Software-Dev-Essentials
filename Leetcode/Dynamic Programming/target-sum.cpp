@@ -3,11 +3,11 @@
 	
 	The given sets can be considered as P and N. where N contains the numbers of other set which are
 	subtracted.
-	P + N = Target(T)
-	P + N + P + N = T + P + N
-	2P = T + (P + N)
-	2P = T + S
-	P = (T + S) / 2
+	P - N = Target(T) ----- 1
+    	P + N = S ------------- 2
+	Adding (1) and (2)
+	=> 2P = T + S
+	=> P = (T + S) / 2
 	
 	=> (T + S) should be even and P = (T + S)/2
   

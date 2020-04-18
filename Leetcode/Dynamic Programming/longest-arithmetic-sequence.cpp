@@ -18,7 +18,7 @@
     us dp[indexof(4)][2] = 2, so dp[indexof(6)] = 2 + 1
     
     TC: O(N^2)
-    SC: O(N*diff), diff: max diff between any two terms of array
+    SC: O(N*diff), diff: max unique number of differences between any two terms of array, which can be N-1
 */
 
 class Solution {

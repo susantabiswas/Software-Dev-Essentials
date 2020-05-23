@@ -17,9 +17,10 @@ public:
         // there is exactly one way to get a BST with 0 or 1 node
         dp[0] = dp[1] = 1;
         
+        // Cn = Sum( Ci * C((n-1) - i)) , 0 <= i <= n-1
         for(int i = 2; i <= n; i++) {
-            for(int j = 1; j <= i; j++) {
-                dp[i] += dp[j-1] * dp[i - j];
+            for(int j = 0; j <= i-1; j++) {
+                dp[i] += dp[j] * dp[i - 1 - j];
             }
         }
         return dp[n];

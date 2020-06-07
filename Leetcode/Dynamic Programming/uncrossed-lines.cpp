@@ -12,15 +12,9 @@ public:
     // TC: O(N^2), SC:O(MN)
     int maxUncrossedLines(vector<int>& A, vector<int>& B) {
         const int M = A.size(), N = B.size();
+		// dp(i, j): longest common subsequence with A[0:i-1] and B[0:j-1]
+		// Initially the length is 0, which covers the cases when the length of A or B being 0.
         vector<vector<int>> dp(M+1, vector<int>(N+1, 0));
-        
-        // when the first array is empty, no lines can connect
-        for(int i = 0; i <= N; i++)
-            dp[0][i] = 0;
-        
-        // when the second array is empty, no lines can connect
-        for(int i = 0; i <= M; i++)
-            dp[i][0] = 0;
         
         // Now the aim is to find the longest common subsequence 
         for(int i = 1; i <= M; i++)

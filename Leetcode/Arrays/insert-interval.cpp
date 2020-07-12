@@ -18,9 +18,6 @@ public:
         if(intervals.empty())
             return merged_intervals;
         
-        // sort the intervals in increasing order acc to start time 
-        sort(intervals.begin(), intervals.end());
-        
         vector<int> curr_interval = intervals[0];
 
         for(int i = 1; i < intervals.size(); i++) {
@@ -52,7 +49,7 @@ public:
         int pos = 0;
         for(int i = 0; i < intervals.size(); i++) {
             // position found to insert
-            if(intervals[i][0] > newInterval[1]) {
+            if(intervals[i][0] > newInterval[0]) {
                 break;
             }
             ++pos;

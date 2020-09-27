@@ -1,15 +1,14 @@
 /*
     https://leetcode.com/problems/find-all-duplicates-in-an-array/submissions/
-    
-    TC: O(N)
-    SC: O(1)
+
 */
 
 class Solution {
 public:
+    // Solution1 : Using moving elements
     // TC: O(N)
     // SC: O(1)
-    vector<int> findDuplicates(vector<int>& nums) {
+    vector<int> sol1(vector<int> &nums) {
         vector<int> result;
         
         // put the numbers at their correct position
@@ -32,5 +31,25 @@ public:
                 result.emplace_back(nums[i]);
         }
         return result;
+    }
+    
+    // Solution2: Using marking for the visited positions
+    // TC: O(N)
+    // SC: O(1)
+    vector<int> sol2(vector<int> &nums) {
+        vector<int> result;
+        for(int i = 0; i < nums.size(); i++) {
+            nums[abs(nums[i]) - 1] *= -1;
+            // check if the number has freq of 2
+            if(nums[abs(nums[i]) - 1] > 0)
+                result.emplace_back(abs(nums[i]));
+            
+        }
+        return result;
+    }
+    
+    vector<int> findDuplicates(vector<int>& nums) {
+        // return sol1(nums);
+        return sol2(nums);
     }
 };

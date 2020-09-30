@@ -55,6 +55,7 @@ public:
         
         int curr = 0;
         // check if the leaves of tree 2 are the same as that of tree 1
-        return compareLeaves(root2, leaves, curr);
+        return compareLeaves(root2, leaves, curr) 
+                && curr == leaves.size(); // if n_leaves_tree1 > n_leaves_tree2
     }
 };

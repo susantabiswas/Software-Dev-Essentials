@@ -1,21 +1,11 @@
 /*
     https://leetcode.com/problems/insertion-sort-list/submissions/
     
+    With dummy head approach.
     TC: O(N)
     SC: O(1)
 */
 
-
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     // put the current node at its correct position
@@ -52,5 +42,44 @@ public:
         sorted_head = dummy_head->next;
         delete dummy_head;
         return sorted_head;
+    }
+};
+
+////////////// Without dummy head
+class Solution {
+public:
+    void placeNode(ListNode* &sorted, ListNode* &node) {
+        ListNode *curr = sorted, *prev = nullptr;
+        // find the position to place the node
+        while(curr && curr->val < node->val) {
+            prev = curr;
+            curr = curr->next;
+        }
+        
+        // insert the node at its correct position
+        node->next = curr;
+        // when it is the smallest and should be at head pos.
+        if(prev) 
+            prev->next = node;
+        else 
+            sorted = node;
+    }
+    
+    // TC: O(N^2)
+    ListNode* insertionSortList(ListNode* head) {
+        // Sorted list of nodes
+        ListNode *sorted = nullptr;
+        ListNode *curr = head, *next_ptr = nullptr;
+        
+        while(curr) {
+            // save the next node info and remove it from current list
+            next_ptr = curr->next;
+            curr->next = nullptr;
+            placeNode(sorted, curr);
+            // goto next node
+            curr = next_ptr;
+        }
+        
+        return sorted;
     }
 };

@@ -16,6 +16,7 @@
     
 class Solution {
 public:
+    // SOLUTION 1: BOTTOM - UP 
     // We try to find the smallest and largest subchild for ecah node
     // once it is found, we find the abs difference of those with the
     // current node value since max value is when difference between max
@@ -59,9 +60,34 @@ public:
         }
     }
     
+    // SOLUTION 2: Top down
+    /*
+        TC: O(N)
+        
+        Here we try to pass down the min and max values for each
+        path all the way till the last node i.e leaf node. At the 
+        end of the path we compute abs(min - max) and then return that value.
+        Since all the leaf paths will return the |max - min| we just
+        need to find the max out of all those.
+    */
+    int findMaxDiffTop(TreeNode *root,
+                    int max_child, int min_child) {
+        // End of path
+        if(!root)
+            return max_child - min_child;
+        // update the min and max for the path with the current value
+        max_child = max(max_child, root->val);
+        min_child = min(min_child, root->val);
+        
+        return max(findMaxDiffTop(root->left, max_child, min_child),
+                  findMaxDiffTop(root->right, max_child, min_child));
+    }
+    
     int maxAncestorDiff(TreeNode* root) {
         int ans = INT_MIN, max_child = INT_MIN, min_child = INT_MAX;
-        findMaxDiff(root, ans, max_child, min_child);
-        return ans;
+        //findMaxDiff(root, ans, max_child, min_child);
+        //return ans;
+        
+        return findMaxDiffTop(root, max_child, min_child);
     }
 };

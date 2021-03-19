@@ -1,11 +1,14 @@
 /*
     https://leetcode.com/problems/word-search-ii/submissions/
-    TC: O(WL) + O((MN) ^ 4), 
+    TC: O(WL) + O((MN) * 4 * 3^L-1), 
         W: no. of words, L: max length of word
         O(WL) for inserting all the words in Trie
-        O((MN) ^ 4): We start DFS from each position of matrix(M x N) and also
-                    in worst case, it can traverse the entrie grid (MN)
-    
+        O((MN) * 4 * 3^L-1): We start DFS from each position of matrix(M x N).
+                            Now at the initial starting point in grid, we have 4 directions to explore with L-1
+                            remaining length, then the next time we have 3 directional positions for traversal
+                            (3 because we reached current cell from 1 one of the directions so it is already visited).
+                            So 4 (initially) * 3^L-1(remaining L-1 will each time have worst case 3 possible unvisited directions)
+                            
     The idea is to create a Trie of the words to find, then for each position of grid
     check if the current char is in Trie and go further, we stop when there is no node in Trie
     for current char as that means there is anyways will be no such word to search.
@@ -50,7 +53,7 @@ public:
     }
     
     void DFS(vector<vector<char> >& board, int i, int j, 
-                    unordered_set<string>& result, string partial, TrieNode* root) {
+                    vector<string>& result, string partial, TrieNode* root) {
         
         // if the current position has already been visited
         if(board[i][j] == '#')
@@ -59,8 +62,10 @@ public:
         partial += board[i][j];
         
         // check if the current char in board ends a string or not
+        // If it does, then mark the flag as false, so that the same word
+        // if found is not inserted again
         if(root->is_string) 
-            result.insert(partial);
+            result.emplace_back(partial), root->is_string = false;
         
         // mark it visited
         char curr_char = board[i][j];
@@ -105,7 +110,7 @@ public:
         for(const string& word: words)
             obj.Insert(word);
         
-        unordered_set<string> result;
+        vector<string> result;
         const int M = board.size(), N = board[0].size();
         
         // get the root of Trie
@@ -119,6 +124,6 @@ public:
                    DFS(board, i, j, result, partial, root->leaves[board[i][j]].get());
                 }
         
-        return vector<string>{result.begin(), result.end()};
+        return result;
     }
 };

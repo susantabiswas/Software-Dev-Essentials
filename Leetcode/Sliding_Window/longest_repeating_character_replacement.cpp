@@ -38,11 +38,12 @@ public:
                 ++j;
                 // update changes required
                 // we don't update max_freq because any valid string 
-                // length created here will still be smaller, so
-                // we just increase the window from left by 1, knowing the
-                // fact that the skipped left char may or may not be the
-                // most freq char, (i-j) will still be same incase it is invalid 
-                // as j gets increased by 1 as well as i
+                // length created here will still be smaller,  knowing this fact
+                // it doesnt matter if the shrunken window is valid or not. We just want to
+                // make the window valid again which became invalid because of most recent char,
+                // so we just shrink by 1, which makes flips_req valid again and we try to expand
+                // again to search for a better longer valid window, incase we still end up with an
+                // invalid window, we will again be inside this loop and repeat the step
                 flips_req = i - j - max_freq;
             }
             // update max length if applicable

@@ -29,11 +29,15 @@ public:
                     ++K;
                 ++j;
             }
-            // Each valid window adds the subarrays which satisfies the condition
-            // For : 1,2,1, k=2
+            // Each valid contiguous window seen so far, add current number 
+            // For : 1,2,3, k=2
             // 1: [1] 
             // 2: [2], [1,2]
-            // 3: [1,2], [2,1], [1,2,1]
+            // 3: [3], [2,3], [1,2,3]
+            // Pattern: current number at ith, can be added to all the contiguous subarrays
+            // till i-1th pos.
+            // In general, no. of contiguous subarrays in N length array: N * (N+1) / 2
+            // Since we are traversing incrementally hence we add each time: 1 + 2 + 3 ....+ N
             substrings += i - j + 1;
         }
         return substrings;

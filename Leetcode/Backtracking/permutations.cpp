@@ -10,7 +10,8 @@
 class Solution {
 public:
     // Using backtracking
-    // TC: O(n!), SC: O(n! * n)
+    // TC: O(n! * n), n for copying the elements at the end for each pmt
+    // SC: O(n! * n)
     void permuteUniqueRec(vector<int>& nums, int curr,  
                           set<vector<int>>& s, vector<vector<int> >& pmt) {
         // if all the numbers have been used

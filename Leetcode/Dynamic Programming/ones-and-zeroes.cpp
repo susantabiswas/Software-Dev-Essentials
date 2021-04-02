@@ -3,6 +3,47 @@
 */
 class Solution {
 public:
+    /*
+        ******************************** SOLUTION 1: Without State Reduction *****************************
+        TC: O(Smn)
+        SC: O(Smn)
+    */
+    tuple<int, int> getCount(string &s) {
+        int zeros = 0;
+        for(const char &ch: s)
+            if(ch == '0') ++zeros;
+        return make_tuple(zeros, s.size() - zeros);
+    }
+    
+    int findMaxForm1(vector<string>& strs, int m, int n) {
+        vector< vector< vector<int> > > 
+            dp(strs.size(), vector< vector<int> >(m + 1, vector<int>(n + 1, 0)));
+        
+        for(int i = 0; i < strs.size(); i++) {
+            // count the number of ones and zeros of current
+            auto [zeros_count, ones_count] = getCount(strs[i]);
+                    
+            for(int zeros = 0; zeros <= m; zeros++)
+                for(int ones = 0; ones <= n; ones++) {
+                    // either current string can be included (given it meets the constraints)
+                    // or we dont include it
+                    int exclude = i >= 1 ? dp[i-1][zeros][ones] : 0;
+                    int include = 0;
+                    if(zeros_count <= zeros && ones_count <= ones)
+                        include = 1 + (i >= 1 ? dp[i-1][zeros - zeros_count][ones - ones_count] : 0);
+                    
+                    dp[i][zeros][ones] = max(include, exclude);
+                }
+        }
+                    
+        return dp[strs.size()-1][m][n];
+    }
+    
+    /*
+        ******************************** SOLUTION 2: State Reduction *****************************
+        TC: O(Smn)
+        SC: O(mn)
+    */
     int findMaxForm(vector<string>& strs, int m, int n) {
     
         // each entry: no. of strings that can be formed with m and n

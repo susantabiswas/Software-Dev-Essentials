@@ -18,13 +18,13 @@ public:
         for(auto num: nums)
             num_sum[num] += num;
         
-        // Max value when the last operation was using a number 
+        // Max value when the last operation was using the number 
         int use_prev = 0;
-        // Max value when last operation was skipping a number
+        // Max value when last operation was skipping the number
         int skip_prev = 0;
         for(int i = 0; i < num_sum.size(); i++) {
             // Max value with operation of using a number
-            int use = max(skip_prev + num_sum[i], use_prev);
+            int use = skip_prev + num_sum[i];
             // Max value if current number is not used
             int skip = max(use_prev, skip_prev);
             

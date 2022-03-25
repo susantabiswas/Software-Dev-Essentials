@@ -2,7 +2,8 @@
     https://leetcode.com/problems/letter-combinations-of-a-phone-number/
     
     TC: O(4^d), d= No. of digits in string
-    
+    SC: O(4^d * n), There are 4^d branches (paths) in recursion tree and the 
+        length of worst case str is n
     Idea is simple, for each digit in string, we try out all possible 
     positional chars for that digit, and recurse further for d-1 remaining digits.
 */

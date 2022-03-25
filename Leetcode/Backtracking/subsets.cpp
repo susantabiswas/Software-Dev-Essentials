@@ -2,6 +2,14 @@
     https://leetcode.com/problems/subsets/
     
     Solution that works with duplicates as well.
+
+    NOTE: No set is used to ensure uniqueness of subsets, this is due
+    to the reason that duplicate sets are formed only when we can have the 
+    same value at a given position multiple times.
+    Eg: [1, 1] => would create duplicate since for pos 0, we can have 
+    1 twice.
+    Since this problem has only unique nums, so we won't have same number at
+    the same position multiple times and hence don't need a set.
 */
 
 class Solution {

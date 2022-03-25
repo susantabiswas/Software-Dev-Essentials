@@ -2,7 +2,13 @@
     https://leetcode.com/problems/subsets/
     
     Solution that works with duplicates as well.
-
+	Note: Elements of a subset have their order maintained. Eg [1,2,3] => [3,2] is not possible
+	
+	Idea: The core idea is subsets can be formed starting with a smaller null set and slowly
+	adding one element at a time to all existing subsets.
+	The reason why this works is because we are essentially adding the current element to all the 
+	subsets of varying lengths formed so far without this element.
+	
     NOTE: No set is used to ensure uniqueness of subsets, this is due
     to the reason that duplicate sets are formed only when we can have the 
     same value at a given position multiple times.

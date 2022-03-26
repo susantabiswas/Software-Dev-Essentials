@@ -2,7 +2,7 @@
     980. Unique Paths III
     https://leetcode.com/problems/unique-paths-iii/
     We use backtracking for finding the paths. Since movement can be 
-    in 4 directions, we form a loop path, so we mark each processing node 
+    in 4 directions, we form run into a loop path, so we mark each processing node 
     -1 essentially preventing further accessing that cell till we find ways 
     using that cell, after that is done we mark is accessible again.
 */
@@ -11,7 +11,7 @@ class Solution {
 public:
     void findPaths(pair<int, int>& end, int i, int j, 
                  vector<vector<int>>& grid, int walkable_steps, int& ways) {
-        // when target is found
+        // when target is found and all the walkable points are used
         if(i == end.first && j == end.second) {
             if(walkable_steps == -1)
                 ++ways;
@@ -42,9 +42,9 @@ public:
         pair<int, int> start = {-1, -1};
         pair<int, int> end = {-1, -1};
         
-        // keeps track of cells that are walkable
+        // keeps track of total number of cells that are walkable
         int walkable_steps = 0;
-        
+        // find the coordinates of start, finish point and total walkable steps 
         for(int i = 0; i < M; i++)
             for(int j = 0; j < N; j++) {
                 if(grid[i][j] == 1) {

@@ -13,14 +13,11 @@ public:
     // TC: O(n! * n), n for copying the elements at the end for each pmt
     // SC: O(n! * n)
     void permuteUniqueRec(vector<int>& nums, int curr,  
-                          set<vector<int>>& s, vector<vector<int> >& pmt) {
+                          vector<vector<int> >& pmt) {
         // if all the numbers have been used
         if(curr == nums.size()) {
-            if(s.find(nums) == s.end()) {
-                s.emplace(nums);
                 pmt.emplace_back(nums);
                 return;
-            }
         }
         
         // swap the current position with remaining numbers
@@ -29,7 +26,7 @@ public:
             if(i == curr || nums[i] != nums[curr]) {
                 // swap positions
                 swap(nums[curr], nums[i]);
-                permuteUniqueRec(nums, curr + 1, s, pmt);
+                permuteUniqueRec(nums, curr + 1, pmt);
                 // revert back
                 swap(nums[curr], nums[i]);
             }
@@ -38,9 +35,8 @@ public:
     
     // Using backtracking
     vector<vector<int>> permuteBacktracking(vector<int>& nums) {
-        set<vector<int> > s;
         vector<vector<int> > pmt;
-        permuteUniqueRec(nums, 0, s, pmt);
+        permuteUniqueRec(nums, 0, pmt);
         return pmt;
     }
     
@@ -74,8 +70,8 @@ public:
     }
     
     vector<vector<int>> permute(vector<int>& nums) {
-        // return permuteBacktracking(nums);
-        return nextPermutationDriver(nums);
+        return permuteBacktracking(nums);
+        // return nextPermutationDriver(nums);
     }
     
 };

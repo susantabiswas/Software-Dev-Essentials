@@ -8,7 +8,7 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices, int fee) {
         // cash if we don't hold any stock
-        int cash_without_stock = 0,  cash_without_stock_orev = 0;
+        int cash_without_stock = 0,  cash_without_stock_prev = 0;
         // cash if we hold a stock
         int cash_with_stock = 0, cash_with_stock_prev = -1 * prices[0];
         
@@ -19,16 +19,16 @@ public:
             // 2. No stock till yesterday and buy stock today
             // 3. keep holding the previous stock
             cash_with_stock = max({
-                                    cash_without_stock_orev - prices[i],
+                                    cash_without_stock_prev - prices[i],
                                     cash_with_stock_prev
                                 });
             // Cash without holding stock: 
             // 1. keep cash we had the previous day
             // 2. sell the stock we had till yesterday 
-            cash_without_stock = max(cash_without_stock_orev,
+            cash_without_stock = max(cash_without_stock_prev,
                                     cash_with_stock_prev + prices[i] - fee);
             // update previous states
-            cash_without_stock_orev = cash_without_stock;
+            cash_without_stock_prev = cash_without_stock;
             cash_with_stock_prev = cash_with_stock;
         }
         return cash_without_stock;

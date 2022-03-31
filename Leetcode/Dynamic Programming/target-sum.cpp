@@ -23,7 +23,10 @@ public:
         if(S > total || (S + total) % 2 != 0)
             return 0;
         
-        int positive_set_sum = (S + total) / 2;
+        // If T is negative or either P or N are negative, the essence of 
+        // formula stays the same but the positive_set_sum might be negative and
+        // throw error, so we take abs of formula
+        int positive_set_sum = abs((S + total) / 2);
         
         // each entry i: num of ways in which sum i is possible using the given arrays elements 
         vector<int> dp(positive_set_sum + 1, 0);

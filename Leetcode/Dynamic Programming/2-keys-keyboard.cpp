@@ -43,20 +43,24 @@ public:
         
         return ans;
     }
-    /*
+    
+    // Sol 2
     int minSteps(int n) {
-        // dp[i] indicates the min no. of steps req for making 'i'As.
+        // dp[i] = Min no. of ops needed to fill i chars
         vector<int> dp(n+1, INT_MAX);
+        // no ops needed
+        dp[0] = dp[1] = 0;
         
-        dp[0] = dp[1] = 0; 
-        for(int i = 2; i <= n; i++) {
-           for(int j = 1; j < i; j++) {
-                // current can't be used for making As if it cannot divide n
-                if(i % j == 0) {
-                    dp[i] = min(dp[i], dp[j] + (i / j - 1) + 1);
-                }
-           }
-        }
-       return dp[n];
-    }*/
+        // For each char 'i', we check all the possible char states 'j' that
+        // have appeared so far and check the ops usage if one of those
+        // is used for paste operation.
+        for(int i = 2; i <= n; i++)
+            for(int j = 1; j <= i / 2; j++)
+                // if the curr char no. of chars 'j' can make i chars on
+                // the screen, then use it (i / j) and add the cost of getting 
+                // j chars on screen in the 1st place (dp[j])
+                if(i % j == 0)
+                    dp[i] = min(dp[i], i / j + dp[j]);
+        return dp[n];
+    }
 };

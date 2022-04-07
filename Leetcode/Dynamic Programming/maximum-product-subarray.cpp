@@ -2,7 +2,8 @@
     152. Maximum Product Subarray
     https://leetcode.com/problems/maximum-product-subarray/
     
-    For getting the max product, we need to consider a contiguous array of elements. Now if there are odd number of neg numbers exists in between, then product becomes negative. 
+    For getting the max product, we need to consider a contiguous array of elements. 
+    Now if odd number of neg numbers exists in between, then product becomes negative. 
     Also if there are even number of negative terms, then entire product becomes +ve.
     We use two vars: one tracks the max product till current point and other min product.
     Also whenever we get a negative term, we swap the two vars.

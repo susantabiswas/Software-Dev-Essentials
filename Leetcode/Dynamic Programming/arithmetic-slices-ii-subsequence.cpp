@@ -15,7 +15,7 @@
 class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& nums) {
-        // dp[i] = Hash table of <diff, seq length ending at ith element>  
+        // dp[i] = Hash table of <diff, no. of AP seqs till ith element>  
         vector<unordered_map<long, long>> dp(nums.size());
         long arithmetic_seq = 0;
         

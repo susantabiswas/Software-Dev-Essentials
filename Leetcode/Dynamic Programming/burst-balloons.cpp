@@ -16,9 +16,8 @@ public:
         // add 2 more columns to account for -1 and N boundaries
         vector<vector<int> > dp(N + 2, vector<int>(N + 2, 0));
         
-        // we approach the balloon bursting from bottom up.
         // for a range [i:j], we find the max coins that we can get in that range
-        // if a balloon 'k' is the last one to be burst, i<=k<=j
+        // if a balloon 'k' is the last one to be burst, i<=k<=j.
         // Also since we are thinking in the bottom up way, where the kth balloon is the 
         // last one to be burst, in the original array, we can still have [ : i-1] and [j+1 : ]
         // balloons, so since kth balloon will be the last one in [i:j] range and the corner
@@ -27,9 +26,15 @@ public:
         for(int l = 0; l < N; l++) {
             for(int i = 1; i <= N - l; i++) {
                 int j = i + l;
-                
+                // kth balloon is burst last since if it is burst first
+                // then dp[start][k-1] and dp[k+1][end] cannot be independent subproblems.
+                // With kth balloon bursted, k-1 and k+1 will become adjacent and hence 
+                // can no longer be solved independently.
+                // Since kth is burst last, none of balloons in [start:end] will be present, rather
+                // start-1 and end+1 th balloons will be present.
                 for(int k = i; k <= j; k++) {
-                    dp[i][j] = max(dp[i][j], dp[i][k-1] + nums[i-1] * nums[k] * nums[j+1] + dp[k+1][j]);
+                    dp[i][j] = max(dp[i][j], 
+                                dp[i][k-1] + (nums[i-1] * nums[k] * nums[j+1]) + dp[k+1][j]);
                 }
             }
         }

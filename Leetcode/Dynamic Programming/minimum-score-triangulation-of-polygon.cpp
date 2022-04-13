@@ -9,6 +9,7 @@
 
 class Solution {
 public:
+    // Tabular Sol: Style 1
     // TC: O(N^3)
     // SC: O(N^2)
     int minScoreTriangulationTabular(vector<int>& arr) {
@@ -20,7 +21,7 @@ public:
         // starting from i..j and there is an edge between i and j
         vector<vector<int> > dp(N, vector<int>(N, 0));
         
-        // start swiping each vertex using index 'i' and use the index
+        // start sweeping each vertex using index 'i' and use the index
         // 'j' to keep the other end fixed, this i and j edge will then be evaluated
         // with every other vertex in between them by making a triangle with it and checking
         // the score of left and right side of remaining polygon.
@@ -39,6 +40,26 @@ public:
         return dp[0][N-1];
     }
     
+    // Tabular Sol: Style 2
+    int tabSol(vector<int>& values) {
+        const int N = values.size();
+        // dp[i][j] = max score of triangulation between vertices i and j
+        vector<vector<int>> dp(N, vector<int>(N, 0));
+        
+        for(int l = 2; l < N; l++) {
+            for(int start = 0; start < N - l; start++) {
+                int end = start + l;
+                for(int k = start + 1; k < end; k++) {
+                    dp[start][end] = min(dp[start][end] == 0 ? INT_MAX : dp[start][end],
+                                        values[start] * values[k] * values[end]
+                                        + dp[start][k] + dp[k][end]);
+                }
+            }
+        }
+        
+        return dp[0][N-1];
+    }
+
     // using memoization
     // TC: O(N ^ 3)
     // SC: O(N ^ 2)

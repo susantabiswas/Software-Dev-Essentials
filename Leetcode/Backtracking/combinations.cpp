@@ -9,7 +9,7 @@
 class Solution {
 public:
     // TC: O(n * n!/(n-k)!), in the end it takes O(n) to copy the array elements to array
-    // SC: P(n! / (n - k)!)
+    // SC: P(n), recursive stack will have max n elements
     void findCmb(int curr, int k, int& n, vector<int> partial,
                 vector<vector<int>>& cmb) {
         // base case: when we have a subset of size k

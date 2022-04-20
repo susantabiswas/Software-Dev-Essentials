@@ -10,14 +10,9 @@ public:
     bool isValid(int row, int col, vector<bool>& visited_cols,
                 vector<bool>& upper_left_diagonal, vector<bool>& upper_right_diagonal) {
         // check if any other queen in same col
-        if(visited_cols[col])
-            return false;
         // check if the upper diagonals have queens placed
-        const int N = visited_cols.size();
-        if(upper_left_diagonal[col - row + N] || upper_right_diagonal[row + col])
-            return false;
-        
-        return true;
+        return !(visited_cols[col] || upper_left_diagonal[col - row + visited_cols.size()] 
+			|| upper_right_diagonal[row + col]);
     }
     
     void placeQueens(int row, int n, vector<bool>& visited_cols,
@@ -55,7 +50,6 @@ public:
         int result = 0;
         // visited_cols[c]: whether a queen is placed in c-th column
         vector<bool> visited_cols(n, false);
-        
         /*
         We encode the row and col values to map to a single value that can be used to represent
         a diagonal. (row, col) represents 2 diagonals:

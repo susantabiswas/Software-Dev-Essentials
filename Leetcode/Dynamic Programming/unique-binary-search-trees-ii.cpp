@@ -1,6 +1,9 @@
 /*
     95. Unique Binary Search Trees II
     https://leetcode.com/problems/unique-binary-search-trees-ii/
+
+    Time: O(C0+C1+...Cn), where Cn is the Catalan number
+    SC: O(n * Cn), Cn: Total Cn no. of BSTs with n nodes
 */
 
 /**

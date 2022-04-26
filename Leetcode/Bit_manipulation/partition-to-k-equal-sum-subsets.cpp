@@ -1,6 +1,3 @@
-/*
-  https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
-*/
 class Solution {
 public:
     // Bitmask solution
@@ -78,7 +75,11 @@ public:
     }
     
     // NOTE: TLE
-    // TC: O(k*2^N)
+    // TC: O(2^Nk), We spend max O(2^n) to find one partition, one that is done then we look for the
+    // next parition which might again take O(2^n). Thing to note here is finding the next partition depends
+    // on the computation and backtracking done previously, so (2^n * 2^n) not (2^n + 2^n)
+    // Since we find k partitions, O(2^n * 2^n * 2^n ....... k times) ~ O(2^nk)
+    // SC: O(n)
     bool backtrack(int curr, int sum, int k, int target,
                   vector<bool>& visited, vector<int>& nums) {
         // base case: single partition sum is always valid

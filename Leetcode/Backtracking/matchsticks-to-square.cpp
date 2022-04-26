@@ -45,7 +45,7 @@ public:
     }
     
     // Backtracking solution
-    // TC: O(4 * 2^N)
+    // TC: O(2^4N), We spend O(2^n) for one partition, and do this 4 times: 2^n * 2^n .... 2^n
     bool backtrackSol(vector<int>& nums) {
         long sum = accumulate(nums.begin(), nums.end(), 0);
         // check if the total sum of side lengths can be divided into 4 equal partitions

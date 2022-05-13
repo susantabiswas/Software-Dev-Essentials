@@ -17,6 +17,9 @@
     
     TC: O(V + E) + O(ElogE) + O(E) // graph construction + sorting + Euler traversal
     SC: O(V + E)
+    
+    Ref:
+    https://www.youtube.com/watch?v=8MpoO2zA2l4
 */
 class Solution {
 public:

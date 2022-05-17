@@ -61,3 +61,50 @@ public:
         return merged;
     }
 };
+
+////////////////////////////
+
+
+
+class Solution {
+public:
+    // Checks if b overlaps with a or not. 'a' will start first
+    // or at the same time
+    bool isOverlapping(vector<int>& a, vector<int>& b) {
+        return b[0] <= a[1] && b[0] >= a[0];
+    }
+    
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        if(intervals.empty()) 
+            return {newInterval};
+        if(newInterval.empty()) 
+            return intervals;
+        
+        vector<vector<int>> new_intervals;
+        //Find the position where the interval can be inserted
+        int pos = 0;
+        for(; pos < intervals.size(); pos++) {
+            // curr.start <= intervals.start or curr.end <= intervals.end
+            if(intervals[pos][1] >= newInterval[0] 
+               || isOverlapping(intervals[pos], newInterval) || isOverlapping(newInterval, intervals[pos]))
+                break;
+            new_intervals.emplace_back(intervals[pos]);
+        }
+        
+        
+        // merge any subsequent overlapping intervals
+        for(; pos < intervals.size() && 
+            (isOverlapping(intervals[pos], newInterval) || isOverlapping(newInterval, intervals[pos])); pos++)
+            newInterval = {min(intervals[pos][0], newInterval[0]),
+                          max(intervals[pos][1], newInterval[1])};
+        
+        // insert the new interval
+        new_intervals.emplace_back(newInterval);
+        
+        // add the remaining intervals
+        for(; pos < intervals.size(); pos++)
+            new_intervals.emplace_back(intervals[pos]);
+        
+        return new_intervals;
+    }
+};

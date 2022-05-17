@@ -84,13 +84,11 @@ public:
         //Find the position where the interval can be inserted
         int pos = 0;
         for(; pos < intervals.size(); pos++) {
-            // curr.start <= intervals.start or curr.end <= intervals.end
-            if(intervals[pos][1] >= newInterval[0] 
-               || isOverlapping(intervals[pos], newInterval) || isOverlapping(newInterval, intervals[pos]))
+            // if current interval can't be put ahead of new interval
+            if(intervals[pos][1] >= newInterval[0])
                 break;
             new_intervals.emplace_back(intervals[pos]);
         }
-        
         
         // merge any subsequent overlapping intervals
         for(; pos < intervals.size() && 

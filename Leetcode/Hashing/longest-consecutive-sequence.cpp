@@ -10,6 +10,51 @@
     Since any eelement will be marked true once visited, so each element can be visited at most twice
     making it linear.
 */
+///////////////////////////////////////////////////// Way 1
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        // set of all numbers
+        unordered_set<int> elements;
+        for(auto num: nums)
+            elements.emplace(num);
+        
+        int max_len = 0;
+        
+        while(!elements.empty()) {
+            // For the current element, start traversing its left and right elements
+            auto element = *elements.begin();
+            int curr_len = 1;
+            
+            int left = element - 1;
+            int right = element + 1;
+            
+            // erase the current element
+            elements.erase(element);
+            
+            // explore all the left elements, remove the elements to ensure
+            // that the same element doesn't start the traversal next time
+            while(elements.count(left)) {
+                ++curr_len;
+                elements.erase(left);
+                --left;
+            }
+            // explore right elements
+            while(elements.count(right)) {
+                ++curr_len;
+                elements.erase(right);
+                ++right;
+            }
+            
+            max_len = max(max_len, curr_len);
+        }
+        
+        return max_len;
+    }
+};
+
+
+///////////////////////////////////////////////////// Way 2
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {

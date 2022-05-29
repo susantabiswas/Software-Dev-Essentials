@@ -1,11 +1,20 @@
 /*
     https://leetcode.com/problems/partition-labels/submissions/
     
+    Sol 1
     1. We create the intervals of chars. TC: O(N), SC: (M), M: unique chars
     2. Merge the overlapping intervals. TC: O(N), SC: O(M)
     
     TC: O(N)
     SC: O(M)
+    
+    Sol 3:
+    Find the end position of each char and create a reverse hash table <end pos, char>.
+    Now we maintain a set for elements of current window. Start iterating through the elements,
+    if the ith position is end pos of any of the set elements, remove it. Check if the set has become
+    empty or not, if it has, then that means a parition is found.
+    TC: O(N)
+    SC: O(26)
 */
 class Solution {
     struct Interval {
@@ -96,8 +105,49 @@ public:
         return result;
     }
     
+    // Solution 3
+    vector<int> solution3(string s) {
+        // <char, end pos>
+        unordered_map<char, int> pos;
+        unordered_map<int, char> end_pos;
+        
+        for(int i = 0; i < s.size(); i++) {
+            if(!pos.count(s[i]))
+                pos[s[i]] = i;
+            pos[s[i]] = i;
+        }
+        
+        // now put the positions in this way
+        for(auto [ch, end]: pos) {
+            end_pos[end] =  ch;
+        }
+        
+        vector<int> parts;
+        // set of all elements in current partition
+        unordered_set<char> elements;
+        
+        int partition_start = 0;
+        for(int i = 0; i < s.size(); i++) {
+            // add the current char
+            elements.emplace(s[i]);
+            // check if any element's last position is 'i'
+            if(end_pos.count(i)) {
+                // remove the element
+                elements.erase(end_pos[i]);
+            }
+            // check if there is any element in current partition
+            if(elements.empty()) {
+                // partition can be created
+                parts.emplace_back(i - partition_start + 1);
+                partition_start = i + 1;
+            }
+        }
+        return parts;
+    }
+    
     vector<int> partitionLabels(string S) {
         // return solution1(S);
+        // return solution3(S);
         return solution2(S);
     }
 };

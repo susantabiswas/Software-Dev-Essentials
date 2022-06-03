@@ -7,18 +7,21 @@
 
     TC: O(3*N) ~ O(N)
     
-    Solution: BFS
+    Solution: BFS variant 1
     TC: O(N)
+    
+    Solution: BFS variant 2
+    
 */
 class Solution {
 public:
-    // Solution : BFS
+    // Solution 1: BFS
     // TC: O(n)
     // SC: O(n)
     // Idea is to assign the 1st node of the component with color 1 and from there 
     // assign the next nodes the next lexographical color. For a given node, its neighbor
     // might be already colored, in that scenario, assign the next color of current node to it.
-    vector<int> bfs(int n, vector<vector<int>>& graph) {
+    vector<int> bfs1(int n, vector<vector<int>>& graph) {
         // node_color[i] = color of ith node
         vector<int> node_color(n, -1);
         
@@ -46,6 +49,56 @@ public:
                             node_color[neighbor] = max(1, (node_color[curr] + 1) % 5);
                         }
                     }
+                }
+            }
+        }
+        return node_color;
+    }
+    
+    // Solution: BFS Variant 2, Easier to understand
+    // TC: O(N)
+    // We perform BFS traversal for nodes, for each node we check the colors
+    // used by the neighboring nodes and pick the 1st unused color for it.
+    // Repeat the process for the rest of nodes.
+    vector<int> bfs2(vector<vector<int>>& graph,
+            vector<int>& node_color) {
+        
+        vector<bool> visited(graph.size(), false);
+        
+        for(int node = 0; node < node_color.size(); node++) {
+            // unprocessed node
+            if(!visited[node]) {
+                queue<int> q;
+                q.push(node);
+                // Since this is the 1st node of a disconnected component,
+                // we can start with color 1
+                // node_color[node] = 1;
+                visited[node] = true;
+                
+                while(!q.empty()) {
+                    auto curr = q.front();
+                    q.pop();
+                    
+                    // check the color of neighboring nodes
+                    vector<bool> color_used(4, false);
+
+                    for(auto neighbor: graph[curr])
+                        if(node_color[neighbor] != -1)
+                            color_used[node_color[neighbor] - 1] = true;
+
+                    // pick the first unused color for the current node
+                    for(int color = 0; color < 4; color++)
+                        if(color_used[color] == false) {
+                            // color the source node
+                            node_color[curr] = color + 1;
+                            break;
+                        }
+                    // traverse the unvisited neighbor
+                    for(auto neighbor: graph[curr])
+                        if(!visited[neighbor]) {
+                            visited[neighbor] = true;
+                            q.push(neighbor);
+                        }
                 }
             }
         }
@@ -85,6 +138,7 @@ public:
         }
         
         // return colorGraph(g);
-        return bfs(n, g);
+        // return bfs1(n, g);
+        return bfs2(n, g);
     }
 };

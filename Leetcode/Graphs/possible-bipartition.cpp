@@ -49,4 +49,41 @@ public:
         }
         return true;
     }
+    
+    ///////////////////// DFS Solution //////////////////
+    bool dfsCanColor(int curr, vector<vector<int>>& graph,
+                    vector<int>& color) {
+        
+        for(auto neighbor: graph[curr]) {
+            if(color[neighbor] == -1) {
+                color[neighbor] = !color[curr];
+                if(!dfsCanColor(neighbor, graph, color))
+                    return false;
+            }
+            else if(color[neighbor] == color[curr])
+                return false;
+        }   
+        return true;
+    }
+    
+    bool possibleBipartition(int n, vector<vector<int>>& dislikes) {
+        vector<vector<int>> graph(n);
+        
+        // create a graph
+        for(auto edge: dislikes) {
+            graph[edge[0] - 1].emplace_back(edge[1] - 1);
+            graph[edge[1] - 1].emplace_back(edge[0] - 1);
+        }
+        
+        vector<int> color(n, -1);
+        for(int node = 0; node  < n; node++) 
+            if(color[node] == -1) {
+                // color it with color 1
+                color[node] = 1;
+                if(!dfsCanColor(node, graph, color))
+                    return false;
+            }
+                
+        return true;
+    }
 };

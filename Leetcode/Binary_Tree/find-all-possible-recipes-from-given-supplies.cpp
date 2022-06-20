@@ -49,7 +49,7 @@ public:
     
     // SOLUTION 1: TOPOLOGICAL SORT + GRAPH COLORING
     vector<string> topologicalDFS(unordered_set<string>& all_supplies,
-                                 vector<string>& recipes) {
+                                 vector<string>& recipes, vector<vector<string>>& ingredients) {
         unordered_map<string, int> visited;
         vector<string> result;
         
@@ -127,8 +127,8 @@ public:
         // For each node, there are two states: {1 (fully processed), 0 (partially processed)}
         
         // Solution 1
-        // return topologicalDFS(all_supplies, recipes);
+        return topologicalDFS(all_supplies, recipes, ingredients);
         // Solution 2: Kahn's Algo
-        return topologicalKahn(all_supplies, recipes, ingredients);
+        // return topologicalKahn(all_supplies, recipes, ingredients);
     }
 };

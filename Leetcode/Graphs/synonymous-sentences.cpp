@@ -138,6 +138,7 @@ public:
         return result;
     }
     
+    // SOLUTION 2: BFS
     // TC: O(m^nlog(m^n)), n = no. of words in sentence, m = no. of synonyms
     // worst case when all n words are same and m synonyms exists for those words
     // sentence: "joy joy joy joy", synonyms = ["joy", "happy", "cheerful"]

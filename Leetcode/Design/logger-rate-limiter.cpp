@@ -1,6 +1,23 @@
 /*
     https://leetcode.com/problems/logger-rate-limiter/
     
+    Design a logger system that receives a stream of messages along with their timestamps. Each unique message should only be printed at most every 10 seconds (i.e. a message printed at timestamp t will prevent other identical messages from being printed until timestamp t + 10).
+
+    All messages will come in chronological order. Several messages may arrive at the same timestamp.
+
+    Implement the Logger class:
+
+        Logger() Initializes the logger object.
+        bool shouldPrintMessage(int timestamp, string message) Returns true if the message should be printed in the given timestamp, otherwise returns false.
+
+    Example:
+
+    Input
+    ["Logger", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage", "shouldPrintMessage"]
+    [[], [1, "foo"], [2, "bar"], [3, "foo"], [8, "bar"], [10, "foo"], [11, "foo"]]
+    Output
+    [null, true, true, false, false, false, true]
+
     Solution 1: Hash Table
     We use hash table to store the last printed message time for each of the unique messages. 
     TC: O(1)
@@ -16,8 +33,18 @@
     another 10s.
     
     Solution 3: Queue + Set
+    Use a queue that records the log events. Idea is to have a queue that only stores the events from last 10s. We also use
+    a set that keeps track of logs recently printed. For every new log message, remove the events from queue that are older than 10s.
+    While removing ensure to remove the entries from set as well. Check if the message is still present or not in the set after removing.
+    If it does, that means that log entry hasn't elapsed the 10s mark and still in queue. Add the event log if it is getting printed.
     
     Solution 4: Bucketing + Set
+    Idea is to keep buckets for each of the 10s. We maintain an array that tracks the timestamp for a bucket. If use % operation to
+    decide the bucket. If the timestamp of a bucket is not equal to current timestamp, that means it's been 10s since the last log message
+    for that bucket, so clear all the messages from that bucket.
+    Then check all the buckets for that same log message and one which is under 10s mark, if we find one then that means we don't print the
+    current log message and hence ignore the message.
+    If we don;t find any buckets with the message, add the message to the right bucket.
     
 */
 // Solution 1: Hash Table
@@ -49,7 +76,7 @@ public:
 
 // Solution 2: Two Sets
 // Pros: Efficient use of memory.
-class Logger {
+/*class Logger {
 private:
     // Indicates the start time of current interval of message requests
     int interval_start;
@@ -87,6 +114,80 @@ public:
         
         // add the current message to the current interval
         curr_interval.emplace(message, timestamp);
+        return true;
+    }
+};
+*/
+
+// Solution 3: Queue + Set
+// Con: Memory can be overwhelmed for queue if too many req made in the same 10s interval
+// Pros: Hash data retained only for 10s
+/*
+class Logger {
+private:
+    unordered_map<string, int> last_printed;
+    queue<pair<string, int> > logs;
+public:
+    Logger() {
+    }
+    
+    bool shouldPrintMessage(int timestamp, string message) {
+        // clear all logs older than 10s wrt current
+        while(!logs.empty() && logs.front().second + 10 <= timestamp) {
+            auto [log, t] = logs.front();
+            logs.pop();
+            // clear the record from set, since this is the last instance
+            // when this message was printed
+            last_printed.erase(log);
+        }
+                                                            
+        // Check if the log came within the last 10s
+        if(last_printed.count(message))
+            return false;
+        
+        // add the log event
+        logs.emplace(message, timestamp);
+        last_printed.emplace(message, timestamp);
+        return true;
+    }
+};
+*/
+
+// Solution 4: Bucketing + Set
+// Con: A bit more overhead
+// Pros: Low memory usage
+class Logger {
+private:
+    int time_duration = 0;
+    vector<int> bucket_timestamps;
+    vector<unordered_set<string>> time_buckets;
+public:
+    Logger() {
+        time_duration = 10;
+        time_buckets.resize(time_duration);
+        bucket_timestamps.resize(time_duration, -1);
+    }
+    
+    bool shouldPrintMessage(int timestamp, string message) {
+        // bucket where the message belongs
+        int bucket_idx = timestamp % time_duration;
+        // check the bucket's timestamp
+        // if the timstamp of bucket doesn't match that means
+        // this message is coming after a duration of time_duration
+        // so all the logs are expired
+        if(bucket_timestamps[bucket_idx] != timestamp) {
+            bucket_timestamps[bucket_idx] = timestamp;
+            // clear all the expired logs from bucket
+            time_buckets[bucket_idx].clear();
+        }
+        
+        // check if the log message came in last time_duration seconds
+        for(int idx = 0; idx < time_buckets.size(); idx++) {
+            if(bucket_timestamps[idx] + 10 > timestamp && time_buckets[idx].count(message))
+                return false;
+        }
+        // add the message
+        time_buckets[bucket_idx].emplace(message);
         return true;
     }
 };

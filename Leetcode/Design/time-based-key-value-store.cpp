@@ -1,8 +1,8 @@
 /*
     https://leetcode.com/problems/time-based-key-value-store/
     
-    set: TC: O(1), SC: O(1)
-    get(): TC: O(1), SC: O(1)
+    set: TC: O(logm), SC: O(m), m = no. of timestamps 
+    get(): TC: O(logm), SC: O(1)
     
     Idea is to keep the following the data structure:
     { key: {timestamp: value} }

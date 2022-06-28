@@ -31,7 +31,7 @@
     TC:
         SnapshotArray(): O(n)
         set(): O(1)
-        snap(): O(c), c = no. of columns with a change since last snap()
+        snap(): O(c * logm), c = no. of columns with a change since last snap(), each insertion in height balanced tree takes logm
         get(): O(logm), m = no. of snapshots
     SC: 
         set(): O(1)
@@ -74,7 +74,7 @@ public:
 
 
 /////////////// SOLUTION 2
-/*
+
 class SnapshotArray {
 private:
     int snap_id = 0;
@@ -114,12 +114,3 @@ public:
         return 0;
     }
 };
-
-*/
-/**
- * Your SnapshotArray object will be instantiated and called as such:
- * SnapshotArray* obj = new SnapshotArray(length);
- * obj->set(index,val);
- * int param_2 = obj->snap();
- * int param_3 = obj->get(index,snap_id);
- */

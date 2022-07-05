@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/is-subsequence/submissions/
+    https://leetcode.com/problems/is-subsequence/
     
     Two solutions. 
     2nd sol is suitable for follow-up if m << n:

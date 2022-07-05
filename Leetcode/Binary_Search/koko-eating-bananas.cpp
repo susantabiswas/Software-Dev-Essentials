@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/koko-eating-bananas/submissions/
+    https://leetcode.com/problems/koko-eating-bananas/
     
     The idea is similar to Painter's partition problem. 
     We use binary search on the search space of eating rates K.

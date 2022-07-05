@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/peak-index-in-a-mountain-array/submissions/
+    https://leetcode.com/problems/peak-index-in-a-mountain-array/
     
     Idea is to skip all the elements lesser than peak and making sure that one 
     of the limits always points to the greater element around mid.

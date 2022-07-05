@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/search-insert-position/submissions/ 
+    https://leetcode.com/problems/search-insert-position/
     Simple Binary search
 */
 

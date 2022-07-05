@@ -10,7 +10,7 @@
     caveat here, in a typical djikstra we skip a value if it is stale / outdated
     wrt to cost function.
     In this problem we have two costs: price and stops, price necessarily doesnt
-    have priority over costs, since a path might be picked that has better price but ultimately
+    have priority over stops, since a path might be picked that has better price but ultimately
     goes over K stops and at that point we might not be able to use that path.
     
     [0]--1-->[1]--1-->[2]--1-->[3]
@@ -46,19 +46,23 @@ public:
         cost[src] = {0, 0};
         // start source will have 0 price and stops
         min_heap.push({0, 0, src});
+        // As per the question, stops are only the cities that lie in between the
+        // source and destination. But to make code easier to understand and write we 
+        // can consider the final city also as a stop and thus we can have max allowed K+1 stops.
+        k = k + 1;
         
         while(!min_heap.empty()) {
             auto [price, stops, curr] = min_heap.top();
             min_heap.pop();
             
             // target reached
-            if(curr == dst && stops - 1 <= k)
+            if(curr == dst && stops <= k)
                 return price;
             
             for(auto [neighbor, flight_price]: g[curr]) {
                 // only try the neighbor iff we can get a smaller value for either
                 // stops or price
-                if(stops - 1 <= k && cost[neighbor].first > price + flight_price || 
+                if(stops + 1 <= k && cost[neighbor].first > price + flight_price || 
                    (cost[neighbor].second > stops + 1)) {
                     
                     cost[neighbor] = {price + flight_price, stops + 1};
@@ -103,7 +107,7 @@ public:
             // add the edge with cost
             g[flight[0]].emplace_back(make_pair(flight[1], flight[2]));
         
-        // return djikstraCost(src, dst, g, k);
-        return bellmanFord(n, src, dst, flights, k);
+        return djikstraCost(src, dst, g, k);
+        // return bellmanFord(n, src, dst, flights, k);
     }
 };

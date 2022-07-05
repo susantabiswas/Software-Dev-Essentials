@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/search-suggestions-system/submissions/
+    https://leetcode.com/problems/search-suggestions-system/
 */
 class Solution {
 public:

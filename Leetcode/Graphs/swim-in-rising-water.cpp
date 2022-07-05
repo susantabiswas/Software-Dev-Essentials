@@ -49,7 +49,7 @@ public:
             else
                 lower = mid + 1;
         }
-        return lower;
+        return upper;
     }
     
     // TC: O(MNlog(MN))

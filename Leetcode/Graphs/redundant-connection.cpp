@@ -1,6 +1,9 @@
 /*
     https://leetcode.com/problems/redundant-connection/
 */
+/*
+    https://leetcode.com/problems/redundant-connection/
+*/
 class Solution {
     class UnionFind {
         private:
@@ -24,12 +27,12 @@ class Solution {
                 return u;
             }
         
-            void Union(int a, int b) {
+            bool Union(int a, int b) {
                 int root_a = getRoot(a);
                 int root_b = getRoot(b);
                 
                 if(root_a == root_b)
-                    return;
+                    return false;
                 
                 if(size[root_a] > size[root_b]) {
                     root[root_b] = root_a;
@@ -39,6 +42,7 @@ class Solution {
                     root[root_a] = root_b;
                     size[root_b] += size[root_a];
                 }
+                return true;
             }
         
             bool Find(int a, int b) {
@@ -50,20 +54,18 @@ public:
     
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
         // find the max vertices
-        int n = 0;
-        for(auto edge: edges) {
-            n = max({n, edge[0], edge[1]});
-        }
-        UnionFind ob(n);
+        int n = edges.size();
+        UnionFind uf(n);
+        
+        vector<int> extra_edge;
         
         for(auto edge: edges) {
-            if(!ob.Find(edge[0], edge[1])) {
-                ob.Union(edge[0], edge[1]);
+            if(!uf.Union(edge[0], edge[1])) {
+                extra_edge = edge;
+                break;
             }
-            else
-                return edge;
         }
             
-        return {};
+        return extra_edge;
     }
 };

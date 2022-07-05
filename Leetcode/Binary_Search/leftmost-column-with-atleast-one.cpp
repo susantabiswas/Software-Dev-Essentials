@@ -1,5 +1,5 @@
 /*
-	  https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/530/week-3/3306/
+	https://leetcode.com/problems/leftmost-column-with-at-least-a-one/
     
     For each row we find the first index of 1 if it exists using binary search.
     The answer is the min of all these indices.

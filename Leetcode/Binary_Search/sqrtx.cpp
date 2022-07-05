@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/sqrtx/submissions/
+    https://leetcode.com/problems/sqrtx/
     
     We use binary search for this. We set the lower limit as 0 and upper limit as n/2.
     n/2 ensures that the range covers all possible candidates for sq root, since sq root is

@@ -36,13 +36,7 @@ public:
                 }
             }
             // move the interval that ends first
-            // When the intervals overlap, move the one that ends first by comparing the end points of both
-            if(isOverlapping(slots1[i], slots2[j]) && slots1[i][1] < slots2[j][1])
-                ++i;
-            else if(isOverlapping(slots1[i], slots2[j]) && slots1[i][1] > slots2[j][1])
-                ++j;
-            // If non-overlapping, then its is enough to compare the end of one interval with start of another
-            else if(slots1[i][1] < slots2[j][0])
+            if(slots1[i][1] < slots2[j][1])
                 ++i;
             else
                 ++j;

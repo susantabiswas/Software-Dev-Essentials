@@ -92,4 +92,38 @@ public:
     ListNode* sortList(ListNode* head) {
         return mergeSortList(head);
     }
+    
+    ///////////////////////////////////////////////////// INSERTION SORT
+    void placeNode(ListNode* node, ListNode* sorted) {
+        ListNode* curr = sorted->next, *prev = sorted;
+        // Iterate till the position is found
+        while(curr && node->val >= curr->val) {
+            prev = curr;
+            curr = curr->next;
+        }
+        prev->next = node;
+        node->next = curr;
+    }
+    
+    // TC: O(N^2)
+    // SC: O(1)
+    ListNode* insertionSort(ListNode* head) {
+        // dummy node
+        ListNode *sorted = new ListNode(INT_MIN);
+        
+        ListNode* curr = head;
+        while(curr) {
+            auto next_ptr = curr->next;
+            // place the current node at its correct position
+            placeNode(curr, sorted);
+            curr = next_ptr;
+        }
+        
+        // delete the dummy head
+        ListNode* temp = sorted;
+        sorted = sorted->next;
+        delete temp;
+        
+        return sorted;
+    }
 };

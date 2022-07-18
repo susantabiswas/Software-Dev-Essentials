@@ -49,3 +49,39 @@ public:
         return max_len;
     }
 };
+
+//////////////////////////// Style 2
+class Solution {
+public:
+    template<typename F1, typename F2>
+    int maxTurbulentWindow(vector<int>& arr, F1 comp1,
+                          F2 comp2) {
+        int max_len = arr.empty() ? 0 : 1;
+        int end = 0, start = 0;
+        
+        while(end < arr.size() - 1) {
+            ++end;
+            
+            if((end % 2 == 0 && comp1(arr[end], arr[end-1])) ||
+               (end % 2 != 0 && comp2(arr[end], arr[end-1])))
+                start = end;
+            
+            max_len = max(max_len, end - start + 1);
+        }
+        return max_len;
+    }
+    
+    int maxTurbulenceSize(vector<int>& arr) {
+        if(arr.empty())
+            return 0;
+        
+        int max_len = 0;
+        auto less_than_equal = [&](const int& a, const int& b) { return a <= b; };
+        auto greater_than_equal = [&](const int& a, const int& b) { return a >= b; };
+        
+        max_len = max(max_len, maxTurbulentWindow(arr, greater_than_equal, less_than_equal));
+        max_len = max(max_len, maxTurbulentWindow(arr, less_than_equal, greater_than_equal));
+        
+        return max_len;
+    }
+};

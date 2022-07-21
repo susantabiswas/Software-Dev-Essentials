@@ -1,12 +1,12 @@
 /*
-    https://leetcode.com/problems/search-suggestions-system/submissions/
+    https://leetcode.com/problems/search-suggestions-system/
 */
 class Solution {
 public:
     // SOLUTION 1
     // Using Binary search
-    // TC: Binary Search + Sorting
-    //      O(L ^ 2 * logn + m*nlogn), L: length of word to find, m: length of longest word
+    // TC: Binary Search for L chars + Sorting
+    //      O(L * (min(L, m) * logn) + m*nlogn), L: length of word to find, m: length of longest word
     // For binary search: 1char: logn
     //                     2chars: 2 * logn
     //                      ... L chars: L * logn
@@ -45,7 +45,7 @@ public:
     // Using Trie
     /*
         TC: Sorting + Trie Creation + Trie Query
-        TC: O(m*nlogn + m*n + L^2), L: length of word to find, m: length of longest word,
+        TC: O(m*nlogn + m*n + L), L: length of word to find, m: length of longest word,
                                         n: No. of words
                                         
         We create a Trie where for each of the nodes we also save the suggestions for that char.

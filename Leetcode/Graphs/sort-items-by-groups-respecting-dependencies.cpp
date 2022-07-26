@@ -1,7 +1,7 @@
 /*
     https://leetcode.com/problems/sort-items-by-groups-respecting-dependencies/
     
-    TC: O(n + m)
+    TC: O(n + m + E), E = No. of edges as seen from 'beforeItems' array
     SC: O(n + m)
     
     Looking at the problem, it is clearly a topological sort problem. But there are two things that

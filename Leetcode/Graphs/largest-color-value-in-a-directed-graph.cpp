@@ -22,7 +22,7 @@
 */
 class Solution {
 public:
-    // SOLUTION 1: TOPOLOGICAL SORT
+    /////////////////////////////////////////////////////////////////////// SOLUTION 1: TOPOLOGICAL SORT
     // TC: O(V + E)
     // SC: O(V + E)
     int topologicalSol(vector<unordered_set<int> >& graph, string& colors) {
@@ -71,6 +71,9 @@ public:
         return processed < n ? -1 : max_color;
     }
     
+	/////////////////////////////////////////////////////////////////////////// SOLUTION 2: DFS + DP
+    // TC: O(V + E)
+    // SC: O(V + E)
     bool dfs(int node, vector<unordered_set<int> >& graph, string& colors, 
              vector<int>& visited, vector<vector<int> >& color_path_len, int& max_color) {
         // Node is currently under processing and we are again seeing it, means a cycle
@@ -103,9 +106,6 @@ public:
         return true;
     }
     
-    // SOLUTION 2: DFS + DP
-    // TC: O(V + E)
-    // SC: O(V + E)
     int dfsDpSol(vector<unordered_set<int> >& graph, string& colors) {
         int max_color = -1, n = graph.size();
         // visited[i] = {0 (Unvisited), 1 (Processing), 2(Visited)}

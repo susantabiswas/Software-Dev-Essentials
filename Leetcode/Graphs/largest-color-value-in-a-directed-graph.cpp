@@ -31,7 +31,7 @@ public:
         // indegree[i] = No. of incoming edges to node i
         vector<int> indegree(n, 0);
         // color_path_len[i][c] = For each color c,
-        // stores the max path length where that color is the most frequent color  
+        // stores the max no. of times c has been seen in a path ending here at node i  
         vector<vector<int> > color_path_len(n, vector<int>(26, 0));
         // Overall longest same colored nodes in a path
         int max_color = -1;
@@ -111,7 +111,7 @@ public:
         // visited[i] = {0 (Unvisited), 1 (Processing), 2(Visited)}
         vector<int> visited(n, 0);
         // color_path_len[i][c] = For each color c,
-        // stores the max path length where that color is the most frequent color  
+        // stores the max no. of times c has been seen in a path start from here at node i  
         vector<vector<int> > color_path_len(n, vector<int>(26, 0));
         
         for(int node = 0; node < n; node++)

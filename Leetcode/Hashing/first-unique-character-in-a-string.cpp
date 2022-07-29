@@ -4,6 +4,23 @@
     TC: O(N), N: length of string
     SC: O(M), M: unique chars
 */
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        unordered_map<char, int> idx;
+        
+        for(int i = 0; i < s.size(); i++)
+            ++idx[s[i]];
+        // Non repeating char will have count of 1
+        for(int i = 0; i < s.size(); i++)
+            if(idx[s[i]] == 1)
+                return i;
+        return -1;
+    }
+};
+
+//////////////////////////
 class Solution {
 public:
     int firstUniqChar(string s) {

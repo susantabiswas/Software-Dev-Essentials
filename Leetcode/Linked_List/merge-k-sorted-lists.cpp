@@ -4,12 +4,10 @@
     The idea is to merge the lists in tournament tree order to mnimize the 
     number of merge operations.
     
-    TC: O(NKlogK), N: length of longest list
-        there will be logK merge operations and a worst case list of size NK will be merged
-        = 2N*K/2 + 4N*K/2 + ........1
-        = NK + NK ....... + 1
-        = logK * NK
-        = NK * logK
+    TC: O(NlogK), N: length of longest list
+        there will be logK merge operations and a worst case list of size N will be merged
+        = 2T(k/2) + N
+        = N * logK
     SC: O(1)
 */
 

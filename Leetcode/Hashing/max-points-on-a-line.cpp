@@ -62,7 +62,7 @@ public:
             // clear the hash table, so that same points are added again
             line_slope.clear();
             // +1 for including the point itself
-            max_pts = max({max_pts, duplicate + 1, duplicate + vertical + 1});
+            max_pts = max({max_pts, duplicate + vertical + 1});
         }    
         return max_pts;
     }

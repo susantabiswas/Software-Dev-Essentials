@@ -1,20 +1,97 @@
 /*
-    https://leetcode.com/problems/word-search-ii/submissions/
+    https://leetcode.com/problems/word-search-ii/
     TC: O(WL) + O((MN) * 4 * 3^L-1), 
         W: no. of words, L: max length of word
         O(WL) for inserting all the words in Trie
-        O((MN) * 4 * 3^L-1): We start DFS from each position of matrix(M x N).
-                            Now at the initial starting point in grid, we have 4 directions to explore with L-1
-                            remaining length, then the next time we have 3 directional positions for traversal
-                            (3 because we reached current cell from 1 one of the directions so it is already visited).
-                            So 4 (initially) * 3^L-1(remaining L-1 will each time have worst case 3 possible unvisited directions)
+        O((MN) * 4 * 3^L-1): 
+        We start DFS from each position of matrix(M x N).
+        Now at the initial starting point in grid, we have 4 directions to explore with L-1
+        remaining length, then the next time we have 3 directional positions for traversal
+        (3 because we reached current cell from 1 one of the directions so it is already visited).
+        So 4 (initially) * 3^L-1(remaining L-1 will each time have worst case 3 possible unvisited directions)
                             
     The idea is to create a Trie of the words to find, then for each position of grid
     check if the current char is in Trie and go further, we stop when there is no node in Trie
     for current char as that means there is anyways will be no such word to search.
 */
 
+class Solution {
+    struct TrieNode {
+        unordered_map<char, TrieNode*> leaves;
+        bool is_string = false;
+    };
+    
+    class Trie {
+    public:
+        bool insert(TrieNode* root, string& word) {
+            for(auto ch: word) {
+                if(root->leaves.count(ch) == 0) 
+                    root->leaves[ch] = new TrieNode();
+                root = root->leaves[ch];
+            }    
+            // Whether we are inserting this string or not depends
+            // on whether it was already added or not
+            if(root->is_string)
+                return false;
+            return root->is_string = true;
+        }    
+        
+        
+    };
+    
+    vector<pair<int, int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+public:
+    bool isValid(int row, int col, int M, int N) {
+        return row >= 0 && row < M && col >= 0 && col < N;
+    }
+    
+    void backtrack(int row, int col, string partial, TrieNode* root, 
+                   vector<string>& result, vector<vector<char>>& board) {
+        char ch = board[row][col];
+        partial += ch;
+        // mark the position as visited
+        board[row][col] = '#';
+        
+        // base case, when seq is a string
+        if(root->is_string) {
+            result.emplace_back(partial);
+            // Marking as false so that this same word is never picked again
+            root->is_string = false;
+        }
+        
+        for(auto [dx, dy]: directions) {
+            int r = row + dx, c = col + dy;
+            // Only take the step if that char is present in trie
+            // and the cell is a valid unvisited cell 
+            if(isValid(r, c, board.size(), board[0].size()) &&
+               board[r][c] != '#' && root->leaves.count(board[r][c])) 
+                backtrack(r, c, partial, root->leaves[board[r][c]], result, board);
+        }
+        // backtrack by reverting the change
+        board[row][col] = ch;
+    }
+    
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+        TrieNode* root = new TrieNode();
+        Trie* trie = new Trie();
+        // Add the words to Trie
+        for(auto word: words)
+            trie->insert(root, word);
+        
+        vector<string> result;
+        // From each cell, try looking for words
+        for(int row = 0; row < board.size(); row++)
+            for(int col = 0; col < board[0].size(); col++)
+                // Only take the step if char is present
+                if(root->leaves.count(board[row][col]))
+                    backtrack(row, col, "",
+                              root->leaves[board[row][col]], result, board);
+        
+        return result;
+    }
+};
 
+///////////////////////////////////////
 class Solution {
 public:
     struct TrieNode {

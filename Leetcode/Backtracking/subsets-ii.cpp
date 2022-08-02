@@ -1,18 +1,10 @@
 /*
     https://leetcode.com/problems/subsets-ii/
     
-    TC: O(2^N)
-    t(0) = 0
-    t(1) = 1 (push 1 el to subset) + t(0)
-    t(2) = 2 (push 2 elements, one at a time to subset) + t(1) + t(0)
-    .....
-    t(n-1) = n-1 + t(n-2) + t(n-3) +...+ t(1) + t(0)
-    t(n) = n + t(n-1) + [t(n-2) + ...+ t(1) + t(0)]
-         = n + t(n-1) + [t(n-2) + ...+ t(1) + t(0) + (n-1) - (n-1)
-         = n + t(n-1) + [t(n-2) + ...+ t(1) + t(0) + (n-1)] - (n-1)  
-         = n + t(n-1) + t(n-1) - (n-1) = 2t(n-1) + 1
+    TC: O(N * 2^N)
+    There will be 2^N subsets. Power set of N numbers/bits is 2^N.
 
-    => t(n) = 2^n-1
+    Also each time we add subset to the result, this can get length of N
     
     SC: O(n), max depth of recursive stack
     

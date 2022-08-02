@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/squares-of-a-sorted-array/submissions/
+    https://leetcode.com/problems/squares-of-a-sorted-array/
     
     All the numbers are in ascending order, but
     final output is sq of each, so negative numbers can

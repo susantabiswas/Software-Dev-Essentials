@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/remove-outermost-parentheses/submissions/
+    https://leetcode.com/problems/remove-outermost-parentheses/
     
     Two Pointers Solution:
     Since the string is a valid bracket string, we know for a fact that there will

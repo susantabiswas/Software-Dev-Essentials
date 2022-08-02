@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/implement-stack-using-queues/submissions/
+    https://leetcode.com/problems/implement-stack-using-queues/
     
     Push: TC: O(N)
     Pop: TC: O(1)

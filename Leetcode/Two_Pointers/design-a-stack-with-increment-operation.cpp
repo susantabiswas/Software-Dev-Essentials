@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/design-a-stack-with-increment-operation/submissions/
+    https://leetcode.com/problems/design-a-stack-with-increment-operation/
     
     Push and pop are simple to do with O(1), problem is with increment operation
     that can take O(k) if done naively each time.

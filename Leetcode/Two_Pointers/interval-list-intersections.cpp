@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/interval-list-intersections/submissions/
+    https://leetcode.com/problems/interval-list-intersections/
 */
 class Solution {
 public:

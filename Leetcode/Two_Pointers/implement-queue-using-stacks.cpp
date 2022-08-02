@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/implement-queue-using-stacks/submissions/
+    https://leetcode.com/problems/implement-queue-using-stacks/
     
     Idea is to use two stacks, one incharge of enqueue and other for dequeue operation.
     The enqueue stack accepts the elements in O(1).

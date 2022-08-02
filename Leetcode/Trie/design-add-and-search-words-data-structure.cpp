@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/design-add-and-search-words-data-structure/submissions/
+    https://leetcode.com/problems/design-add-and-search-words-data-structure/
     
     Idea is to use a Trie for adding the words. Now since we have a special char '.'
     which can match any single char, so we need to look into all possible cmb from that point.

@@ -1,6 +1,5 @@
 /*
-    https://leetcode.com/problems/implement-trie-prefix-tree/submissions/
-*/
+    https://leetcode.com/problems/implement-trie-prefix-tree/
 class Trie {
 private:
     struct TrieNode {

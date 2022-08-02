@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/prefix-and-suffix-search/submissions/
+    https://leetcode.com/problems/prefix-and-suffix-search/
     
     We use a modified Trie, where each node also contains an index vector
     of the words whose chars reach till that node.

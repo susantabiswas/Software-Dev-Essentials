@@ -21,7 +21,7 @@
 class Solution {
 public:
     // Using backtracking
-    // TC: O(N * 2^N), SC:O(2^N)
+    // TC: O(N * 2^N), SC:O(N), Worst case we go till length of array depth wise
     void generateSubsets(vector<int>& nums, vector<int>& partial,
                     int i, vector<vector<int> >& result) {
         if(i == nums.size()) {

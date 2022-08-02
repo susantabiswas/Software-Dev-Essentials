@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/palindrome-partitioning/submissions/
+    https://leetcode.com/problems/palindrome-partitioning/
     
     TC: O(n^2) (for finding palindromic substrings using DP) 
         + O(2^n) (Backtracking)

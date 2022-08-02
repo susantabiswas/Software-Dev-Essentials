@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/generate-parentheses/submissions/
+    https://leetcode.com/problems/generate-parentheses/
 */
 class Solution {
 public:

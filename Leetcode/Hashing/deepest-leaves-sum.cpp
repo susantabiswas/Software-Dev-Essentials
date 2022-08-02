@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/deepest-leaves-sum/submissions/
+    https://leetcode.com/problems/deepest-leaves-sum/
     
     Idea is to use BFS, where for each level we find the sum and when
     the BFS ends, we end up with sum of last level.

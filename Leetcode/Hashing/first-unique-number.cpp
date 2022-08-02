@@ -1,7 +1,7 @@
 /*
     First Unique Number
     
-    https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/531/week-4/3313/
+    https://leetcode.com/problems/first-unique-number/
     
     The idea is to use a hash table for keeping track of elements
     which have been inserted in the Data sttructure. The hash table

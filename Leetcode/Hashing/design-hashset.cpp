@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/design-hashset/submissions/
+    https://leetcode.com/problems/design-hashset/
 */
 
 class MyHashSet {

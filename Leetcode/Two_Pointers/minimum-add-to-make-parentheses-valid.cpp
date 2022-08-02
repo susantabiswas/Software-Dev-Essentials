@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/submissions/
+    https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
     
     Solution 1: Stack
     TC: O(N)
@@ -38,9 +38,10 @@ public:
     int twoPointersSol(string &S) {
         /*
             We start the traversal with a pointer for writing the char
-            and one for traversal. The writing index is always pointing 
-            to the position where the new char should be written, so we 
-            check if current traversal pos and last written char form a balanced 
+            and one for traversal. Thw writing index can write either ( or ) when
+            it is unbalanced.
+            The writing index is always pointing to the position where the new char should be written, 
+            so we check if current traversal pos and last written char form a balanced 
             pair, if they do then we need to exclude the current and last added 
             char. This is done by moving a step back for writing ptr and not adding curr char.
             Finally if there are any unbalcned brackets, write idx > 0

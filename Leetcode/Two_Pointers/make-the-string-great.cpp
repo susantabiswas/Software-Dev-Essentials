@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/make-the-string-great/submissions/
+    https://leetcode.com/problems/make-the-string-great/
     
     Solution 1: Stack
     TC: O(N)

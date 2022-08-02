@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/maximize-distance-to-closest-person/submissions/
+    https://leetcode.com/problems/maximize-distance-to-closest-person/
     
     Solution 1: Uses O(N) extra space
     Solution 2: Uses O(1) space 

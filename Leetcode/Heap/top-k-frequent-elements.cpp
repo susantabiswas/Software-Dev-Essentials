@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/top-k-frequent-elements/submissions/
+    https://leetcode.com/problems/top-k-frequent-elements/
     
     https://leetcode.com/problems/top-k-frequent-elements/discuss/481142/C%2B%2B-Solution-using-Heap-(NlogK)-Detailed-Explanation
 */

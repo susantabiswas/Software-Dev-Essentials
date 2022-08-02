@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/submissions/
+    https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/
     
     Idea is to remove the elements which appear the least number of times first, so that 
     unique elements decrease in number.

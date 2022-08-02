@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/high-five/submissions/
+    https://leetcode.com/problems/high-five/
     
     Idea is to find the top 5 scores for each unique student efficiently.
     We use a min heap to do that, then find the avg for each unique student.

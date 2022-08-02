@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/submissions/
+    https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/
     
     Idea is to do DFS and send the parent and grandparent along the dfs call. For the next child node
     current node becomes its parent and its parent becomes the grandparent.

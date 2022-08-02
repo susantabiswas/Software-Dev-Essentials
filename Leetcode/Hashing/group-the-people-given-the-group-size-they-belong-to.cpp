@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/submissions/
+    https://leetcode.com/problems/group-the-people-given-the-group-size-they-belong-to/
     
     Since we know that there exists a valid sol, so we can use cmb of greedy and hashing. 
     Idea is to first find out to which group size each of the elements belong. After that

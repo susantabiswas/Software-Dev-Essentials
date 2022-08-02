@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/largest-unique-number/solution/
+    https://leetcode.com/problems/largest-unique-number/
     
     Simply find the freq of each unique number and then look for the 
     number which has 0 repeatition and also the largest.

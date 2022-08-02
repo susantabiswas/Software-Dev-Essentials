@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/intersection-of-two-arrays/submissions/
+    https://leetcode.com/problems/intersection-of-two-arrays/
     
     We use a hash table to keep track of all the unique elements of smaller array 
     in constant time. Then traverse the bigger list to find the unique elements using the

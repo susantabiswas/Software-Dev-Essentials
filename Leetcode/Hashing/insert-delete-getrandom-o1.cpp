@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/insert-delete-getrandom-o1/submissions/
+    https://leetcode.com/problems/insert-delete-getrandom-o1/
 */
 class RandomizedSet {
 private:

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/intersection-of-two-arrays-ii/submissions/
+    https://leetcode.com/problems/intersection-of-two-arrays-ii/
     
     Idea is to create a hash table and store the frequency of all the
     elements of the smaller length array. Then iterate through the longer

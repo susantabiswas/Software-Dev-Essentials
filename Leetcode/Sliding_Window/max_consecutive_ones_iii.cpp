@@ -34,3 +34,29 @@ public:
         return max_len;
     }
 };
+
+/////////////////////////////////
+/*
+    https://leetcode.com/problems/max-consecutive-ones-iii/
+*/
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int max_ones = 0, ones = 0;
+        
+        int n = nums.size();
+        int start = 0, end = 0;
+        
+        while(end < n) {
+            // expand the window till k is positive
+            if(k >= 0) 
+                k = (nums[end++] == 1 ? k : k-1);  
+            // shrink to make the window safe
+            if(k < 0)
+                k = (nums[start++] == 1 ? k : k+1);
+            
+            max_ones = max(max_ones, end - start);
+        }
+        return max_ones;
+    }
+};

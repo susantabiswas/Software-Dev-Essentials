@@ -37,8 +37,8 @@ public:
             // Pattern: current number at ith, can be added to all the contiguous subarrays
             // till i-1th pos.
             // In general, no. of contiguous subarrays in N length array: N * (N+1) / 2
-            // Since we are traversing incrementally hence we add each time: 1 + 2 + 3 ....+ N
-            substrings += i - j + 1;
+            // Since we are traversing incrementally hence we add each time: 1 + 2 + 3 ....+ N, if current length is N
+            substrings += i - j;
         }
         return substrings;
     }

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/prison-cells-after-n-days/submissions/
+    https://leetcode.com/problems/prison-cells-after-n-days/
     
     Since for binary bits, there can be 2^N combinations. So since only 6 places
     change, we have 2^6 combinations and for any N greater than that, we will see

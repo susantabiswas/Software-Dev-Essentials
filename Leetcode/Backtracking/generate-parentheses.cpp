@@ -3,8 +3,17 @@
 */
 class Solution {
 public:
-    // Using backtracking
-    // TC: O(2^n), SC: O(n!)(Recursive stack)
+    // Using backtracking, Since we only form valid parenthesis and not all cmbs of 
+    // parenthesis, we no. of valid parenthesis = nth Catalan no.
+    // Had we created all cmbs of parenthesis and checked if it is a valid one when length 
+    // becomes 2n, then we would have generated 2^ n cmbs and then the TC would have been O(n * 2^n)
+
+    // TC: O(n * Cn), Cn = Nth Catalan Number of valid sequences and it takes n to copy it to the result
+    // Cn = 1 / (1+n) * C(2n, n)
+    // Cn = 1/(1+n) * (2n)!/n!n!
+    // bound: 4^n / sqrt(n)
+​
+    // SC: O(n)(Recursive stack), O(Cn + n) if result is also accounted
     void generateParenthesisArrangements(string curr, int left,
                                          int right, vector<string>& parenthesis) {
         // when there are no parenthesis left

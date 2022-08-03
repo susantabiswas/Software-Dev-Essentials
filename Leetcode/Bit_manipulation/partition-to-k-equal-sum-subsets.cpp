@@ -51,7 +51,7 @@ public:
         // dp[mask]: (Total sum of all elements represented in the mask) % Target,
         // when dp[mask] = 0, it shows that given mask elements have partitions with Target sum and 
         // there are no remainder (extra) elements wrt target sum.1
-        vector<int> dp((1 << N) + 1, -1);
+        vector<int> dp((1 << N), -1);
         // empty set can be partitioned
         dp[0] = 0;
         

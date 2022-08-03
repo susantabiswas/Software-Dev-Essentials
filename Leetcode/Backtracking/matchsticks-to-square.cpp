@@ -73,7 +73,7 @@ public:
         const int N = nums.size();
         // dp[mask] = total sum of elements for current partition, indicates if there is any remainder 
         // left for curr partition
-        vector<int> dp((1<<N) + 1, -1);
+        vector<int> dp((1<<N), -1);
         dp[0] = 0;
         
         // try out all the matchstick subset combinations

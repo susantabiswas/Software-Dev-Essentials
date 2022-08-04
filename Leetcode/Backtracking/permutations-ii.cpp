@@ -106,7 +106,17 @@
         3,1,[1,2,2,1,3], i = 5 => nums[4] != nums[4-1] so swapping between 1 at idx=1 and 1 at idx=5 will happen and
         result is duplicate remaining subset
         
-        3. Correct logic:
+        3. Why if(i == curr || nums[i] != nums[i-1]) doesn't work with a single swap but if(i == curr || nums[curr] != nums[i]) does?
+        1,1,2,2,3,3
+        curr = 0
+        i = 2, nums[2] = 2, nums[2-1] = 1 => nums[i] != nums[i-1] is true
+        So it will swap, 2,1,1,2,3,3
+        i = 3, nums[3] = 2, nums[3-1] = 1 => nums[i] != nums[i-1] is true
+        Since we compared only with the last, we got 1 at previous 2's place after swapping and now the nums[curr] != nums[i] also is true due to that.
+        This would result in a swap which shouldnt happen, now again 2 at idx = 3 is put at 0th index and would create a duplicate
+        2,1,1,2,3,3
+        
+        4. Correct logic:
             for(int i = curr; i < nums.size(); i++) {
                 if(i == curr || nums[curr] != nums[i]) {
                     swap(nums[curr], nums[i]);
@@ -150,7 +160,7 @@ public:
             // Notice how all the elements after curr=0 are still sorted and since they are sorted
             // (i == curr || nums[curr] != nums[i]) will work. As this check can only work when the duplicates are
             // put together. In an unsorted order, it won't work.
-            if(i == curr || nums[curr] != nums[i]) {
+            if(i == curr || nums[i-1] != nums[i]) {
                 swap(nums[curr], nums[i]);
                 findPmt(curr + 1, nums, result);
             }
@@ -163,54 +173,5 @@ public:
         findPmt(0, nums, result);
         
         return result;
-    }
-};
-
-
-/////////////////////////////////////////////////////////////////
-/*
-    Solution 2
-    https://leetcode.com/problems/permutations-ii/submissions/
-    
-    For each number position 'i', to get all the permutations with the N-i numbers,
-    we need to swap each of the numbers with ith number once , add it to the current pmt,
-    repeat the same for the remaining numbers.
-    
-    TC: O(n * n!), we are doing n * (n-1) * (n-2) .. (1) recursive calls => O(n!)
-    then at each call(n), we run the for loop n times and at leaf nodes, again n times
-    T(n) = n * T(n-1) 
-    SC: (n! * n)
-*/
-class Solution {
-public:
-    void permuteUniqueRec(vector<int>& nums, int curr,  
-                          set<vector<int>>& s, vector<vector<int> >& pmt) {
-        // if all the numbers have been used
-        if(curr == nums.size()) {
-            if(s.find(nums) == s.end()) {
-                s.emplace(nums);
-                pmt.emplace_back(nums);
-                return;
-            }
-        }
-        
-        // swap the current position with remaining numbers
-        for(int i = curr; i < nums.size(); i++) {
-            // don't swap with same numbers, except we are doing it with itself
-            if(i == curr || nums[i] != nums[curr]) {
-                // swap positions
-                swap(nums[curr], nums[i]);
-                permuteUniqueRec(nums, curr + 1, s, pmt);
-                // revert back
-                swap(nums[curr], nums[i]);
-            }
-        }
-    }
-    
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        set<vector<int> > s;
-        vector<vector<int> > pmt;
-        permuteUniqueRec(nums, 0, s, pmt);
-        return pmt;
     }
 };

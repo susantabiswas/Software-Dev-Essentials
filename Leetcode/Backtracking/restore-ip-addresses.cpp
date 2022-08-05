@@ -1,9 +1,9 @@
 /*
     https://leetcode.com/problems/restore-ip-addresses/
     
-    TC: O(3^12) ~ (1), we make 3 calls for in each stage and at max do this for 
-                        max length of ip number which is 12 digits
-    SC: O(12) ~ O(1), we recurse only for max of 12 levels
+    TC: O(3^4) ~ (1), we make 3 calls for in each stage and at max do this for 
+                        no. of parts of ip number which is 4 parts controlled by part_num
+    SC: O(4) ~ O(1), we recurse only for max of 4 levels
     
     Try to simulate the rules as closly as possible.
     For each sub range of ip, we use a mthod to validate.

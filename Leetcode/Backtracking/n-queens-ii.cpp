@@ -2,7 +2,8 @@
     https://leetcode.com/problems/n-queens-ii/
     
     TC: t(n) = nT(n-1) + O(1)
-        O(n^n), n calls made at each stage and max depth of n levels, validating correcting pos takes O(1)
+        O(n^n), n calls made at each stage and max depth of n levels, 
+        validating correcting pos takes O(1)
     SC: O(n), max stack depth
 */
 class Solution {

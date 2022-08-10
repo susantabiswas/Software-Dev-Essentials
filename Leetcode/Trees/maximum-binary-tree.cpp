@@ -1,6 +1,6 @@
 /*
     654. Maximum Binary Tree
-    https://leetcode.com/problems/maximum-binary-tree/submissions/
+    https://leetcode.com/problems/maximum-binary-tree/
     
     For the given array range, find the max element index and create root with that.
     Then recurse for the left and right side remaining array for creating left and right 

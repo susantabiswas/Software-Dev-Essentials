@@ -1,6 +1,6 @@
 /*
     1026. Maximum Difference Between Node and Ancestor
-    https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/submissions/
+    https://leetcode.com/problems/maximum-difference-between-node-and-ancestor/
     
     Bottom up:
         For this we just need to maximize the diff of root and child value. We do postorder traversal.

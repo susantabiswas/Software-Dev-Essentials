@@ -1,6 +1,6 @@
 /*
     96. Unique Binary Search Trees
-    https://leetcode.com/problems/unique-binary-search-trees/submissions/
+    https://leetcode.com/problems/unique-binary-search-trees/
     
     For each N, we can have all cmb of all smaller elements on left and remaining
     greater N-i elements on right.

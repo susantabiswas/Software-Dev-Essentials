@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/score-of-parentheses/submissions/
+    https://leetcode.com/problems/score-of-parentheses/
     
     Since the scoring happens based on the nested braces, we need a way
     to know the level of nested braces. To indicate each nested level we

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-the-most-competitive-subsequence/submissions/
+    https://leetcode.com/problems/find-the-most-competitive-subsequence/
     
     TC: O(N)
     SC: O(k)

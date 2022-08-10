@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/submissions/
+    https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
     
     Since we remove 2 chars if they are same and adjacent or if there is a even numbered
     char group in between. So we need a way to save the previous information of chars based

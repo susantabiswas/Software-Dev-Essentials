@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/min-stack/submissions/
+    https://leetcode.com/problems/min-stack/
     
     TC: push/pop O(1)
     SC: O(N)

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/daily-temperatures/submissions/
+    https://leetcode.com/problems/daily-temperatures/
     
     Solution 1
     This problem can be thought of as finding the closest greater temp for 

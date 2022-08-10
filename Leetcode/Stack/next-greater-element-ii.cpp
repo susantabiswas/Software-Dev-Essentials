@@ -1,6 +1,5 @@
 /*
-    https://leetcode.com/problems/next-greater-element-ii/submissions/
-    
+    https://leetcode.com/problems/next-greater-element-ii/
     SOLUTION 1
     To find the nexxt greater element in a linear array, we can use a stack and traverse 
     from right to left ensuring that increasing order is maintained inside the stack.

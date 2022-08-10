@@ -1,4 +1,51 @@
 /*
+    https://leetcode.com/problems/smallest-string-starting-from-leaf/
+    
+    TC: O(n + mL), n = total nodes, m = leaf nodes, L = length of longest string
+    SC: O(n)
+    
+    Idea is to create the word from top to bottom. When we reach a leaf node,
+    compare the word formed so far with the smallest word seen so far.
+*/
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    void preorder(TreeNode* root, string str, string& smallest) {
+        if(root) {
+            // Add the current char to the string percolated from root
+            str += string(1, 'a' + root->val);
+            // leaf node, check if the string formed from root till current leaf
+            // is the smallest or not
+            if(!root->left && !root->right) {
+                // reverse the word to make it start from leaf to top
+                reverse(str.begin(), str.end());
+                smallest = min(smallest, str);
+            }
+            
+            preorder(root->left, str, smallest);
+            preorder(root->right, str, smallest);
+        }    
+    }
+    
+    string smallestFromLeaf(TreeNode* root) {
+        string smallest = "~";
+        preorder(root, "", smallest);
+        return smallest;
+    }
+};
+
+//////////////////////////////////////////////////
+/*
     988. Smallest String Starting From Leaf
     https://leetcode.com/problems/smallest-string-starting-from-leaf/
     

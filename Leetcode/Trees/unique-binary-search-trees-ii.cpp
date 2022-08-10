@@ -1,6 +1,18 @@
 /*
     95. Unique Binary Search Trees II
     https://leetcode.com/problems/unique-binary-search-trees-ii/
+
+    TC: O(n * Cn)
+    SC: O(n * Cn)
+    Cn = nth Catalan number
+
+    Though the solution is the nth Catalan number, to compute that we end up computing
+    Catalan number for each of 1...n. So n * Cn. Similarly we save n Catalan numbers.
+
+    For each n, the time complexity due to the loops and picking each intermediate node as 
+    root leads to a total of nth Catalan.
+
+    The Catalan number grows asymptotically similar to 4^n/n^(3/2)
 */
 
 /**

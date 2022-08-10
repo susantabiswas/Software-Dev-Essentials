@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/design-circular-queue/submissions/
+    https://leetcode.com/problems/design-circular-queue/
     
     Idea is to keep two pointers, one which tracks the first element inserted in queue
     and the other which points to the position where the last element was written.

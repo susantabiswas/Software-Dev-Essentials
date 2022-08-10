@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/delete-nodes-and-return-forest/submissions/
+    https://leetcode.com/problems/delete-nodes-and-return-forest/
 	
 	Idea is to traverse in post order and while processing a node check if that node 
 	needs to be deleted or not. If it needs deletion then the child nodes become tree root 

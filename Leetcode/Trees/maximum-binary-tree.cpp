@@ -1,4 +1,57 @@
 /*
+    https://leetcode.com/problems/maximum-binary-tree/
+    
+    Thing to note is a greater element splits the array into two parts: left and right.
+    Then its left child is the max in the left side and right child is the max on the right side.
+    
+    We use a monotonic decreasing stack which ensures we know elements that are just smaller than the previous 
+    one. 
+    Each time an element is added to stack, the stack top if not empty is will be the parent for current node.
+    Similarly, that node will be left child of its previous element in stack.
+    
+    Also remove all the elements in the stack smaller than current and make the last popped the left child as that
+    is the one on the left just smaller than current.
+    
+    TC: O(N)
+    SC: O(1)
+*/
+class Solution {
+public:
+    TreeNode* stackSol(vector<int>& nums) {
+        // monotonically decreasing stack
+        // Each element's right child is the next element in the stack
+        // since they are all monotonically decreasing and according to the problem
+        // Each time a local maxima becomes a subtree root
+        deque<TreeNode*> s;
+        
+        for(int i = 0; i < nums.size(); i++) {
+            // Create the node for the current element
+            TreeNode* node = new TreeNode(nums[i]);
+            
+            // If the current node is greater than some of the elements on the 
+            // left, then the biggest amongst them will be its left child
+            while(!s.empty() && s.back()->val < nums[i]) {
+                node->left = s.back();
+                s.pop_back();
+            }
+            // The bigger element in the stack before current will be current's parent 
+            if(!s.empty())
+                s.back()->right = node;
+            // Add current to monotonically decreasing stack
+            s.emplace_back(node);
+        }
+        
+        return s.front();
+    }
+    
+    TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
+        return stackSol(nums);
+    }
+};
+
+/////////////////////////////////////////////////////////////////////////////
+
+/*
     654. Maximum Binary Tree
     https://leetcode.com/problems/maximum-binary-tree/
     

@@ -1,10 +1,7 @@
 /*
     https://leetcode.com/problems/binary-tree-preorder-traversal/
     
-    TC: O(N)
-    SC: O(1)
-    
-    Solution: Morris Traversal
+    Solution 1: Morris Traversal
     
     Idea of morris traversal is to set links to inorder predecessor to their successor.
     This is what is naturally achieved with a recursion.
@@ -17,6 +14,20 @@
     have processed it in the 2nd time.
     
     Now if there is no left child, process it and go to the right node.
+    
+    TC: O(N)
+    SC: O(1)
+    
+    SOLUTION 2: Stack
+    
+    Idea is to use stack to mimic the recusion stack, we go left as usual while saving the 
+    nodes on the way. When we hit a null node, just pop the last node from stack and then from there 
+    take a right turn. 
+    In case we are again null, then pop back to last node and so on.
+    TC: O(N)
+    SC: O(N)
+    
+    
 */
 /**
  * Definition for a binary tree node.
@@ -31,6 +42,9 @@
  */
 class Solution {
 public:
+    // SOLUTION 1: Morris Traversal (Threaded Binary Tree)
+    // TC: O(N)
+    // SC: O(1)
     vector<int> morrisTraversal(TreeNode* root) {
         TreeNode* curr = root;
         vector<int> order;
@@ -68,7 +82,33 @@ public:
         return order;
     }
     
+    // SOLUTION 2: Stack
+    // TC: O(N)
+    // SC: O(N)
+    vector<int> stackSol(TreeNode* root) {
+        stack<TreeNode*> s;
+        TreeNode* curr = root;
+        vector<int> order;
+        
+        while(curr || !s.empty()) {
+            // Go as much left as possible
+            while(curr) {
+                order.emplace_back(curr->val);
+                s.emplace(curr);
+                curr = curr->left;
+            }
+            // Now we have hit a null node, so step back to the 
+            // last node
+            curr = s.top();
+            s.pop();
+            // Explore the right subtree
+            curr = curr->right;
+        }
+        return order;
+    }
+    
     vector<int> preorderTraversal(TreeNode* root) {
-        return morrisTraversal(root);
+        // return morrisTraversal(root);
+        return stackSol(root);
     }
 };

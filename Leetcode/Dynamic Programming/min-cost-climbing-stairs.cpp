@@ -7,48 +7,49 @@
 */
 class Solution {
 public:
-    int minCostClimb(int curr, vector<int>& cost, vector<int>& dp) {
-        // once we reach beyond the last step, our goal is reached
-        if(curr >= cost.size())
+    int minCostMem(int curr, vector<int>& dp, vector<int>& cost) {
+        // reached the top
+        if(curr >= cost.size())    
             return 0;
-        
-        // at current step, we select the step which gives us the min overall cost
-        if(dp[curr] == 0) {
-            dp[curr] = min(minCostClimb(curr + 1, cost, dp), 
-                        minCostClimb(curr + 2, cost, dp)) 
-                        + cost[curr];
+        if(dp[curr] == -1) {
+            dp[curr] = cost[curr] + min(minCostMem(curr + 1, dp, cost),
+                                       minCostMem(curr + 2, dp, cost));
         }
         return dp[curr];
     }
     
-    /*
-        Stair top can be reached either from N-1 or N-2th step. That means
-        we need to find the min cost incurred while selecting a step. 
-        So for each step we find the cost incurred when it is used,
-        which is cost of current step and min cost to reach current step.
-    */
-    int minCostClimbTab(vector<int>& cost, vector<int>& dp) {
-        if(cost.empty()) 
-            return 0;
-        if(cost.size() == 1) 
-            return cost[1];
+    int minCostTab(vector<int>& dp, vector<int>& cost) {
+        // only one step or 0 step
+        if(cost.empty() || cost.size() == 1)
+            return cost.empty() ? 0 : cost[0];
         
-        dp[0] = cost[0];
-        dp[1] = cost[1];
+        // dp[i] = min cost to use the curr step ( includes reaching the step + using the step)
+        dp[0] = cost[0], dp[1] = cost[1];
         
-        for(int i = 2; i < cost.size(); i++) 
-            // calculate the cost incurred for selecting current:
-            // which is cost of current step and min cost to reach current step
-            dp[i] = min(dp[i-1], dp[i-2]) + cost[i];
-        
+        for(int i = 2; i < cost.size(); i++) {
+            dp[i] = cost[i] + min(dp[i-1], dp[i-2]);
+        }
         return min(dp[cost.size() - 1], dp[cost.size() - 2]);
     }
     
+    int mem(int n, vector<int>& costs, vector<int>& dp) {
+        if(n == 0)
+            return dp[n] = costs[n];
+        if(dp[n] == -1) {
+            dp[n] = costs[n] + min(n-1 >= 0 ? mem(n-1, costs, dp) : 0,
+                                  n-2 >= 0 ? mem(n-2, costs, dp) : 0);
+        }
+        return dp[n];
+    }
+    
     int minCostClimbingStairs(vector<int>& cost) {
-        vector<int> dp(cost.size(), 0);
-        // take the min out of starting at 0 and 1th step
-        //return min(minCostClimb(0, cost, dp), minCostClimb(1, cost, dp));
-        
-        return minCostClimbTab(cost, dp);
+        // dp[i] = Min cost to reach the top of stairs from ith pos
+        vector<int> dp(cost.size(), -1);
+        // return min(minCostMem(0, dp, cost), minCostMem(1, dp, cost));
+        // return minCostTab(dp, cost);
+
+        // Way 3
+        mem(cost.size()-1, cost, dp);
+        return min(dp[cost.size()-2], dp[cost.size()-1]);
     }
 };

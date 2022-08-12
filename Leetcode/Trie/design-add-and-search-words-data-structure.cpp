@@ -37,7 +37,8 @@ public:
     }
     
     // Searches for a word in Trie
-    // TC: O(n * L), L: length of longest word
+    // TC: O(26 ^ L), L: length of longest word
+    // In worst case we can have only ...., then T(L) = 26T(L-1) => 26^L
     // Worst case: when all the chars are . and all words in Trie are of same length
     bool searchWord(int idx, TrieNode *root, string &word) {
         // all the chars coevered, check if the current node marks

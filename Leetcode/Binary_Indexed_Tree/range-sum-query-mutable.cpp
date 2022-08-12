@@ -3,20 +3,20 @@
     
     Binary Indexed Tree Solution
     
-    Binary Indexed Tree is an n-ary tree that stores has a size equal to the size of input array
+    Binary Indexed Tree is an n-ary tree that has a size equal to the size of input array
     unlike a segment tree where size is often 4n.
     
     1. Each node represents an index.
     2. Here the relationship between each node is based on the binary representation.
-    A node x is child of node y, if on setting the rightmost set bit (LSB) makes it equal to y.
+    A node x is child of node y, if on setting OFF the rightmost set bit (LSB) makes it equal to y.
     Eg. x = 10110, y = 10100
-    If we set the rightmost bit of x => 10100
+    If we set OFF the rightmost bit of x => 10100
     It becomes y.
     
     Similarly for x, 10111 can be a child.
     
     3. Each node index will account for values decided by its LSB. Eg 1010, LSB number is 10, so it will account for
-    last 2 numbers in the array including itself. So bit[1010 (10)] = Accounts for nums[9:8], Bit has 1 based indexing
+    last 2 numbers in the array including itself. So bit[1010 (10)] = Accounts for nums[9:8], BIT has 1 based indexing
     hence 1010 accounts for 9-8 (0 based indexing).
     
     idx      Coverage

@@ -1,7 +1,7 @@
 /*
     https://leetcode.com/problems/word-break/
     
-    TC: O(N^3)
+    TC: O(N^3), can be reduced to O(N^2) by creating the substring incrementally. Refere Word Break II
     SC: O(n)
     
     Idea is to use backtracking + DP. In normal backtracking we would have

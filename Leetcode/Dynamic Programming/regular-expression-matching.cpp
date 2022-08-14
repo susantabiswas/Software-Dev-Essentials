@@ -3,6 +3,13 @@
     Solutions:
     1. Memoization
     2. Tabular
+
+    NOTE: * is not a single char, it should be considered as combination of 2 chars
+    i.e (preceeding)*. These two both account as a single char.
+    Eg. p = a*, s = aa
+    Here *'s preceeding is 'a', so s[1] is matched, next we don't compare p[0] = a with s[0] = a
+    since p[0] exists with * and shouldnt be treated as a standalone char.
+    So next time again for s[0], we use p[1] = * since its preceeding char is 'a'.
 */
 class Solution {
 public:
@@ -42,7 +49,8 @@ public:
                     
                     // DON'T USE * 
                     // also covers the case when current pattern char is wildcard * and doesn't match
-                    // the char of source, try the char before '*' of pattern
+                    // the char of source, try the char before '*' of pattern.
+                    // Since j-1 char should only be considered with *, skip that as well
                     without_star = regexMatch(dp, s, p, i, j-2);
                     dp[i][j] = with_star || without_star;
                 }

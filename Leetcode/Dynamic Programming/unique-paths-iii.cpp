@@ -5,6 +5,13 @@
     in 4 directions, we form run into a loop path, so we mark each processing node 
     -1 essentially preventing further accessing that cell till we find ways 
     using that cell, after that is done we mark is accessible again.
+
+    TC: O(4*3^W)
+    SC: O(W)
+
+    W = walkable cells
+    From each cell we make 3 effective calls in other directions, we dont go to the direction
+    where we came from.
 */
 
 class Solution {

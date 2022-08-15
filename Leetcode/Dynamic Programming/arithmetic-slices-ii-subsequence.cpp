@@ -1,11 +1,16 @@
 /*
+    https://leetcode.com/problems/arithmetic-slices-ii-subsequence/
+
 	Idea: [7,7,7]
-	For a given number we find the diff it makes with the numbers before it. Now the current i-th number can be appended with all the found sequences for a given j-th number and also (nums[i], nums[j]) .
+	For a given number we find the diff it makes with the numbers before it. 
+    Now the current i-th number can be appended with all the found sequences 
+    for a given j-th number and also (nums[i], nums[j]) .
 	
 	idx | Subsequences
 	0:   {}
 	1:   diff 0 -> {7, 7} (Current number and previous)
-	2:   diff 0 -> {7, 7, 7} (Current appended with the sequences of previous) , {7, 7} (Current with previous)
+	2:   diff 0 -> {7, 7, 7} (Current appended with the sequences of previous) , 
+                                {7, 7} (Current with previous)
 	Ans: 1 ( {7, 7, 7} considered)
 	
     TC:  O(N^2)

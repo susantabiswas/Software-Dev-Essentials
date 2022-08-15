@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/2-keys-keyboard/submissions/
+    https://leetcode.com/problems/2-keys-keyboard/
     
     We use the bottom-up approach. For each 'i', find the min steps that will be taken 
     starting with j = 1(A), j = 2(AA) for creating 'i' no. of As.

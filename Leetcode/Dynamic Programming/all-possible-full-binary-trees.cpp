@@ -21,6 +21,14 @@
         
         Since we only compute for odd numbers,
         for N = 2k + 1
+
+        TC: summation(Ci), i = 0 -> N/2
+            = n/2 * Cn
+            = n/2 * 4^n/(n^(3/2))
+            = n/2 * 2^(2n) / n ^(3/2)
+            = (2^(2n) * 2^-1) / (n ^ 3/2 * n^-1)
+            = 2^(2n-1) / n ^ (1/2)
+            ~ 2^n
     SC: O(2^N)
 */
 /**

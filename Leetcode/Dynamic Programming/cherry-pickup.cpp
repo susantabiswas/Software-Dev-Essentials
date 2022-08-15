@@ -74,12 +74,14 @@ public:
           || grid[x1][y1] == -1 || grid[x2][y2] == -1)
             return INT_MIN;
         
-        // destination reached, because of nature of movement i.e only forward either
+        // destination reached, this line is imp as without it we won't know whether
+        // path is actually possible to the destination or not from top left
+        // because of nature of movement i.e only forward either
         // right or down, the total effective distance (Manhattan Distance) travelled by both is same
         // and they both will reach the end at the same time
         if(x1 == grid.size()-1 && y1 == grid.size()-1)
            return dp[key] = grid[x1][y1];
-            
+
         // Find the max path sum from current position to reach the target
         if(dp.count(key) == 0) {
             int total_cherries = 0;

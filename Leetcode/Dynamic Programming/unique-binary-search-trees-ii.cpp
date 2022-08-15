@@ -4,6 +4,19 @@
 
     Time: O(C0+C1+...Cn), where Cn is the Catalan number
     SC: O(n * Cn), Cn: Total Cn no. of BSTs with n nodes
+
+    TC: O(n * Cn)
+    SC: O(n * Cn)
+    Cn = nth Catalan number
+
+    Though the solution is the nth Catalan number, to compute that we end up computing
+    Catalan number for each of 1...n. So n * Cn. Similarly we save n Catalan numbers.
+
+    For each n, the time complexity due to the loops and picking each intermediate node as 
+    root leads to a total of nth Catalan.
+
+    The Catalan number grows asymptotically similar to 4^n/n^(3/2)
+    So n * (4^n/n^(3/2)) => (4^n/n^(1/2))
 */
 
 /**

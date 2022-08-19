@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/maximal-rectangle/submissions/
+    https://leetcode.com/problems/maximal-rectangle/
 */
 class Solution {
 public:

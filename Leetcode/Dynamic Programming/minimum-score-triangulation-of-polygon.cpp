@@ -1,6 +1,6 @@
 /*
    
-    https://leetcode.com/problems/minimum-score-triangulation-of-polygon/submissions/
+    https://leetcode.com/problems/minimum-score-triangulation-of-polygon/
     
     The idea is to  take each pair of vertices possible and then with those fixed, find 
     a vertex in between such that the polygon on left and right side of it are of min score.

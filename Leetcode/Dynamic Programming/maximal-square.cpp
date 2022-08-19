@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/maximal-square/submissions/
+    https://leetcode.com/problems/maximal-square/
     
     We use a 2D dp, where each position stores the side of the
     max square ending at the current position. For finding the max square 

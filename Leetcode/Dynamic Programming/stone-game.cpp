@@ -1,5 +1,5 @@
 /*
-  https://leetcode.com/problems/stone-game/submissions/
+  https://leetcode.com/problems/stone-game/
 */
 
 class Solution {

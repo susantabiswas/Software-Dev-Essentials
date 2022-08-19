@@ -1,6 +1,6 @@
 ```
 /*
-    https://leetcode.com/problems/scramble-string/submissions/
+    https://leetcode.com/problems/scramble-string/
     TC: O(N^2)
 */
 class Solution {

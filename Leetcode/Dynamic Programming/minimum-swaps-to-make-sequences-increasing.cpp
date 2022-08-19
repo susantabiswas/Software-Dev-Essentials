@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/submissions/
+    https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/
     TC: O(N)
     SC: O(N)
 */

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/submissions/
+    https://leetcode.com/problems/tiling-a-rectangle-with-the-fewest-squares/
     
     DP solution not optimal. Use backtracking
 */

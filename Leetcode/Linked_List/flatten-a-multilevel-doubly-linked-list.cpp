@@ -18,7 +18,57 @@ public:
     Node* child;
 };
 */
+/////////////////////// STYLE 1
+class Solution {
+public:
+    void dfs(Node* head, Node*& last) {
+        if(!head)
+            return;
+        
+        Node* nxtptr = nullptr;
+        // add the nodes in the current level
+        while(head) {
+            // Make the last added node's next point
+            // to current node and current node's prev
+            // point to last node
+            head->prev = last;
+            last->next = head;
+            last = head;
+            // save the next node addr since this node is the current
+            // last and will be altered during dfs of its child
+            nxtptr = head->next;
+            
+            // end the current last node
+            last->next = nullptr;
+                     
+            // Do dfs of its child nodes
+            if(head->child)
+                dfs(head->child, last);
+            
+            head->child = nullptr;
+            // go to the next node originally in the multilevel list
+            head = nxtptr;
+        } 
+    }
+    
+    Node* flatten(Node* multilevel_head) {
+        Node* head = new Node(-1), *last = head;
+        
+        dfs(multilevel_head, last);
+        // Delete the dummy head node
+        Node* temp = head;
+        head = head->next;
+        // Since the 1st node's prev was pointing to the dummy head,
+        // make it point to null now
+        if(head)
+            head->prev = nullptr;
+        delete temp;
+        
+        return head;
+    }
+};
 
+/////////////////////// STYLE 2
 class Solution {
 public:
     // Preorder traversal 

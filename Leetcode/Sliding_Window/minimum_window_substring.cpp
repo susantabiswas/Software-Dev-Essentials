@@ -13,6 +13,52 @@
         means we have extra number of that char in current window. Once we cover everything, we try shrinking
         window size.
 */
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char, int> freq1, freq2;
+        
+        for(auto ch: t)
+            ++freq1[ch];
+        
+        int start = 0, end = 0;
+        int min_len = INT_MAX, n = s.size();
+        int win_start = 0, win_end = 0;
+        int chars = 0;
+        
+        // When we no chars to cover, this wont come in LC since
+        // len(t) >= 1
+        if(freq1.size() == 0)
+            return "";
+        
+        while(end < n) {
+            // expand the window
+            ++freq2[s[end]];
+            // all the instances of current char covered
+            if(freq1.count(s[end]) && freq2[s[end]] == freq1[s[end]])
+                ++chars;
+            ++end;
+            
+            // if the condition is satisfied, try shrinking the window
+            while(chars == freq1.size()) {
+                if(end - start < min_len) {
+                    min_len = end - start;
+                    win_start = start, win_end = end;
+                    //min_str = s.substr(start, end - start);
+                }
+                
+                auto ch = s[start++];
+                --freq2[ch];
+                if(freq1.count(ch) && freq2[ch] < freq1[ch])
+                    --chars;
+            }
+        }
+        return s.substr(win_start, win_end - win_start);
+    }
+};
+
+// Older solution: Probably TLE now
 class Solution {
 public:
     string minWindow(string s, string t) {

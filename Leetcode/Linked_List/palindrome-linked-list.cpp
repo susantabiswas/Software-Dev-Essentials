@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/palindrome-linked-list/submissions/
+    https://leetcode.com/problems/palindrome-linked-list/
     Solution1: TC: O(n), SC: O(1)
     Solution2: TC: O(n), SC: O(n)
 */

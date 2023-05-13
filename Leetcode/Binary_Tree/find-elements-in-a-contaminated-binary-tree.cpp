@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/submissions/
+    https://leetcode.com/problems/find-elements-in-a-contaminated-binary-tree/
     
     Idea is to create the tree in a top down manner using the given rules.We pass the value
     that needs to be set. Initially 0 is passed for the root node, there onwards, we use the

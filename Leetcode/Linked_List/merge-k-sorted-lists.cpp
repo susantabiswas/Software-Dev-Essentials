@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/merge-k-sorted-lists/submissions/
+    https://leetcode.com/problems/merge-k-sorted-lists/
     
     The idea is to merge the lists in tournament tree order to mnimize the 
     number of merge operations.

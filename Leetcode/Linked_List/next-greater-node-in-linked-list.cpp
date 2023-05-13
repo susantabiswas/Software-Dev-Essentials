@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/next-greater-node-in-linked-list/submissions/
+    https://leetcode.com/problems/next-greater-node-in-linked-list/
     
     The problem is basically find the next greater right element.
     But since this is a linked list we can't start traversing from right

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/heaters/submissions/
+    https://leetcode.com/problems/heaters/
     
     Solution is very similar to Painter's partition problem.
     We do the binary search on the search space for radius.

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/submissions/
+    https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/
     
     Idea is that whenever consecutive 0-sum zublist appears, the cumulative sum becomes the same as
     it was just before the start of that sublist.

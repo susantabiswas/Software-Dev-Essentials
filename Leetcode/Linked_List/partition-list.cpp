@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/partition-list/submissions/
+    https://leetcode.com/problems/partition-list/
 */
 
 /**

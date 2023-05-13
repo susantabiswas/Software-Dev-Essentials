@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/leaf-similar-trees/submissions/
+    https://leetcode.com/problems/leaf-similar-trees/
     
     Idea is to find the order of leaf nodes of 1st tree and then do a 
     preorder traversal of 2nd tree and check if the leaves of 2nd tree

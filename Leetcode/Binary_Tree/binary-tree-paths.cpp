@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/binary-tree-paths/submissions/
+    https://leetcode.com/problems/binary-tree-paths/
     
     We do preorder traversal so that each time the current node is visited
     before its children. For each subsequent DFS call we also pass the nodes visited

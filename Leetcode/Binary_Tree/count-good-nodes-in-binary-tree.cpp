@@ -1,6 +1,5 @@
 /*
-    https://leetcode.com/problems/count-good-nodes-in-binary-tree/submissions/
-    
+    https://leetcode.com/problems/count-good-nodes-in-binary-tree/
     Idea is to pass the max node encountered in each path from root and each
     time comparing the root node with the max node seen so far, if it is <= max seen
     so far or it is root, that means it is a good node.

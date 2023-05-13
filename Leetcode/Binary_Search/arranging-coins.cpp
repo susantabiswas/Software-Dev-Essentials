@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/arranging-coins/submissions/
+    https://leetcode.com/problems/arranging-coins/
     
     We use binary search to search the row for which the coins are utilized the
     most. To evaluate the directtion to move we use a function that gives the remaining

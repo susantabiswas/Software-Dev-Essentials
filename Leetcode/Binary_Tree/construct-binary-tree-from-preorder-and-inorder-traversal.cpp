@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/
+    https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
     
     We create the tree in preorder fashion. So each time the current index of preorder is used, 
     once a node is created we increment its index position. For the current preoder element, we 

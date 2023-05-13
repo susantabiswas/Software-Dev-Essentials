@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/first-bad-version/submissions/
+    https://leetcode.com/problems/first-bad-version/
     
     We can use binary search for doing this. Search space is [1:n], goal is to find the first defective version.
 	We set low=1 and high=n. Now all the versions after the first defective are all also defective, so take out the 

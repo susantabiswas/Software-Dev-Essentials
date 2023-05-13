@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/submissions/
+    https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/
     
     The problem can be solved using binary search. The thing to note here
     is we do binary search on the search space of solution, instead of doing it on 

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/binary-tree-right-side-view/submissions/
+    https://leetcode.com/problems/binary-tree-right-side-view/
     
     Do normal BFS so that we can be aware of the level. In each level add the last
     node to the traversal result.

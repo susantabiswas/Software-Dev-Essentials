@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/linked-list-in-binary-tree/submissions/
+    https://leetcode.com/problems/linked-list-in-binary-tree/
     
     Idea is do BFS of tree and once we get the a node which has the same value as that
     of the list head, then we start DFS of tree from that node and list head to check if that

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/submissions/
+    https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/
     
     We can use binary search here on the search space of days req to make req. bouquets.
     We check for a given days, is it possible to make the bouquets, if yes then search for 

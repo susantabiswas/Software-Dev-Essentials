@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/split-linked-list-in-parts/submissions/
+    https://leetcode.com/problems/split-linked-list-in-parts/
     
     Max equal nodes per group: N/k
     remaining nodes, that needs to be given in sequential manner starting from beginning: N % k

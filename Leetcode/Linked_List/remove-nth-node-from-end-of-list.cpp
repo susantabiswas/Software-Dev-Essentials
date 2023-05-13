@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/remove-nth-node-from-end-of-list/submissions/
+    https://leetcode.com/problems/remove-nth-node-from-end-of-list/
     
     Idea is to traverse n nodes first, once reached we
     use another ptr which starts from beginning.

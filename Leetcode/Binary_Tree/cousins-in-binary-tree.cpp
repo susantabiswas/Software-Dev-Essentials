@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/cousins-in-binary-tree/submissions/
+    https://leetcode.com/problems/cousins-in-binary-tree/
     
     Idea is to do BFS and check if any node is a parent of x or y.
     If parent is found for either x or y, then in order for them to be 

@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/reverse-nodes-in-k-group/submissions/
+    https://leetcode.com/problems/reverse-nodes-in-k-group/
     
     Idea is to traverse the list with k groups in mind. For every group found, we
     separate and reverse the group and insert it back in the following order:

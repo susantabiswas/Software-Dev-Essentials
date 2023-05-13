@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/guess-number-higher-or-lower/submissions/
+    https://leetcode.com/problems/guess-number-higher-or-lower/
     
     This is a binary search problem, where the guess
     function is the comparator

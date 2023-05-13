@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/copy-list-with-random-pointer/submissions/
+    https://leetcode.com/problems/copy-list-with-random-pointer/
 */
 /*
 // Definition for a Node.

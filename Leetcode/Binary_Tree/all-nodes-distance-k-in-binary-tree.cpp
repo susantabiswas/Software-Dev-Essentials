@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/submissions/
+    https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
     
     Idea is to convert the tree to a bidirectional graph. Once we have a graph representation
     of nodes, we can do BFS from the target node till K levels and return the nodes in Kth level.

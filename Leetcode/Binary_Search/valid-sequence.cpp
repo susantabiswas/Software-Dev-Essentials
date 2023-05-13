@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/532/week-5/3315/
+    https://leetcode.com/problems/check-if-a-string-is-a-valid-sequence-from-root-to-leaves-path-in-a-binary-tree/
 */
 
 /**

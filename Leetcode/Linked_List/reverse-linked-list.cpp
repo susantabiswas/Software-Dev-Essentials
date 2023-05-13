@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/reverse-linked-list/solution/
+    https://leetcode.com/problems/reverse-linked-list/
     
     Most important thing to handle is the addr of next node while traversing.
 */

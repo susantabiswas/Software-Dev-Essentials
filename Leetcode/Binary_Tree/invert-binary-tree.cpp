@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/invert-binary-tree/submissions/
+    https://leetcode.com/problems/invert-binary-tree/
     TC: O(N)
 */
 /**

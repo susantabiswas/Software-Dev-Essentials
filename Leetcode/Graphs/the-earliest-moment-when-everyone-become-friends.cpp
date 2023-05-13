@@ -7,7 +7,9 @@
     This problem can be mapped to an undirected graph, where nodes are people.
     Problem asks us to find whether there will be one group in the end or not after
     all the meetings, also if that happens the earliest time when everyone knows each other.
-    We can use union find to find the groups where people will know each other and for each cluster we note the last time when a new person joined. We sort the meetings by time so that we add the people to a cluster according to time.
+    We can use union find to find the groups where people will know each other and for each
+    cluster we note the last time when a new person joined. We sort the meetings by time
+    so that we add the people to a cluster according to time.
     
 */
 class Solution {

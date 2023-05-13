@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/submissions/
+    https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/
     
     TC: O(xy)
 */

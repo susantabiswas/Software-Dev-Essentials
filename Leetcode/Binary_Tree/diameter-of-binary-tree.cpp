@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/diameter-of-binary-tree/submissions/
+    https://leetcode.com/problems/diameter-of-binary-tree/
     TC: O(N)
     
     The max path will be formed when a path is created using the path left + root + right.

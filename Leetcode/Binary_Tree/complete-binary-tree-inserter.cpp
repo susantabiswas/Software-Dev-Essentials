@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/complete-binary-tree-inserter/submissions/
+    https://leetcode.com/problems/complete-binary-tree-inserter/
     
     Insert: TC: O(N), SC: O(1)
     get: TC: O(1)

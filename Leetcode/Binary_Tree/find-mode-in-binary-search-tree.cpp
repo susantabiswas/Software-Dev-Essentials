@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-mode-in-binary-search-tree/submissions/
+    https://leetcode.com/problems/find-mode-in-binary-search-tree/
     
     // Solution 1
     We find the frequency count of all the nodes and sort them in decreasing order 

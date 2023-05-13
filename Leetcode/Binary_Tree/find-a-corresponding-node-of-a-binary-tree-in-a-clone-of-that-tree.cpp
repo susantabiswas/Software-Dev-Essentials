@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/submissions/
+    https://leetcode.com/problems/find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree/
     
     Since there is a clone of the original tree, we do traversal of original 
     tree alongside the cloned tree and once the target node is found set the ref_node 

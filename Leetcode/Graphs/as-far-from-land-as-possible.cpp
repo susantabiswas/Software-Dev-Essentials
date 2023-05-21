@@ -65,7 +65,7 @@ public:
     }
     
     // Solution 2: Djikstra
-    // TC: O(MN)
+    // TC: O(MNlog(MN))
     // SC: O(MN)
     int djikstraSol(vector<vector<int>>& grid) {
         int M = grid.size(), N = grid[0].size();

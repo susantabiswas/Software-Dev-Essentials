@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/course-schedule-iv/submissions/
+    https://leetcode.com/problems/course-schedule-iv/
     
     We create a directed graph using the prerequisite edges and each query is basically finding
     a possible path from u to v. So we use dfs to check for a possible path.

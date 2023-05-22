@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/critical-connections-in-a-network/submissions/
+    https://leetcode.com/problems/critical-connections-in-a-network/
 
     Nice Explanation:
     https://www.hackerearth.com/practice/algorithms/graphs/articulation-points-and-bridges/tutorial/

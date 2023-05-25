@@ -126,7 +126,6 @@ public:
         - Remove the graph edge
         - Remove followee's tweets from follower's feed: O(mlog10)
 */
-/*
 class Twitter {
     // <follower: Set(followees) >
     unordered_map<int, unordered_set<int>> graph;
@@ -197,7 +196,6 @@ public:
     }
 };
 
-*/
 /**
  * Your Twitter object will be instantiated and called as such:
  * Twitter* obj = new Twitter();

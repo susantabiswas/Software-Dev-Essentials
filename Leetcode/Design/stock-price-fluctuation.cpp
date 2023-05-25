@@ -15,7 +15,7 @@
     Difference between solution 1 and solution 2 is that, in solution 2 we keep track of current min and max for each update 
     operation and use those vars to return the value for each minimum() and maximum() call.
 */
-/*
+
 ///////////////////////// SOLUTION 1
 class StockPrice {
 private:
@@ -71,7 +71,7 @@ public:
         return min_max.begin()->first;
     }
 };
-*/
+
 
 //////////////////////// SOLUTION 2 /////////////////
 // Constant time operation for minimum() and maximum() price

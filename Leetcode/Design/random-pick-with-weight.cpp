@@ -42,7 +42,7 @@
     Using binary search find the 1st position where it should lie. 
 */
 /////////////////////////////////////////// SOLUTION 1 ////////////////////////////////////
-/*
+
 class Solution {
 private:
     // stores the index value of w array
@@ -78,7 +78,7 @@ public:
         return idx[index]; 
     }
 };
-*/
+
 
 /////////////////////////////////////////// SOLUTION 2: Binary Search ///////////////////////////////
 class Solution {

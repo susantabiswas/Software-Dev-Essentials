@@ -50,7 +50,6 @@
 // Solution 1: Hash Table
 // Con: Memory can be overwhelmed with many unique logs as previous ones are
 // not deleted
-/*
 class Logger {
 private:
     unordered_map<string, int> last_printed;
@@ -72,11 +71,11 @@ public:
         }
     }
 };
-*/
+
 
 // Solution 2: Two Sets
 // Pros: Efficient use of memory.
-/*class Logger {
+class Logger {
 private:
     // Indicates the start time of current interval of message requests
     int interval_start;
@@ -117,12 +116,11 @@ public:
         return true;
     }
 };
-*/
+
 
 // Solution 3: Queue + Set
 // Con: Memory can be overwhelmed for queue if too many req made in the same 10s interval
 // Pros: Hash data retained only for 10s
-/*
 class Logger {
 private:
     unordered_map<string, int> last_printed;
@@ -151,7 +149,7 @@ public:
         return true;
     }
 };
-*/
+
 
 // Solution 4: Bucketing + Set
 // Con: A bit more overhead

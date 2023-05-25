@@ -51,7 +51,7 @@ public:
     }
 };
 
-/*
+
 ////////////////////////////////////// SOLUTION 2
 class SummaryRanges {
 private:
@@ -89,7 +89,7 @@ public:
         return intervals;
     }
 };
-*/
+
 /**
  * Your SummaryRanges object will be instantiated and called as such:
  * SummaryRanges* obj = new SummaryRanges();

@@ -33,7 +33,7 @@ public:
         
     }
     
-    // TC: Searching O(logn) + O(n) Merging, worst case when current interval covers all, insertion would take O(1)
+    // TC: Searching O(logn) + O(n) Merging, worst case when current interval covers all, insertion would take O(n)
     // SC: O(1)
     void addRange(int left, int right) {
         Interval interval(left, right);

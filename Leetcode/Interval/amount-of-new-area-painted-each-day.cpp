@@ -17,8 +17,23 @@
     right. for a given x coordinate, it will process all the points there. So Start interval events will result in the 
     points being added and End interval points will result in the points being removed from the sweep line.
     
-    Now the idea is for a given interval point (x coordinate), the smallest index day will actually will paint that.
-    So we pick the smallest event point and for that index do += 1, indicating that for that day a point was painted.
+    In each event point, we save the {day_supposed_to_be_painted, whether_start} information.
+    Now the idea is for a given interval point (x coordinate), the smallest index day out of all the current days in the sweep line
+    will actually paint that.
+    So we pick the smallest day index from the sweep line and for that day index do += 1, indicating that for that day a point was painted.
+    
+    1------2, day=0
+    1--------------4, day=1
+    
+    Points = [[], [(0, T), (1, T)], [(0, F)], [], [(1, F)]]
+    Sweep Line:
+    x=0, line = {}
+    x=1, line={0, 1} => coord x=1 should be painted on day 0
+    x=2, line={1} => coord x=2 should be painted on day 1, day0 event point end received so removed from line 
+    x=3, line={1} => coord x=3 should be painted on day 1
+    x=4, line={} => coord x=4 not painted as it is an exit point for day1 
+    
+    Work done = [1, 2]
 */
 class Solution {
 private:
@@ -28,10 +43,10 @@ private:
     };
     
     struct Point {
-        int pt;
+        int day; // Day on which this point is supposed to be painted
         bool is_start;
         
-        Point(int pt, bool is_start): pt(pt), is_start(is_start) {};
+        Point(int day, bool is_start): day(day), is_start(is_start) {};
     };
 public:
     ///////////////////////////////////// SOLTUION 1
@@ -95,10 +110,15 @@ public:
         
         // Add the pts to the coordinate system
         // points[x] = [Point] Point events for given x coordinate
+        // For each of the interval coordinates, we store the info about the day
+        // on which it is supposed to be painted
+        // Eg points[1] = [Point(0, true), Point(2, true)]
+        // Above means that for interval starting with 1, it should be painted
+        // on days 0 and 2.
         vector<vector<Point> > points(farthest_pt + 1);
-        for(int i = 0; i < paint.size(); i++) {
-            points[paint[i][0]].emplace_back(Point(i, true)); // entry point
-            points[paint[i][1]].emplace_back(Point(i, false)); // exit point
+        for(int day = 0; day < paint.size(); day++) {
+            points[paint[day][0]].emplace_back(Point(day, true)); // entry point
+            points[paint[day][1]].emplace_back(Point(day, false)); // exit point
         }
         // This is an imaginary vertical line that will traverse from left to right
         // Stores the vertical points for a given x coordinate
@@ -108,9 +128,9 @@ public:
             // Add all the event points for given x
             for(auto point: points[x]) {
                 if(point.is_start)
-                    sweep_line.emplace(point.pt);
+                    sweep_line.emplace(point.day);
                 else
-                    sweep_line.erase(point.pt);
+                    sweep_line.erase(point.day);
             }
             // For the current x coordinate, pick the smallest day index
             // when the pt will be painted

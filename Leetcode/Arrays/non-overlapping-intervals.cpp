@@ -12,7 +12,7 @@
 */
 class Solution {
 public:
-    
+    // SOLUTION 1
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
         // sort by end position
         sort(intervals.begin(), intervals.end(), 
@@ -35,6 +35,47 @@ public:
             else
                 curr = intervals[i];
             
+        }
+        return remove;
+    }
+    
+    
+    // SOLUTION 2: Sorting by start time
+    // Question is to find the intervals that overlap and then
+    // pick the ones that can reduce the overlapping .
+    // We first sort the intervals by start time, then we start going from
+    // left to right. We use an ongoing interval that is init with the 1st interval
+    // and this is the interval that is kept.
+    // Whenever there is an overlap between the currently tracked interval and the next interval,
+    // we remove the one that has a farther end point to reduce the scope of overlapping with later
+    // intervals.
+    
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        if(intervals.empty())
+            return 0;
+        
+        int remove = 0;
+        
+        auto comp = [&](const vector<int>& a, const vector<int>& b) {
+            return tie(a[0], a[1]) < tie(b[0], b[1]);
+        };
+        
+        sort(intervals.begin(), intervals.end(), comp);
+        
+        vector<int> curr = intervals[0];
+        for(int i = 1; i < intervals.size(); i++) {
+            // intervals overlap, we will remove the interval with the longer end time.
+            // This is because an interval with a longer end time has more scope for getting
+            // overlapped with the later intervals.
+            if(curr[1] > intervals[i][0]) {
+                // we pick the one with nearer end point
+                curr[1] = min(curr[1], intervals[i][1]);
+                ++remove;
+            }
+            // no overlapping, so update the ongoing tracked interval
+            else {
+                curr = intervals[i];
+            }
         }
         return remove;
     }

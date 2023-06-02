@@ -3,7 +3,7 @@
 */
 class Solution {
 public:
-    // Sol 1: Value Optimization for Aj and Ak
+        // Sol 1: Value Optimization for Aj and Ak
     // TC: O(N)
     // SC: O(N)
     /*
@@ -15,14 +15,21 @@ public:
         highest value seen so far won't do, we need to keep track of local maximas of Aj and Ak,
         otherwise if we are just tracking the global maxima for Aj and Ak we might not find a 
         value where the triplet elements are not part of global maximas, minima etc.
-            J
-            /\
-         j /  K
+             J
+            /
+         j /  
         /\/
         i k
-        Look at the above eg, if we only tracked global J and K then we wouldnt have found (i, k, j) triplet.
+        Look at the above eg, if we only tracked global J then we wouldnt have found (i, k, j) triplet.
+        Since we would not have found K while tracking only the global J, so it is imp to find triplets locally.
         So it is important to keep track of nearest greatest elements. For keeping track of nearest greatest elements,
         we use stack.
+        
+        Eg
+        [1,3,2,4,5,6,7,8,9,10]
+        Expected: true (1, 3, 2)
+        Had we been tracking only the global then J = 10, won't get K since after 10,
+        J won't get an update and K stays at INT_MIN.
         
         We scan from right to left and keep track of greatest (Aj) and second greatest (Ak) element,
         these are potential candidates. Since we are tracking the 2 greatest values, any Ai which is 

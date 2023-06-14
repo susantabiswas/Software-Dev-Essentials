@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/submissions/
+    https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/
     
     Solution 1: Using bit manipulation
     TC: O(N)

@@ -3,7 +3,11 @@
     Find the longest window which can have same characters when we can do K conversions.
     https://leetcode.com/problems/longest-repeating-character-replacement/
     
-    In a window of characters, if we want to convert all the characters to the same type, then we convert every character to the most frequent character in that window. So we start with a window, use a vector to keep track of frequencies of characters in current window, this helps us to know the most frequent character in current window. Then we move the right position of window we check if the no. of switches required in current window is <= K or not. If yes then continue expanding else we start shrinking from left.
+    In a window of characters, if we want to convert all the characters to the same type, then we convert every character to the most 
+    frequent character in that window. So we start with a window, use a vector to keep track of 
+    frequencies of characters in current window, this helps us to know the most frequent character 
+    in current window. Then we move the right position of window we check if the no. of switches required 
+    in current window is <= K or not. If yes then continue expanding else we start shrinking from left.
 */
 
 class Solution {
@@ -23,6 +27,16 @@ public:
             // increment frequency of current char and check if it
             // is has the most frequency or not
             ++dict[s[i]];
+            // We don't need to update the max_freq for a window
+            // that is smaller than the max length window so far as it
+            // doesn't help us anyway.
+            // eg: aaabcccccc, k = 0
+            // Here max_freq = 3 will stay till ccc is there in the current window.
+            // Once we get aaab, our window is invalid and we will shrink the window
+            // then next time again the window' start will shift right (even end is shifting 1 step right)
+            // as the window is still not valid.
+            // This goes even when bccc is the current window, then the next turn => window = cccc
+            // Now this is a new max valid window and will automatically force the max_freq to be updated to 4
             max_freq = max(max_freq, dict[s[i]]);
             ++i;
             

@@ -2,7 +2,7 @@
     76. Minimum Window Substring
     
     Min window of S that contains alll chars of T
-    https://leetcode.com/problems/minimum-window-substring/submissions/
+    https://leetcode.com/problems/minimum-window-substring/
     
     
     Solution:

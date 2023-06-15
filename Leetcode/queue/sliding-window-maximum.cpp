@@ -50,8 +50,9 @@ public:
     }
     
     // SOLUTION 2: Height balanced tree
-    // TC: O(klogk)
+    // TC: O(nlogm), n = total elements, m = unique elements
     // SC: O(k)
+    // Each element will be pushed once and there are n elements
     vector<int> treeSol(vector<int>& nums, int k) {
         map<int, int> elements;
         vector<int> result;

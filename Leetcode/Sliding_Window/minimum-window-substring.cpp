@@ -13,7 +13,49 @@
         means we have extra number of that char in current window. Once we cover everything, we try shrinking
         window size.
 */
-
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        unordered_map<char, int> freq;
+        // tracks the required no. of chars
+        int req = 0;
+        for(auto ch: t)
+            ++freq[ch], ++req;
+        
+        int min_len = INT_MAX;
+        int end = 0, start = 0;
+        int min_start = 0, min_end = 0;
+        
+        while(end < s.size()) {
+            // expand window
+            --freq[s[end]];
+            // If there are more no. of chars than needed,
+            // then they should not contribute to the req count
+            if(freq[s[end]] >= 0)
+                --req;
+            ++end;
+            
+            // minimize the valid window
+            while(req == 0) {
+                int len = end - start;
+                
+                if(len < min_len) {
+                    min_len = len;
+                    min_start = start, min_end = end;
+                }
+                ++freq[s[start]];
+                // If there are excess instances of this char, then
+                // the freq[char] = negative and those don't contribute to the req count.
+                // So update the req count only when those excess duplicates have been removed
+                if(freq[s[start]] > 0)
+                    ++req;
+                ++start;
+            }
+        }   
+        return min_len != INT_MAX ? s.substr(min_start, min_len) : "";
+    }
+};
+////////////////////////// Older solutions
 class Solution {
 public:
     string minWindow(string s, string t) {

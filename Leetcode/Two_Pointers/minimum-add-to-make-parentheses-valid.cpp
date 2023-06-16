@@ -9,6 +9,9 @@
     TC: O(N)
     SC: O(1)
     
+    Solution 3: Counter
+    TC: O(N)
+    SC: O(1)
 */
 class Solution {
 public:
@@ -59,8 +62,35 @@ public:
         return write_idx;
     }
     
+    // SOLUTION 3: Counter
+    // TC: O(n)
+    // SC: O(1)
+    int counterSol(string s) {
+        // Tracks how many ( unbalanced have appeared
+        // Whenever a matching closing ) is found, the count is decreased
+        // to indicate a balanced pair of ()
+        int unbalanced_opening = 0;
+        // ) for which there are no opening (
+        int req = 0;
+        
+        for(int i = 0; i < s.size(); i++) {
+            if(s[i] == '(')
+                ++unbalanced_opening;
+            // Balance out as many matching opening (
+            // as possible
+            else if(unbalanced_opening > 0)
+                --unbalanced_opening;
+            // There are no opening ( that can match the current ),
+            // so an insert operation is required
+            else
+                ++req;
+        }
+        return req + unbalanced_opening;
+    }
+    
     int minAddToMakeValid(string S) {
         // return stackSol(S);
+        // return counterSol(S);
         return twoPointersSol(S);
     }
 };

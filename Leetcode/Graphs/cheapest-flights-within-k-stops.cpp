@@ -58,6 +58,12 @@ public:
             // target reached
             if(curr == dst && stops <= k)
                 return price;
+
+            // The reason why we track the visited node is because our heap operates on the
+            // price metric but we allow both the lower price or lower stops for heap addition.
+            // Let's say we have added two edges for a node X, one with a lower price and one with
+            // lower number of stops. We will get the min price edge first and if we mark the node as 
+            // visited, we won't see the lower stops edge, hence we don't track visited nodes.
             
             for(auto [neighbor, flight_price]: g[curr]) {
                 // only try the neighbor iff we can get a smaller value for either

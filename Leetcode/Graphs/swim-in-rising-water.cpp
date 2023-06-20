@@ -57,7 +57,7 @@ public:
     // SC: O(MN)
     // Here the cost metric is the max seen height seen in the current path as that decides the
     // max time for that path.
-    int djikstraSol(vector<vector<int>>& grid) {
+    int dijkstraSol1(vector<vector<int>>& grid) {
         const int M = grid.size(), N = grid[0].size();
         vector<vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         // least_time[r][c] = min time at which curr pos can be reached
@@ -139,7 +139,7 @@ public:
 
     int swimInWater(vector<vector<int>>& grid) {
         // return binSearchSol(grid);
-        // return djikstraSol1(grid);
+        // return dijkstraSol1(grid);
         return dijkstraSol2(grid);
     }
 };

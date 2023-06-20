@@ -51,9 +51,12 @@ public:
         }
         return upper;
     }
-    
+
+    // Dijkstra Solution 1 
     // TC: O(MNlog(MN))
     // SC: O(MN)
+    // Here the cost metric is the max seen height seen in the current path as that decides the
+    // max time for that path.
     int djikstraSol(vector<vector<int>>& grid) {
         const int M = grid.size(), N = grid[0].size();
         vector<vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
@@ -93,9 +96,50 @@ public:
         
         return 0;
     }
-    
+
+    // Dijkstra Solution 2 
+    // TC: O(MNlog(MN))
+    // SC: O(MN)
+    // Here the cost is the just the height. Since the path's time is decided by the max
+    // elevation of a cell in that path, we can just use the height as the metric for heap.
+    // Every time the heap will just pick the smaller height cell and that ensures that the max height in the path is 
+    // also min.
+    int dijkstraSol2(vector<vector<int>>& grid) {
+        // <height, row, col, time>
+        priority_queue<array<int, 4>, vector<array<int, 4>>, greater<array<int, 4>> > min_heap;
+        
+        // start 
+        min_heap.push({grid[0][0], 0, 0, grid[0][0]});
+        
+        vector<array<int, 2>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        vector<vector<bool>> visited(grid.size(), vector<bool>(grid[0].size(), false));
+                                     
+        while(!min_heap.empty()) {
+            auto [_, r, c, time] = min_heap.top();
+            min_heap.pop();
+            
+            if(r == grid.size()-1 && c == grid[0].size()-1)
+                return time;
+            
+            if(visited[r][c])
+                continue;
+            
+            visited[r][c] = true;
+            
+            for(auto [dx, dy]: directions) {
+                int row = r + dx, col = c + dy;
+                if(row >= 0 && row < grid.size() && col >= 0 && col < grid[0].size() &&
+                   !visited[row][col])
+                    min_heap.push({grid[row][col], row, col, max(grid[row][col], time)});
+            }
+            
+        }
+        return -1;
+    }
+
     int swimInWater(vector<vector<int>>& grid) {
         // return binSearchSol(grid);
-        return djikstraSol(grid);
+        // return djikstraSol1(grid);
+        return dijkstraSol2(grid);
     }
 };

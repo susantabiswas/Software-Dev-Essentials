@@ -69,3 +69,67 @@ public:
         return sub_islands;
     }
 };
+
+/////////////////////////////////// SOLUTION 2: Without Reference Variable
+class Solution {
+public:
+    bool isValid(int r, int c, vector<vector<int>>& grid) {
+        return r >= 0 && r < grid.size() &&
+            c >= 0 && c < grid[0].size();
+    }
+    
+    // Returns true if the current island is a sub-island
+    bool dfs(int r, int c, vector<vector<int>>& grid1,
+            vector<vector<int>>& grid2) {
+        // out of bound or grid 2's cell has water
+        if(!isValid(r, c, grid1) || !grid2[r][c])
+            return true;
+        
+        // Whether the current island is a sub-island or not
+        bool sub_island = true;
+        
+        // land cell in grid 2 but not in grid 1
+        // NOTE: We don't prematurely return once there is a violation
+        // for sub-island condition. This is because if the current cell
+        // makes the entire island not a sub-island then the remaining connected
+        // cells of grid 2 should also be marked as visited to indicate that the entire
+        // island has finished processing. If we return from here, then the remaining connected
+        // land cells will not be traversed in this dfs and will be processed in the driver method later
+        // and that might falsely mark the island as a sub-island.
+        
+        if(grid1[r][c] != grid2[r][c])
+            sub_island = false;
+        
+        // mark grid2's current cell as visited
+        grid2[r][c] = 0;
+        grid1[r][c] = 0;
+        
+        // traverse all possible connecting land cells
+        // to ensure two things:
+        // 1. We traverse the entire island, so that it is not processed later
+        // 2. In case of violation of any cell, that is found
+        auto down = dfs(r+1, c, grid1, grid2);
+        auto up = dfs(r-1, c, grid1, grid2);
+        auto right = dfs(r, c+1, grid1, grid2);
+        auto left = dfs(r, c-1, grid1, grid2);
+        
+        return sub_island && up && right && down && left;
+    }
+    
+    int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
+        int sub_islands = 0;
+        
+        if(grid2.empty())
+            return 0;
+        
+        int m = grid2.size(), n = grid2[0].size();
+        
+        for(int r = 0; r < m; r++)
+            for(int c = 0; c < n; c++)
+                if(grid2[r][c] && dfs(r, c, grid1, grid2)) {
+                    ++sub_islands;
+                }
+        
+        return sub_islands;
+    }
+};

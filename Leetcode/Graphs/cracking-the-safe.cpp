@@ -47,7 +47,10 @@
         
     3. We start with n length starting node comprising of 0s. Then we follow the rule of getting the next node by using the last n-1 chars and following
         one of the k edges. Then with this new node, we do dfs further till we are able to cover all the nodes. We do this with backtracking.
-        
+
+    References
+    https://leetcode.com/problems/cracking-the-safe/discuss/1177242/hamiltonian-cycle-explanation-why-it's-applicable-here-and-implementation.-(python)
+    https://leetcode.com/problems/cracking-the-safe/discuss/153039/DFS-with-Explanations
 */
 class Solution {
 public:

@@ -57,3 +57,46 @@ public:
             return bSearch(nums, pivot, nums.size()-1, target);
     }
 };
+
+///////////////////////////////////////////////// STYLE 2
+class Solution {
+public:
+    int binarySearch(vector<int>& nums, int target, int start, int end) {
+        int low = start, high = end;
+        
+        while(low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if(nums[mid] == target)
+                return mid;
+            else if(nums[mid] < target)
+                low = mid + 1;
+            else
+                high = mid -1 ;
+        }
+        return -1;
+    }
+    
+    int search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size() - 1;
+        int mid = 0;
+        
+        // Find the pivot point
+        while(low < high) {
+            mid = low + (high - low) / 2;
+            
+            if(nums[mid] > nums[high])
+                low = mid + 1;
+            else
+                high = mid;
+        }
+        
+        // 'high' points to the pivot index, which is 
+        // the smallest element in the array
+        // Perform binary search on left and right side 
+        int left = binarySearch(nums, target, 0, high - 1);
+        int right = binarySearch(nums, target, high, nums.size()-1);
+        
+        return left == -1 ? right : left;
+    }
+};

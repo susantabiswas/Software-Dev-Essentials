@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/number-of-operations-to-make-network-connected/submissions/
+    https://leetcode.com/problems/number-of-operations-to-make-network-connected/
     
     Idea is to find the number of disconnected components. Then we need to find the min edges
     required to keep the connected components connected, since this is not weighted so selecting any edge 

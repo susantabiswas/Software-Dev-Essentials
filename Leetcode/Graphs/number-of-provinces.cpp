@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/number-of-provinces/submissions/
+    https://leetcode.com/problems/number-of-provinces/
     
     1. We can use Union-Find algorithm to find the connected components.
     TC: O(ElogV) + O(V)

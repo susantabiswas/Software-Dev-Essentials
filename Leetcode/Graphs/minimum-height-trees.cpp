@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/minimum-height-trees/submissions/
+    https://leetcode.com/problems/minimum-height-trees/
     
     TC: O(V + E)
     SC: O(V)

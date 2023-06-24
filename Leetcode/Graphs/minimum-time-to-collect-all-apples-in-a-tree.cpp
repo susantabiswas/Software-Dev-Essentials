@@ -1,5 +1,5 @@
 /*
-    https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/submissions/
+    https://leetcode.com/problems/minimum-time-to-collect-all-apples-in-a-tree/
     
     We make a graph and do DFS to find finding the paths with apples. During DFS we find the
     total one way path length from root till the last apple in subtree. DFS returns whether there is a 

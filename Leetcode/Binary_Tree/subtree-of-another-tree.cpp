@@ -1,10 +1,14 @@
 /*
-    https://leetcode.com/problems/subtree-of-another-tree/submissions/
-    
+    https://leetcode.com/problems/subtree-of-another-tree/
+
+    SOLUTION 1
     We use BFS to look for the root mode of tree t. Once a node
     is found in s, we check if t is present as a subtree with that node as root.
     
     TC: O(NM), M: nodes in t, N: nodes in s
+
+    SOLUTION 2: Hashing
+    TC: O(M + N)
 */
 
 /**
@@ -52,3 +56,32 @@ public:
         return false;
     }
 };
+
+////////////////////////////////// SOLUTION 2 : HASHING
+void postorder(TreeNode* root, string& tree_hash) {
+        // There can be case where only one child is present, hence
+        // we need to fill that null node position
+        if(!root) {
+            tree_hash += 'L';
+            return;
+        }
+        
+        // Use ',' to separate the nodes
+        tree_hash += "," + to_string(root->val);
+        
+        postorder(root->left, tree_hash);
+        postorder(root->right, tree_hash);
+        
+        tree_hash += '#';
+    }
+    
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        // find the hash
+        string orig;
+        postorder(root, orig);
+        
+        string subtree;
+        postorder(subRoot, subtree);
+        
+        return orig.find(subtree) != string::npos;
+    }

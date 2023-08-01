@@ -1,8 +1,16 @@
 /*
     https://leetcode.com/problems/combination-sum-iii/
     
-    TC: O(k * 9^k), k elements to copy + max 9 recursive calls with max depth k
-    SC: O(k)
+    Time Complexity: O(k * 9! / (9−k)!)
+    
+        In a worst scenario, we have to explore all potential combinations to the very end, i.e. the sum n is a large number (n > 9∗9). At the first step, we have 9 choices, while at the second step, we have 8 choices, so on and so forth.
+        The number of exploration we need to make in the worst case would be P(9,K) = 9!(9−K)!, assuming that K<=9K<=9. By the way, K cannot be greater than 9, otherwise we cannot have a combination whose digits are all unique.
+        Each exploration takes a constant time to process, except the last step where it takes O(K) time to make a copy of combination.
+        To sum up, the overall time complexity of the algorithm would be 9!(9−K)! * k
+    
+    Space Complexity: O(K)
+        During the backtracking, we used a list to keep the current combination, which holds up to KK elements, i.e. O(K).
+
 */
 class Solution {
 public:

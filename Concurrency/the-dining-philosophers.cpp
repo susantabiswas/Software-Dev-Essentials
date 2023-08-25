@@ -1,5 +1,10 @@
 /*
     https://leetcode.com/problems/the-dining-philosophers/
+
+    The central idea is to not let all the threads execeute at once in a circular dependency order.
+    One of the ways to prevent deadlock is to prevent circular dependency.
+    In the below solutions, we have tried doing that via various means like limiting concurrency at n-1 
+    or changing lock fetch order for adjacent people which results in one person not being able to take the lock.
 */
 ///////////////////////////// SOLUTION 3: Semaphore of n-1 size to prevent all n trying together
 class Semaphore {

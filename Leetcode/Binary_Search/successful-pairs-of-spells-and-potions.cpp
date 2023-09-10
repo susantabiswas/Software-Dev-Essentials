@@ -49,6 +49,7 @@ public:
     }
 
 //////////////////////////// VARIANT 2 //////////////////
+// Uses low index as the answer, variant 1 uses high as the answer
 long lowerBound(vector<int>& arr, int target, long success) {
         int low = 0, high = arr.size();
         

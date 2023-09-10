@@ -2,7 +2,7 @@
     https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/
     
     TC: O(N)
-    SC: O(N)
+    SC: O(N), recursive stack will be equal to height of tree which in worst case is N
     
     Idea is simple:
     - A zigzag path needs alternating left and right child nodes in the subtree

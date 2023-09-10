@@ -17,14 +17,15 @@ public:
         
         while(left < right) {
             int mid = left + (right - left) / 2;
-            // if nexxt element is smaller, then go to
-            // left side but keep the mid as right as that might 
-            // be the answer
-            if(nums[mid] > nums[mid + 1])
-                right = mid;
-            // if th next element is greater, that means go in right direction in hope of finding a biger element, since mid is smaller than the next so we can update left as the next element
-            else
+            
+            // if the next element is greater, that means go in right direction
+            // in hope of finding a bigger element, since mid is smaller than the next so we can update left as the next element
+            if(nums[mid] < nums[mid + 1])
                 left = mid + 1;
+            // the next element is not strictly greater so ignore the elements on right and update the
+            // right index as the potential peak element index
+            else
+                right = mid;
         }
         return left;
     }

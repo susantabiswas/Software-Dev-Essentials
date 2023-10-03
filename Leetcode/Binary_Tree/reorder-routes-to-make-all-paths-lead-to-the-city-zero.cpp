@@ -1,4 +1,70 @@
 /*
+    https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/
+    
+    TC: O(n)
+    SC: O(n)
+    
+    Points to note:
+    - There wont be any cycle, so each node pair is connected via that edge only. We just have
+    to worry about orienting that edge
+    - Since all the nodes should reach the node 0, node 0 can be thought of as a tree and all the
+    other nodes form the tree with root node 0
+    
+    Idea is to start the traversal from node 0, then for all of its neighbors, whichever neighbor's edge is not facing  towards the
+    current parent, reverse their orientation and start dfs from that node in a similar manner
+    
+*/
+class Solution {
+public:
+    void dfs(int curr, int& rev, unordered_map<int, unordered_set<int>>& edges,
+            unordered_map<int, unordered_set<int>>& neighbors,
+            unordered_set<int>& visited) {
+        // already visited
+        if(visited.count(curr))
+            return;
+        
+        visited.insert(curr);
+        
+        for(auto neighbor: neighbors[curr]) {
+            // if the neighbor doesnt traverses towards the current node, then
+            // reverse the orientation so that neighbor's edge is directed towards current node
+            if(!visited.count(neighbor) && !edges[neighbor].count(curr))
+                ++rev;
+            if(!visited.count(neighbor))
+                dfs(neighbor, rev, edges, neighbors, visited);
+        }
+    }
+    
+    int minReorder(int n, vector<vector<int>>& connections) {
+        // edges: [node, (neighbors which can be reached via the directed edge)]
+        // neighbors: [node, (surrounding neighbors, irrespective of direction)]
+        unordered_map<int, unordered_set<int>> edges, neighbors;
+        unordered_set<int> visited;
+        
+        // create the mapping of directed edges and surrounding neighbors
+        for(auto edge: connections) {
+            int src = edge[0], dst = edge[1];
+            
+            edges[src].insert(dst);
+            neighbors[src].insert(dst);
+            neighbors[dst].insert(src);
+        }
+        
+        // Start the DFS from source 0 (think of this as tree root) and start
+        // percolating downwards in the tree, if the connecting neighbor is not directed towards
+        // its parent, then it needs to be reversed
+        int rev = 0;
+        for(int node = 0; node < n; node++) {
+            if(!visited.count(node)) 
+                dfs(node, rev, edges, neighbors, visited);
+        }
+        
+        return rev;
+    }
+};
+///////////////////////////////// SOLUTION 2
+
+/*
     https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/submissions/
     
     TC: O(N)

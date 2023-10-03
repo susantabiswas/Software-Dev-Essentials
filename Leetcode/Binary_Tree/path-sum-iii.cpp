@@ -25,8 +25,8 @@
  */
 class Solution {
 public:
-    void findPaths(TreeNode* root, int sum, int path,
-                   int &paths, unordered_map<int, int>& path_sums) {
+    void findPaths(TreeNode* root, int sum, long long path,
+                   int &paths, unordered_map<long long, int>& path_sums) {
         if(root) {
             // add current node to path
             path += root->val;
@@ -45,10 +45,10 @@ public:
     int pathSum(TreeNode* root, int sum) {
         int paths = 0;
         // <path sum, number of such paths>
-        unordered_map<int, int> path_sums;
+        unordered_map<long long, int> path_sums;
         // 0 node path
         path_sums[0] += 1;
-        findPaths(root, sum, 0, paths, path_sums);
+        findPaths(root, sum, 0l, paths, path_sums);
         
         return paths;
     }

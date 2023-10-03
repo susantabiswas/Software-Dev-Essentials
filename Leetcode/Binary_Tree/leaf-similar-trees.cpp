@@ -59,3 +59,25 @@ public:
                 && curr == leaves.size(); // if n_leaves_tree1 > n_leaves_tree2
     }
 };
+
+
+////////////////////// SOLUTION 2: Easy
+class Solution {
+public:
+    void leafSequence(TreeNode* root, string& seq) {
+        if(root) {
+            if(!root->left && !root->right)
+                seq += to_string(root->val) + ',';
+            
+            leafSequence(root->left, seq);
+            leafSequence(root->right, seq);
+        }    
+    }
+    
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        string seq1, seq2;
+        leafSequence(root1, seq1);
+        leafSequence(root2, seq2);
+        return seq1 == seq2;
+    }
+};

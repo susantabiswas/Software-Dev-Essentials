@@ -1,9 +1,13 @@
 /*
     https://leetcode.com/problems/binary-tree-right-side-view/
-    
+
+    SOLUTION 1
     Do normal BFS so that we can be aware of the level. In each level add the last
     node to the traversal result.
     TC: O(N)
+
+    SOLUTION 2
+    Recursive sol
 */
 
 /**
@@ -47,5 +51,30 @@ public:
         }
         
         return result;
+    }
+};
+
+////////////////////////// SOLUTION 2
+class Solution {
+public:
+    void preorder(TreeNode* root, int curr_depth, int& max_depth, vector<int>& view) {
+        if(!root)
+            return;
+        
+        if(curr_depth > max_depth) {
+            view.emplace_back(root->val);
+            max_depth = curr_depth;
+        }
+        
+        preorder(root->right, curr_depth + 1, max_depth, view);
+        preorder(root->left, curr_depth + 1, max_depth, view);
+    }
+    
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> view;
+        int max_depth = 0;
+        
+        preorder(root, 1, max_depth, view);
+        return view;
     }
 };

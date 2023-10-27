@@ -1,7 +1,7 @@
-# https://leetcode.com/problems/rising-temperature/submissions/
+# https://leetcode.com/problems/rising-temperature/
 
 # Self Join with criteria of 1 day difference
-SELECT w1.Id
-FROM Weather w1, Weather w2
-WHERE DATE_ADD(w2.RecordDate, INTERVAL 1 DAY) = w1.RecordDate
-    AND w1.Temperature > w2.Temperature ;
+SELECT today.id
+FROM Weather as today, Weather as yesterday
+WHERE DATE_ADD(yesterday.recordDate, INTERVAL 1 DAY) = today.recordDate
+and today.temperature > yesterday.temperature;

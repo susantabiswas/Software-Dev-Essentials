@@ -4,4 +4,4 @@
 SELECT today.id
 FROM Weather as today, Weather as yesterday
 WHERE DATE_ADD(yesterday.recordDate, INTERVAL 1 DAY) = today.recordDate
-and today.temperature > yesterday.temperature;
+  and today.temperature > yesterday.temperature;

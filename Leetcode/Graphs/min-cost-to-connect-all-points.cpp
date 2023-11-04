@@ -86,7 +86,7 @@ public:
     }
     
     // MST using Prim's algo
-    // TC: O(VE + ElogE)
+    // TC: O(V * (V + logE)), E = V^2. Each time the heap will get 1 + V-1 + V-2 + ..... elements ~ V^2
     int primMST(vector<vector<int>>& points) {
         int cost = 0;
         int n = points.size();
@@ -149,5 +149,130 @@ public:
         
         
         return mst_cost;
+    }
+};
+
+
+///////////////////////////////////////////////////////////// SIMPLER
+class Solution {
+private:
+    class UnionFind {
+    public:
+        vector<int> root, size;
+        
+        UnionFind(int n) {
+            root.resize(n), size.resize(n, 1);
+            
+            for(int i = 0; i < n; i++)
+                root[i] = i;
+        }
+        
+        int getRoot(int idx) {
+            while(idx != root[idx]) {
+                root[idx] = root[root[idx]];
+                idx = root[idx];
+            }
+            return idx;
+        }
+        
+        bool Union(int a, int b) {
+            int rootA = getRoot(a);
+            int rootB = getRoot(b);
+            
+            if(rootA != rootB) {
+                if(size[rootA] > size[rootB]) {
+                    size[rootA] += size[rootB];
+                    root[rootB] = rootA;
+                }
+                else {
+                    size[rootB] += size[rootA];
+                    root[rootA] = rootB;
+                }
+                return true;
+            }
+            return false;
+        }
+    };
+public:
+// TC: O(V^2 + V * (V + log(V^2)) ~ O(V^2 + V * (V + 2log(V)) 
+// ~ O(V^2 + V * (V + log(V))
+//  Each time the heap will get 1 + V-1 + V-2 + ..... elements ~ V^2. In the worst case, heap will have a size of V^2
+    int prims(int n, vector<vector<int>>& edges) {
+        int mst = 0;
+        
+        // create a graph
+        // src: [<weight, dst>]
+        vector<vector<array<int, 2>>> g(n);
+        
+        for(auto edge: edges) {
+            g[edge[1]].push_back({edge[0], edge[2]});
+        }
+        
+        priority_queue<array<int, 2>, vector<array<int, 2>>, greater<array<int, 2>> > min_heap;
+        
+        unordered_set<int> visited;
+        
+        // add the starting node (0)'s adj cut cost
+        min_heap.push({0, 0});
+        
+        int mst_edges = 0;
+        
+        while(!min_heap.empty() && mst_edges <= n-1) {
+            auto [cost, curr] = min_heap.top();
+            min_heap.pop();
+            
+            if(visited.count(curr))
+                continue;
+            
+            // process the node
+            mst += cost;
+            ++mst_edges;
+            visited.insert(curr);
+            
+            // add the cut cost for the adj nodes
+            for(auto edge: g[curr])
+                if(!visited.count(edge[1])) {
+                    min_heap.push(edge);
+                }
+        }
+        
+        return mst;
+    }
+    
+    int kruskal(int n, vector<vector<int>>& edges) {
+        int mst = 0;
+        
+        // sort the edges
+        sort(edges.begin(), edges.end());
+        
+        UnionFind uf(n);
+        
+        int mst_edges = 0;
+        for(auto edge: edges) {
+            if(uf.Union(edge[1], edge[2])) {
+                mst += edge[0];
+                ++mst_edges;
+            }
+            
+            if(mst_edges == n-1)
+                break;
+        }
+        return mst;
+    }
+    
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        // create the edges
+        vector<vector<int>> edges;
+        
+        for(int src = 0; src < points.size(); src++)
+            for(int dst = src + 1; dst < points.size(); dst++) {
+                edges.push_back({abs(points[src][0] - points[dst][0]) + abs(points[src][1] - points[dst][1]),
+                                 src, dst});
+                edges.push_back({abs(points[src][0] - points[dst][0]) + abs(points[src][1] - points[dst][1]),
+                                 dst, src});
+            }
+        
+        // return kruskal(points.size(), edges);
+        return prims(points.size(), edges);
     }
 };

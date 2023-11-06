@@ -1,6 +1,25 @@
 /*
     https://leetcode.com/problems/longest-increasing-path-in-a-matrix/
     TC: O(MN), SC: O(MN)
+
+    Naive intuition fails: 
+    Combine the result of longest path of max(
+        longest_path(top to bottom and left to right),
+        longest_path(bottom to up and from right to left)
+    )
+
+    The reason this fails is because the path is frozen, in the 1st iteration we are
+    only finding a path moving either top to bottom or left to right.
+    In the second iteration we are only moving from bottom to top or
+    right to left.
+
+    Now what if the path is like below
+    --xx
+    --x-
+    --x-
+    --xx
+
+    top right wont be covered as part of the 2nd iteration and the longest path will be missed.
 */
 
 class Solution {

@@ -10,6 +10,9 @@
 	=> P = (T + S) / 2
 	
 	=> (T + S) should be even and P = (T + S)/2
+
+ NOTE: If the target > total, then it is not possible to get. Also if the target is negative, it should be > -total, otherwise
+ if the target is even smaller than the -total, then we will again not be able to create that.
   
   Ref:
   https://leetcode.com/problems/target-sum/discuss/97334/Java-(15-ms)-C%2B%2B-(3-ms)-O(ns)-iterative-DP-solution-using-subset-sum-with-explanation
@@ -20,7 +23,7 @@ public:
     int findTargetSumWays(vector<int>& nums, int S) {
         int total = accumulate(nums.begin(), nums.end(), 0);
         // the sum of S and negative set should be even
-        if(S > total || (S + total) % 2 != 0)
+        if(abs(S) > abs(total) || (S + total) % 2 != 0)
             return 0;
         
         // If T is negative or either P or N are negative, the essence of 

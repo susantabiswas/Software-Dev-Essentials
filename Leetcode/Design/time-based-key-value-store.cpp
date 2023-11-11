@@ -39,6 +39,41 @@ public:
     }
 };
 
+
+/////////////////////////////// SOLUTION 2 : Different Style
+class TimeMap {
+private:
+    unordered_map<string, map<int, string>> kv;
+public:
+    TimeMap() {
+        
+    }
+    
+    void set(string key, string value, int timestamp) {
+        kv[key].insert({timestamp, value});
+    }
+    
+    string get(string key, int timestamp) {
+        if(kv.count(key) == 0)
+            return "";
+        
+        auto it = kv[key].lower_bound(timestamp);
+        
+        // key found
+        if(it->first == timestamp)
+            return it->second;
+        
+        // if key is not found, check if there is a key with TS < timestamp
+        // but it cannot be the 1st element because, lower_bound gives the next greater in case of missing key
+        //, so if it is the beginning iterator that means no smaller timestamp exists
+        if(it == kv[key].begin())
+            return "";
+        // now there is atleast one timestamp that exists before the input 'timestamp', return the prev
+        return (--it)->second;
+    }
+};
+
+
 /**
  * Your TimeMap object will be instantiated and called as such:
  * TimeMap* obj = new TimeMap();

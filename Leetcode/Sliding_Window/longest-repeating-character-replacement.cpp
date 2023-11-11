@@ -8,6 +8,15 @@
     frequencies of characters in current window, this helps us to know the most frequent character 
     in current window. Then we move the right position of window we check if the no. of switches required 
     in current window is <= K or not. If yes then continue expanding else we start shrinking from left.
+
+    Observation: 
+        - The substring with the max no. of common chars is the and, as that substring needs the least no. of replacements.
+        - max_freq: This is the max freq of a char seen in the overall string and not just the current window.
+            We track it globally because, unless there is a char which has more concentration than current max_freq char, we will never 
+            find the answer.
+        - The reason we dont bother updating max_freq in the shrinking window is that it serves no purpose, we have already found the longest
+            window that satisfies the constraint and the current char made the window invalid, so we just want to shrink the window enough
+            so that the window is valid again.
 */
 
 class Solution {

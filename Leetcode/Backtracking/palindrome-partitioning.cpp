@@ -2,8 +2,9 @@
     https://leetcode.com/problems/palindrome-partitioning/
     
     TC: O(n^2) (for finding palindromic substrings using DP) 
-        + O(2^n) (Backtracking)
-        ~O(2^n)
+        + O(n * 2^n) (Backtracking, takes O(n) to copy the string to result)
+        ~O(n * 2^n)
+    SC: O(n), recursive stack
 */
 class Solution {
 public:

@@ -2,9 +2,41 @@
     https://leetcode.com/problems/cheapest-flights-within-k-stops/
     
     Soluion 1
-    TC: O(ElogE), looking at the solution carefully, we don't repeat an edge
+    TC: O(K * Elog(E * k)), looking at the solution carefully, we don't repeat an edge
     because on repeating either of cost or price increases and isn't added to heap.
-    SC: O(E)
+    SC: O(E * K)
+
+    The reason there can be EK edges in the heap is because we have 2 criterias for adding an edge.
+    It is possible to have an edge with the same/different distances but different 'stops' and the 
+    there can be possible K stops, hence the edge can be added via these k different 'stop' paths.
+                            | d = 5, stop = 1
+                            v
+      d = 1, stop = 3-----> A -> B
+                            ^
+                            | d = 4, stop = 2
+    K = 4
+    Here edge with d=1 will be added since it has the least distance, but also the edges with d=5, d=4 will be added
+    since they have stops + 1 < K and also if there was a path with stops=0, that would have been added as well.
+    Hence, there can be K*E entries in the heap and they all can be popped 
+    hence EK * log(EK)
+    "
+        Let E be the number of flights and N be number of cities in the given problem.
+
+        Time complexity: O(N + E⋅K⋅log(E⋅K))
+            Let's assume any node A is popped out of the queue in an iteration. 
+            If the steps taken to visit A are more than stops[node], we do not iterate over the neighbors of A.
+            However, we will iterate over neighbors of A if the steps are less than stops[A], 
+            which can be true K times. A can be popped the first time with K steps, followed by K-1 steps, 
+            and so on until 1 step. The same argument would be valid for any other node like A. As a result, 
+            each edge can only be processed KK times, resulting in O(E⋅K) elements being processed.
+            It will take the priority queue O(E⋅K⋅log(E⋅K)) time to push or pop O(E⋅K) elements.
+            We've added O(N) time by using the stops array.
+    
+        Space complexity: O(N+E⋅K)
+            We are using the adj array, which requires O(E) memory. 
+            The stop array would require O(N) memory. As previously stated, the priority queue can only have O(E⋅K) elements.
+    "
+
     
     At a glance this seems like a typical djikstra problem. But there is a 
     caveat here, in a typical djikstra we skip a value if it is stale / outdated

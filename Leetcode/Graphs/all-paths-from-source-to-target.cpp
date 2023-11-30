@@ -14,6 +14,12 @@
 
   Reference:
   https://leetcode.com/problems/all-paths-from-source-to-target/discuss/986429/Python-Iterative-DFS-with-detailed-time-complexity-and-visuals
+
+  NOTE:
+  For an undirected graph, we have O(V!) possible paths, since we can choose the permutation of each path as well as direction doesnt matter.
+  But this since this is a DAG, A->B ~= B->A, only one of these can exist in the DAG, so we dont do permuation of nodes
+
+  Hence nCk(Combinations -> ~ 2^N) and not nPk(Permutations ~ N!)
 */
 class Solution {
 public:

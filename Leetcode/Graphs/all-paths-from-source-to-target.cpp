@@ -20,6 +20,12 @@
   But this since this is a DAG, A->B ~= B->A, only one of these can exist in the DAG, so we dont do permuation of nodes
 
   Hence nCk(Combinations -> ~ 2^N) and not nPk(Permutations ~ N!)
+
+  Why did we use combinations nCk and not Permutations nPk?
+
+    We should count a group of nodes (only once) and not count every permutation of the same group/combination.
+    In other words, I should not count : Start -> A -> B -> End and Start -> B -> A -> End as two different paths, because in reality, the actual DAG is one of these two solutions (not both).
+
 */
 class Solution {
 public:

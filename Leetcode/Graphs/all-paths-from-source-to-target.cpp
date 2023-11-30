@@ -4,7 +4,16 @@
   We can all the paths using DFS traversal from source to destination. Since
   the graph is acylic we don't have to worry about making sure the traversal 
   doesnt end in an infinite loop also.
-  TC: O(V + E)
+  TC: O(v * 2^(v-2)), v = no. of vertices
+  SC: O(v)
+
+  The start and end points are fixed, so if there are V nodes, we are left with V-2 nodes
+  to choose from for the intermediate path.
+  Also for each of these intermediate nodes, there are 2 choices: include or exclude
+  So we have 2 ^ (V-2) ways of creating paths
+
+  Reference:
+  https://leetcode.com/problems/all-paths-from-source-to-target/discuss/986429/Python-Iterative-DFS-with-detailed-time-complexity-and-visuals
 */
 class Solution {
 public:

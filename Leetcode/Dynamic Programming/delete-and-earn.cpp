@@ -13,9 +13,9 @@
     2. Since we need to account for the total reward associated with a number, we need to 
         compute that first.
     3. Once we know about the possible reward associated with each number and knowing the
-        constraint that adjacent numbers in number line can't be picked. Eg, [1,2,3] then
+        constraint that adjacent numbers in the number line can't be picked. Eg, [1,2,3] then
         if 1 is picked, only 3 can be picked not 2
-    4. Now this entire things looks very similar to 'House Robber' problem, where you can rob
+    4. Now this entire thing looks very similar to 'House Robber' problem, where you can rob
         houses but not adjacent ones to accumulate max rewards. If we arrange the total points for each
         number on a number line associated with each number, then that looks similar to the houses in 
         house robber problem. Also the constraint of not picking num+1 and num+2 will be done automatically
@@ -55,5 +55,36 @@ public:
             use_prev = use_curr, skip_prev = skip_curr;
         }
         return max(use_prev, skip_prev);
+    }
+};
+
+
+/////////////////////////////// SOLUTION 2
+// TC: O(nlogm), n = no. of elements in array
+// SC: O(m), m = no. of distinct elements
+class Solution {
+public:
+    int deleteAndEarn(vector<int>& nums) {
+        // max pts accumulated so far if current is used and not used respectively
+        int use = 0, skip = 0; 
+        // max pts accumulated till previous terms if previous was used and not used respectively
+        int use_prev = 0, skip_prev = 0;
+        
+        // find the frequency map
+        map<int, int> freq;
+        for(auto num: nums)
+            ++freq[num];
+        
+        for(auto [num, count]: freq) {
+            // if current number is used, we should skip using the num-1 contribution
+            use = num * count + (freq.count(num-1) ? skip_prev : max(use_prev, skip_prev));
+            
+            // if current is not used, we can use the pts accumulated with contribution from previous
+            skip = max(use_prev, skip_prev);
+            
+            use_prev = use;
+            skip_prev = skip;
+        }
+        return max(use, skip);
     }
 };

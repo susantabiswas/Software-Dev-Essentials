@@ -1,5 +1,10 @@
 /*
     https://leetcode.com/problems/minimum-path-sum/
+
+    cost(i,j) = grid[i][j] + min(cost(i+1,j), cost(i,j+1))
+
+    Time complexity : O(2^(m+n)). For every move, we have have 2 options and hence T(i) = 2T(i), i = m+n.
+    Space complexity : O(m+n). Recursion stack. 
 */
 
 class Solution {

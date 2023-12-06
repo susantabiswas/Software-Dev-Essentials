@@ -4,6 +4,10 @@
 
     Brute Force:
     Time Complexity : O(2^(m+n)), where m and n are the dimensions of the grid
+        For each position we have two choices - left and top
+        t(i) = 2t(i-1)
+        ~ O(2^i)
+        i = m + n, the max path length is rows + cols, since we can only move in down or right 
     Space Complexity : O(m+n), required by recursion stack
 
     DP:

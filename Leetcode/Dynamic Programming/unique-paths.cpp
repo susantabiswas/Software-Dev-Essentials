@@ -1,6 +1,15 @@
 /*
     62. Unique Paths
     https://leetcode.com/problems/unique-paths/
+
+    Brute Force:
+    Time Complexity : O(2^(m+n)), where m and n are the dimensions of the grid
+    Space Complexity : O(m+n), required by recursion stack
+
+    DP:
+    TC: O(mn)
+    SC: O(m+n)
+
 */
 
 class Solution {

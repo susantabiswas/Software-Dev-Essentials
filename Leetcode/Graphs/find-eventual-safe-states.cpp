@@ -17,6 +17,9 @@
         BFS with inorder doesnt tarverse cyclic nodes, so one question why not just do BFS with orig graph,
         it should avoid all the cyclic ones. If we do BFS with the original graph, then safe nodes connected to a cycle 
         will also be missed as their degree won't be decremented at all.
+
+    Another Style
+        Here we don't start dfs for each of the nodes from the driver, but only start for the nodes unvisited
 */
 class Solution {
 private:
@@ -167,5 +170,46 @@ public:
         // return dfsDPSol(graph);
         // return bfsReversalSol(graph);
         return dfsColorSol(graph);
+    }
+};
+
+/////////////////////////////////////////// Another Style
+class Solution {
+public:
+    bool dfs(int curr, vector<vector<int>>& g, vector<int>& color, vector<int>& safe) {
+        if(color[curr] == 1)
+            return false;
+        
+        // node added to recursion stack
+        color[curr] = 0;
+        
+        for(auto neighbor: g[curr]) {
+            if(color[neighbor] == 0)
+                return true;
+            if(dfs(neighbor, g, color, safe))
+                return true;
+        }
+        
+        // node removed from recursion stack
+        color[curr] = 1;
+        // all the paths from current node ended without a cyclic path
+        // so it is safe
+        safe.push_back(curr);
+        
+        return false;
+    }
+    
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        vector<int> safe;
+        
+        // -1: unprocessed, 0: processed, 1: processed
+        vector<int> color(graph.size(), -1);
+        
+        for(int node = 0; node < graph.size(); node++)
+            if(color[node] == -1)
+                dfs(node, graph, color, safe);
+        
+        sort(safe.begin(), safe.end());
+        return safe;
     }
 };

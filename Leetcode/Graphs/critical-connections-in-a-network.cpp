@@ -71,6 +71,8 @@ public:
             }
             // if neighbor has been visited before i.e it might have an earlier discovery 
             // time given it is not the parent of current node
+            // NOTE: since this algo works on an undirected graph without parallel edges,
+            // we should ignore the undirected edge from parent used to reach current node
             else if(visited[neighbor] && parent != neighbor)
                 earliest_back_edge[curr] = min(earliest_back_edge[curr], discovery_time[neighbor]);
         }

@@ -1,9 +1,9 @@
 /*
   https://leetcode.com/problems/all-paths-from-source-to-target/
 
-  We can all the paths using DFS traversal from source to destination. Since
-  the graph is acylic we don't have to worry about making sure the traversal 
-  doesnt end in an infinite loop also.
+  We can find all the paths using DFS traversal from source to destination. Since
+  the graph is acyclic we don't have to worry about making sure the traversal 
+  doesn't end in an infinite loop also.
   TC: O(v * 2^(v-2)), v = no. of vertices
   SC: O(v)
 
@@ -16,15 +16,15 @@
   https://leetcode.com/problems/all-paths-from-source-to-target/discuss/986429/Python-Iterative-DFS-with-detailed-time-complexity-and-visuals
 
   NOTE:
-  For an undirected graph, we have O(V!) possible paths, since we can choose the permutation of each path as well as direction doesnt matter.
-  But this since this is a DAG, A->B ~= B->A, only one of these can exist in the DAG, so we dont do permuation of nodes
+  For an undirected graph, we have O(V!) possible paths, since we can choose the permutation of each path as well as direction doesn't matter.
+  But since this is a DAG, A->B != B->A, only one of these can exist in the DAG, so we don't do permutation of nodes
 
   Hence nCk(Combinations -> ~ 2^N) and not nPk(Permutations ~ N!)
 
   Why did we use combinations nCk and not Permutations nPk?
 
     We should count a group of nodes (only once) and not count every permutation of the same group/combination.
-    In other words, I should not count : Start -> A -> B -> End and Start -> B -> A -> End as two different paths, because in reality, the actual DAG is one of these two solutions (not both).
+    In other words, I should not count: Start -> A -> B -> End and Start -> B -> A -> End as two different paths, because in reality, the actual DAG is one of these two solutions (not both).
 
 */
 class Solution {

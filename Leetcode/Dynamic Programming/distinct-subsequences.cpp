@@ -66,4 +66,40 @@ public:
         
         return dp[m][n];
     }
+
+    // Solution: Space Optimized
+    // TC: O(mn)
+    // SC: O(n)
+    int numDistinct(string s, string t) {
+        int m = s.size(), n = t.size();
+        
+        // Looking carefully we are just concerned with the last length for S,
+        // so we just use 2 vectors to track the current and previous states
+        vector<unsigned long long> prev(n+1, 0), curr(n+1, 0);
+        
+        // when t is empty, there is 1 way to create that empty substring with s of length 0
+        prev[0] = 1;
+        
+        for(int i = 1; i <= m; i++) {
+            // when len(t) = 0, we can create that in one way with an empty sub seq from S of current len
+            curr[0] = 1;
+            for(int j = 1; j <= n; j++) {
+                if(s[i-1] == t[j-1]) {
+                    // 1. match the last char of t and check the ans for s[:i-1] and t[:j-1]
+                    // 2. since we want to capture all the previous subsequences also, we need to ask
+                    // the previous string s[:i-1] the no. of sub sequences that were matched till t[:j]
+                    // i.e we are allowing the last char of T to be matched with a previously seen char in S
+                    unsigned long long include = prev[j-1];
+                    unsigned long long exclude = prev[j];
+                    curr[j] = include + exclude;
+                }
+                else
+                    curr[j] = prev[j];
+            }
+            
+            prev = curr;
+        }
+        
+        return curr.back();
+    }
 };

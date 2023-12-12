@@ -1,5 +1,11 @@
 /*
     https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/
+
+    Brute Force
+    TC: O(2^k), each time we take 2 calls if the chars are not same, where the size is decreased by 1
+        = 2T(k-1)
+    SC: O(l)
+    k = n + m
     
     Solved using :  1. Top down
                     2. Bottom up

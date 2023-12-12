@@ -1,6 +1,12 @@
 /*
     https://leetcode.com/problems/palindromic-substrings/
+
+    Brute Force
+    TC: O(2^n), each time we take 2 calls if the chars are not same, where the size is decreased by 1
+        = 2T(n-1)
+    SC: O(n)
     
+    DP
     TC: O(N^2)
     SC: O(N^2)
 */

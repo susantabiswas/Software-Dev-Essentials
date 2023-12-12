@@ -1,5 +1,11 @@
 /*
-    https://leetcode.com/problems/edit-distance/submissions/
+    https://leetcode.com/problems/edit-distance/
+
+    Brute Force
+    TC: O(3^k), each time we take 3 calls if the chars are not same, where the size is decreased by 1
+        = 3T(k-1)
+    SC: O(3)
+    k = n + m
 */
 
 class Solution {

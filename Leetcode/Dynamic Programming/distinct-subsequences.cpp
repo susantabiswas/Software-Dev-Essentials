@@ -3,6 +3,8 @@
 */
 class Solution {
 public:
+// TC: O(mn)
+// SC: O(mn)
     int numDistinct(string s, string t) {
         const int N = s.size(), M = t.size();
         
@@ -34,5 +36,34 @@ public:
             }
         
         return dp[M][N];
+    }
+
+    // Style 2: Iterative DP
+    int numDistinct(string s, string t) {
+        int m = s.size(), n = t.size();
+        
+        // when s is empty, we cannot create any subsequences
+        vector<vector<unsigned long long>> dp(m+1, vector<unsigned long long>(n+1, 0));
+        
+        // when t is empty, there is 1 way to create that empty substring for each length of s
+        for(int i = 0; i <= m; i++)
+            dp[i][0] = 1;
+        
+        for(int i = 1; i <= m; i++)
+            for(int j = 1; j <= n; j++) {
+                if(s[i-1] == t[j-1]) {
+                    // 1. match the last char of t and check the ans for s[:i-1] and t[:j-1]
+                    // 2. since we want to capture all the previous subsequences also, we need to ask
+                    // the previous string s[:i-1] the no. of sub sequences that were matched till t[:j]
+                    // i.e we are allowing the last char of T to be matched with a previously seen char in S
+                    unsigned long long include = dp[i-1][j-1];
+                    unsigned long long exclude = dp[i-1][j];
+                    dp[i][j] = include + exclude;
+                }
+                else
+                    dp[i][j] = dp[i-1][j];
+            }
+        
+        return dp[m][n];
     }
 };

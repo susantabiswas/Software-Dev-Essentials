@@ -1,6 +1,15 @@
 /*
     https://leetcode.com/problems/word-ladder/
-    TC: O(D * L * 26) ~ O(DL), D: distance of transformation, L: Length of longest word
+    L: Length of longest word
+    n: total no. of words in wordList
+
+    TC: O(nL + 26^L * (L * 26) + nL) (word set creation + total words cmbs * (loop of word len L * 26) + only n words will be added to the queue because we check before inserting) 
+    ~ O(nL + 26^L * L)
+    only because we modify the original string for checking, we are avoiding 26^L *(L * 26 * L), as the new string is only created when that is a valid word
+    SC: O(nL + nL) (word set + only max n words will be added to queue of length L) 
+    ~ O(nL)
+
+    Similar problem: https://leetcode.com/problems/minimum-genetic-mutation/
 */
 class Solution {
 public:

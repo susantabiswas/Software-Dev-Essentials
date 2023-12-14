@@ -8,7 +8,7 @@
 */
 class Solution {
 public:
-    // using bottom-up approach
+    // Style 1: using bottom-up approach
     int numTreesTabular(int n) {
         if(n <= 1)
             return 1;
@@ -25,7 +25,24 @@ public:
         }
         return dp[n];
     }
-    
+
+    // Style 2: bottom-up (Easier)
+    /*
+        C(n) = Summation[ C(i-1) * C(n-i)], i=1 to n
+    */
+    int numTrees(int n) {
+        vector<int> dp(n+1, 0);
+        
+        dp[0] = 1;
+        dp[1] = 1;
+        
+        for(int l = 2; l <= n; l++)
+            for(int node = 1; node <= l; node++) {
+                dp[l] += (dp[node - 1] * dp[l - node]);
+            }
+        return dp[n];
+    }
+
     // using memoization
     int numTreesRec(int n, vector<int>& dp) {
         if(n <= 1)

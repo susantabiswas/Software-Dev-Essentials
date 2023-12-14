@@ -12,8 +12,9 @@
     Also for each of the genes, we iterate through all the positions and then put
     all the possible gene chars at that position. (L * C)
     
-    SC: O((LB + CL))
-    For each gene we can have L*C valid mutations if they all are in the bank
+    SC: O((LB + BL)) (set creation + we only add valid genes, and there are B valid genes)
+    In the worst case, B = C^L, when the gene bank has all the genes possible
+    
     L = Length of gene
     C = No. of unique letters in gene
     B = Max no. of genes in bank

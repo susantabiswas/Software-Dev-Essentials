@@ -43,6 +43,18 @@ public:
         return dp[n];
     }
 
+    // Solution: Mathematical solution
+    int numTrees(int n) {
+        long C = 1;
+        
+        // Ci+1 = Ci * 2(2n + 1) / (n + 2)
+        // Since we want to find the nth catalan, we go till n-1
+        // so that C(n-1 + 1) = C(n)
+        for(int i = 0; i < n; i++)
+            C = C * 2 * (2*i + 1) / (i + 2);
+        
+        return C;
+    }
     // using memoization
     int numTreesRec(int n, vector<int>& dp) {
         if(n <= 1)

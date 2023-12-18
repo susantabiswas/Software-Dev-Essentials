@@ -28,7 +28,7 @@
             However, we will iterate over neighbors of A if the steps are less than stops[A], 
             which can be true K times. A can be popped the first time with K steps, followed by K-1 steps, 
             and so on until 1 step. The same argument would be valid for any other node like A. As a result, 
-            each edge can only be processed KK times, resulting in O(E⋅K) elements being processed.
+            each edge can only be processed K times, resulting in O(E⋅K) elements being processed.
             It will take the priority queue O(E⋅K⋅log(E⋅K)) time to push or pop O(E⋅K) elements.
             We've added O(N) time by using the stops array.
     

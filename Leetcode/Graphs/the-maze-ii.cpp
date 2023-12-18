@@ -24,6 +24,8 @@ public:
     
     // TC: O((MN)log(MN) + MN * max(M, N)), (Heap operations + For each cell, we traverse in 4 dirs till a wall is hit)
     // SC: O(MN)
+    // OPTIMIZATION: We can use a distance matrix which tracks the min distance for each cell from the start. 
+    // We only add the edge which gives a better distance value for that neighbor
     int djikstra(vector<vector<int>>& maze, vector<int>& start, vector<int>& destination) {
         int m = maze.size(), n = maze[0].size();
         

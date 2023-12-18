@@ -104,3 +104,87 @@ public:
         return order;
     }
 };
+
+
+////////////////////////////////////// STYLE 2 : Using DFS Topological sort
+class Solution {
+public:
+    bool dfs(int curr, vector<vector<int>>& g, vector<int>& color, vector<int>& order) {
+        // node is not being processed for the 1st time
+        if(color[curr] != -1)
+            return color[curr] == 0; // if node is still processing, there is a cycle
+        
+        color[curr] = 0;
+        
+        for(auto neigh: g[curr]) {
+            if(dfs(neigh, g, color, order))
+                return true;
+        }
+        color[curr] = 1;
+        order.push_back(curr);
+        
+        return false;
+    }
+    
+    vector<int> sortItems(int n, int m, vector<int>& group, vector<vector<int>>& beforeItems) {
+        // create the groups
+        vector<vector<int>> groups(m);
+        // <node: group_idx>
+        unordered_map<int, int> group_idx;
+        
+        for(int node = 0; node < group.size(); node++)
+            if(group[node] != -1) {
+                groups[group[node]].push_back(node);
+                group_idx[node] = group[node];
+            }
+            else {
+                // make a new group whose sole element is the current element
+                groups.push_back({ node });
+                group_idx[node] = groups.size() - 1;
+            }
+        
+        // create the dependency graphs for - within nodes, within groups
+        vector<vector<int>> node_dep(n), group_dep(groups.size());
+        
+        for(int src = 0; src < n; src++) {
+            auto dep = beforeItems[src];
+            
+            for(auto dst: dep) {
+                // if the dependency is between the elements of different groups
+                if(group[src] != group[dst])
+                    group_dep[group_idx[src]].push_back(group_idx[dst]);
+                else
+                    node_dep[src].push_back(dst);
+            }
+        }
+        
+        vector<int> color(n, -1);
+        // run topo sort for within the group elements
+        for(int grp = 0; grp < groups.size(); grp++) {
+            vector<int> order;
+            
+            for(int node : groups[grp]) {
+                if(color[node] == -1 && dfs(node, node_dep, color, order))
+                    return vector<int>{};
+            }
+            groups[grp] = move(order);
+        }
+        
+        // run topo sort between groups
+        color.clear();
+        color.resize(groups.size(), -1);
+        
+        vector<int> group_order;
+        for(int grp = 0; grp < groups.size(); grp++) {
+            if(color[grp] == -1 && dfs(grp, group_dep, color, group_order))
+                return vector<int>{};
+        }
+        
+        vector<int> result;
+        for(int grp : group_order)
+            for(auto node: groups[grp])
+                result.push_back(node);
+        
+        return result;
+    }
+};

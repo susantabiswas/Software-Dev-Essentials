@@ -91,7 +91,7 @@ public:
             if(curr == dst && stops <= k)
                 return price;
 
-            // The reason why we track the visited node is because our heap operates on the
+            // The reason why we don't track the visited node is because our heap operates on the
             // price metric but we allow both the lower price or lower stops for heap addition.
             // Let's say we have added two edges for a node X, one with a lower price and one with
             // lower number of stops. We will get the min price edge first and if we mark the node as 
@@ -102,7 +102,15 @@ public:
                 // stops or price
                 if(stops + 1 <= k && cost[neighbor].first > price + flight_price || 
                    (cost[neighbor].second > stops + 1)) {
-                    
+                    // NOTE - The reason we use the direct values 'stops' and 'price' for current path
+                    // instead of cost[curr].first and cost[curr].second is to make sure the neighbor is added to the current
+                    // path and not to the path with best values seen so far.
+                    // Whenever we get any better price or stop, we update the cost[neighbor], this helps to track the
+                    // best seen so far, and is used to decide if the curr is any better than the best seen so far. This best
+                    // value may or may not lead to a correct path. E.g a path with lower cost updates it, but later we don't see
+                    // any possible path to destination, so that cost[neighbor] should only be used to decide if the new value is better.
+                    // We should always use the current path's stop and price values to update the neighbor param, as this ensures that it
+                    // is still folllowing the current path.
                     cost[neighbor] = {price + flight_price, stops + 1};
                     min_heap.push({price + flight_price, stops + 1, neighbor});
                 }

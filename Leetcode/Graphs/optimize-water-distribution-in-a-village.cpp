@@ -60,8 +60,9 @@ private:
     
 public:
     //////////////////////////////////////////////// SOLUTION 1: Prim's MST
-    // TC: O(E + nlogE)
+    // TC: O(m + ElogE)
     // SC: O(E)
+    // m = no. of pipes, n = no. of villages, E = m + n
     int primMST(int n, vector<int>& wells, vector<vector<int>>& pipes) {
         unordered_set<int> visited;
         int total_cost = 0;
@@ -115,9 +116,9 @@ public:
     }
     
     /////////////////////////////////////////// SOLUTION 2: KRUSKAL
-    // TC: O(ElogE + N)
+    // TC: O(n + ElogE) (adding edges from virtual node + union find)
     // SC: O(E)
-    
+    // m = no. of pipes, n = no. of villages, E = m + n
     int kruskalMST(int n, vector<int>& wells, vector<vector<int>>& pipes) {
         // Since each house can have its own well also, we can create a dummy house
         // Assume that all the wells are built here and the pipe to each individual house

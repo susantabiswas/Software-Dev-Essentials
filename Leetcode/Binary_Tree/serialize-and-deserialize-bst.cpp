@@ -1,6 +1,10 @@
 /*
     https://leetcode.com/problems/serialize-and-deserialize-bst/submissions/
-    
+
+    SOLUTION 1:
+    TC: O(n) for both the operations
+
+    SOLUTION 2
     Encoding: TC: O(N)
     We use the preorder traversal data.
     
@@ -9,16 +13,57 @@
     a time to the BST. Since we use preorder data we will be pushing nodes
 	as they appeared in the original tree.
 */
+//////////// SOLUTION 1
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+public:
+    void preorder(TreeNode* root, string& result) {
+        if(!result.empty())
+            result += ',';
+        
+        if(!root) {
+            result += 'n';
+            return;
+        }
+        
+        result += to_string(root->val);
+        
+        preorder(root->left, result);
+        preorder(root->right, result);
+    }
+    
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        string result;
+        
+        preorder(root, result);
+        return result;
+    }
+    
+    TreeNode* decode(istringstream& ss) {
+        string token;
+        if(!getline(ss, token, ','))
+            return nullptr;
+        
+        if(token == "n")
+            return nullptr;
+        
+        TreeNode* root = new TreeNode(stoi(token));
+        root->left = decode(ss);
+        root->right = decode(ss);
+        
+        return root;
+    }
+    
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        istringstream ss(data);
+        return decode(ss);
+    }
+};
+
+
+
+//////////// SOLUTION 2
 class Codec {
 public:
     void preOrder(TreeNode *root, string &traversal) {

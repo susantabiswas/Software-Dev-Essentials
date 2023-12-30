@@ -8,7 +8,51 @@
     TC: O(NM), M: nodes in t, N: nodes in s
 
     SOLUTION 2: Hashing
-    TC: O(M + N)
+    TC: O(N + M)
+    SC: O(max(M, N))
+
+    Postorder/ Preorder
+    NOTE - One imp thing to take care is with the start of a node. The hash of a subtree might start from the 
+    the substring of another tree's node, this can give false positive.
+    eg: tree: [21]
+    subtree: [1]
+
+        hash: 1 might match with partial node string 21, so we need to ensure that the start of node is clear and cannot be a 
+        substring of another node's string value.
+    
+        This is why if we add ',' before each value, we can ensure that a char is there to mark the start of a node value.
+        With this, above problem is resolved, 
+        tree hash: ,21,LL
+        subtree hash: ,1,LL
+
+        Note - We don't need to mark the recursion end of child call with a special char since we are marking the null nodes
+        and they capture the tree structure.
+
+    
+    Inorder:
+        One caution with inorder, since the left subtree hash is present before the curr + right, the null node of left subtree
+        might along with the rest of matching subtree might give a false positive. Here we can use a special symbol to mark the end of recursion
+        call, this way after the null node of left subtree we will get * symbols to capture the actual structure.
+    
+    Subtree
+        9
+      /  \
+     0    1
+          \
+           2
+
+    Main Tree
+        100
+       / \ 
+      9
+    /  \
+   0    1
+    \    \
+     8    2
+
+    Here the main tree doesnt really have the subtree, but without capturing the end of recursion, the null node after 8 will appear just before 9 and 
+    the string search wll turn true.
+    With capturing the recursion call end, we will have null,*,9.... => this will not match the string as expected
 */
 
 /**
@@ -71,8 +115,6 @@ void postorder(TreeNode* root, string& tree_hash) {
         
         postorder(root->left, tree_hash);
         postorder(root->right, tree_hash);
-        
-        tree_hash += '#';
     }
     
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {

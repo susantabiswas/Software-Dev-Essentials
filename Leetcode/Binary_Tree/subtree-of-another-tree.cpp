@@ -127,3 +127,34 @@ void postorder(TreeNode* root, string& tree_hash) {
         
         return orig.find(subtree) != string::npos;
     }
+
+
+
+/////////////// HASHING + Inorder
+class Solution {
+public:
+    void hashTree(TreeNode* root, string& hash) {
+        if(!hash.empty())
+            hash += ',';
+        
+        if(!root) {
+            hash += 'n';
+            return;
+        }
+        
+        hashTree(root->left, hash);
+        
+        hash += to_string(root->val);
+        
+        hashTree(root->right, hash);
+        hash += '*';
+    }
+    
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        string tree_hash, sub_hash;
+        hashTree(subRoot, sub_hash);
+        hashTree(root, tree_hash);
+        
+        auto it = tree_hash.find(sub_hash);
+        return it != string::npos;
+    }

@@ -1,8 +1,8 @@
 /*
     https://leetcode.com/problems/kth-smallest-element-in-a-bst/
     
-    TC: O(k), TC: O(k)
-    
+    TC: O(logn + k), TC: O(k)
+    Worst case is traversing till the depth of tree and then iterate till the kth element.
 */
 
 /**

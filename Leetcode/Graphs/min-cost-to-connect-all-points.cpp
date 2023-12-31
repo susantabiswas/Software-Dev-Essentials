@@ -86,7 +86,7 @@ public:
     }
     
     // MST using Prim's algo
-    // TC: O(V * (V + logE)), E = V^2. Each time the heap will get 1 + V-1 + V-2 + ..... elements ~ V^2
+    // TC: O(V^2 + ElogE)), E = V^2. Each time the heap will get 1 + V-1 + V-2 + ..... elements ~ V^2
     int primMST(vector<vector<int>>& points) {
         int cost = 0;
         int n = points.size();
@@ -194,8 +194,8 @@ private:
         }
     };
 public:
-// TC: O(V^2 + V * (V + log(V^2)) ~ O(V^2 + V * (V + 2log(V)) 
-// ~ O(V^2 + V * (V + log(V))
+// TC: O(V^2 + V^2 * log(V^2)) ~ O(V^2 + V^2 * 2log(V)) 
+// ~ O(V^2 + V^2log(V) ~ O(graph creation + heap insertions)
 //  Each time the heap will get 1 + V-1 + V-2 + ..... elements ~ V^2. In the worst case, heap will have a size of V^2
     int prims(int n, vector<vector<int>>& edges) {
         int mst = 0;

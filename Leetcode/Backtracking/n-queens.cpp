@@ -1,17 +1,13 @@
-```
 /*
     https://leetcode.com/problems/n-queens/
-    
-    TC: t(n) = nT(n-1) + O(1)
-        O(n^n), n calls made at each stage and max depth of n levels, validating correcting pos takes O(1)
-    SC: O(n), max stack depth + 3 vectors of multiple * n space
 
+    SOLUTION 1: Easier and shorter
     
-
+    SOLUTION 2
     Time complexity: O(N!)
 
     Unlike the brute force approach, we will only place queens on squares that aren't 
-    under attack. For the first queen, we have NNN options. For the next queen, we won't 
+    under attack. For the first queen, we have N options. For the next queen, we won't 
     attempt to place it in the same column as the first queen, and there must be at least 
     one square attacked diagonally by the first queen as well. Thus, the maximum number of 
     squares we can consider for the second queen is N−2. For the third queen, 
@@ -22,7 +18,7 @@
 
     While it costs O(N^2) to build each valid solution, the amount of valid 
     solutions S(N) does not grow nearly as fast as N!, 
-    so O(N!)O(N! + S(N) * N^2) = O(N!)
+    so O(N! + S(N) * N^2) = O(N!)
 
     Space complexity: O(N^2)
 
@@ -33,6 +29,73 @@
     space complexity.
 
 */
+////////////// SOLUTION 1
+/*
+    https://leetcode.com/problems/n-queens/
+    
+    TC: O(n^2 * n!),
+        first time we have n cols to place the queen, next time
+        there are n-2 positions since we avoid the same col and the diagonal col,
+        then we have n-4 cols (avoid the 2 diagonal cols and used cols previously) and so on.
+        
+        This is n!
+        Also at the end we copy the entire grid which take O(n^2)
+        
+    SC: O(n + n^2) (recursion stack + grid size)
+*/
+class Solution {
+public:
+    bool isValid(vector<int>& col_placement) {
+        int row = col_placement.size() - 1;
+        
+        for(int r = 0; r < row; r++) {
+            int col_diff = abs(col_placement[r] - col_placement[row]);
+            
+            // diagonal elements have the same col_diff and row_diff
+            if(col_diff == 0 || (col_diff == row - r))
+                return false;
+        }
+        return true;
+    }
+    
+    void solve(int row, vector<int>& col_placement,
+              vector<string>& grid, vector<vector<string>>& cmb) {
+        // terminal case
+        if(row == grid.size()) {
+            cmb.push_back(grid);
+            return;
+        }
+        
+        // find the appropriate position to put the queen for the
+        // current row
+        for(int c = 0; c < grid.size(); c++) {
+            col_placement.push_back(c);
+            grid[row][c] = 'Q';
+            
+            if(isValid(col_placement))
+                solve(row+1, col_placement, grid, cmb);
+            
+            grid[row][c] = '.';
+            // revert the change
+            col_placement.pop_back();
+        }
+    }
+    
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> cmb;
+        vector<string> grid(n);
+        
+        for(int i = 0; i < n; i++)
+            grid[i].resize(n, '.');
+        
+        vector<int> col_placement;
+        
+        solve(0, col_placement, grid, cmb);
+        return cmb;
+    }
+};
+
+////////////// SOLUTION 2
 class Solution {
 public:
     bool isValid(int row, int col, vector<bool>& visited_cols,
@@ -106,4 +169,4 @@ public:
         return result;
     }
 };
-```
+

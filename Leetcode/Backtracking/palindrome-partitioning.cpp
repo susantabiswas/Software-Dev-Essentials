@@ -5,6 +5,17 @@
         + O(n * 2^n) (Backtracking, takes O(n) to copy the string to result)
         ~O(n * 2^n)
     SC: O(n), recursive stack
+
+    A simpler way to look at the time complexity:
+    For a length n string, for each position, we can choose to either put or not put a partition there.
+    e.g "aa", either put/not put a partition at index 0 => "aa", "a","a"
+    So 2 * 2 * .. 2 choices (n times)
+    With 2 choices and length n, we have 2^n possible partitioned strings.
+    
+    Also when we create a substring, that substring is actually a part of one of the possible 2^N partitioned strings. So the in total an effort of O(n) will be spent for that full-length partitioned string and hence it takes O(n) for each possible palindromic partition.
+    For a total of 2^n strings, we have
+    TC: ~O(n * 2^n)
+    SC: O(n), recursion depth
 */
 class Solution {
 public:

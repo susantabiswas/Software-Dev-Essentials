@@ -43,6 +43,11 @@ public:
 };
 
 ///////////////////////////////// Way 2
+    // TC: O(2 ^ max(n, target / min el of candidates)), 
+    // one recursive call only increases the index which can go till 'n',
+    // the other recursive call can happen for target / min el times, so the worst
+    // case is whichever is greater 
+    // SC: O(max(n, target / min el of candidates))
     void sol(int curr, int target, vector<int>& cmb, vector<int>& nums,
             vector<vector<int>>& result) {
         if(target == 0) {

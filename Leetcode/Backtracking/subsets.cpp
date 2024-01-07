@@ -20,9 +20,9 @@
 
 class Solution {
 public:
-    // Using backtracking
+    // Way 1: Using backtracking
     // TC: O(N * 2^N), SC:O(N), Worst case we go till length of array depth wise
-    void generateSubsets(vector<int>& nums, vector<int>& partial,
+    void generateSubsets1(vector<int>& nums, vector<int>& partial,
                     int i, vector<vector<int> >& result) {
         if(i == nums.size()) {
             result.emplace_back(partial);
@@ -31,17 +31,31 @@ public:
         
         // for the current index, we can either include it or choose not to
         partial.emplace_back(nums[i]);
-        generateSubsets(nums, partial, i+1, result);
+        generateSubsets1(nums, partial, i+1, result);
         partial.pop_back();
-        generateSubsets(nums, partial, i+1, result);
+        generateSubsets1(nums, partial, i+1, result);
     }
-    
+
+	// Way 2: Backtracking, same complexity as previous
+	// This mimics the iterative solution, here we add elements to the subset generate so far. 
+    void sol2(int idx, vector<int>& subset, vector<int>& nums, vector<vector<int>>& result) {
+        result.push_back(subset);
+        
+        for(int i = idx; i < nums.size(); i++) {
+            subset.push_back(nums[i]);
+            sol2(i+1, subset, nums, result);
+            subset.pop_back();
+    }
+	
     // driver function for backtracking
     vector<vector<int>> subsetsBacktracking(vector<int>& nums) {
         vector<int> partial;
         vector<vector<int> > result;
-        generateSubsets(nums, partial, 0, result);
-        
+		// way 1
+        generateSubsets1(nums, partial, 0, result);
+
+		// way2
+		// sol2(0, partial, nums, result);
         return result;
     }
     

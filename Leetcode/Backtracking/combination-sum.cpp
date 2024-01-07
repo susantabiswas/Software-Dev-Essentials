@@ -41,3 +41,34 @@ public:
         return result;
     }
 };
+
+///////////////////////////////// Way 2
+    void sol(int curr, int target, vector<int>& cmb, vector<int>& nums,
+            vector<vector<int>>& result) {
+        if(target == 0) {
+            result.push_back(cmb);
+            return;
+        }
+        
+        if(target < 0)
+            return;
+        
+        if(curr == nums.size())
+            return;
+
+        // Exclude the current element
+        sol(curr+1, target, cmb, nums, result);
+        cmb.push_back(nums[curr]);
+
+        // Include the current element
+        sol(curr, target - nums[curr], cmb, nums, result);
+        cmb.pop_back();
+    }
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> result;
+        vector<int> cmb;
+        sol(0, target, cmb, candidates, result);
+        
+        return result;
+    }

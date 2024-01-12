@@ -7,6 +7,15 @@
     Initially the cache values are INF except for 0 target value which can
     be achieved with any no. of coins.
     Then for each target we check the min comb of coins for that
+
+    Brute Force Backtracking
+    
+    TC : O(S^n). 
+    If we use a coin ci, it will take S/ci steps, since we can have recursion running for the different coins
+    used during the recursion, we can have
+    S/c1 * S/c2 * ..... S/cn = S^n/(c1 * c2 * .....cn)
+    
+    SC: O(S/m), m is the smallest coin​
 */
 
 class Solution {

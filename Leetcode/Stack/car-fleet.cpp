@@ -12,6 +12,13 @@
   TC: O(nlogn + n) ~ O(nlogn)
   SC: O(n)
 
+  WAY2 (Easier to understand):
+  We start from the end, if the previous car's eta is smaller then that car will just join the slower
+  car fleet in front.
+  So starting from right to left, each time we encounter eta that is greater than the stack top, it means this
+  car will not be able to join the fleet in front and rather create its own fleet, also this will block the 
+  cars behind it from overtaking it.
+  
   SOLUTION 2: Ordered Set
   TC: O(nlogn + n) [Tree insertion + eta calculation traversal] ~ O(nlogn)
   SC: O(n)
@@ -41,6 +48,32 @@ public:
             eta.push(t);
         }
         return eta.size();
+    }
+};
+
+// WAY 2
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+        stack<double> taken;
+        
+        int n = speed.size();
+        // <position, index>
+        vector<array<int, 2>> pos;
+        
+        for(int i = 0; i < position.size(); i++)
+            pos.push_back({position[i], i});
+        
+        sort(pos.begin(), pos.end());
+        
+        for(int i = n-1; i >= 0; i--) {
+            double time = (target - pos[i][0]) / (double)speed[pos[i][1]];
+            
+            if(taken.empty() || time > taken.top())
+                taken.push(time);
+        }
+        
+        return taken.size();
     }
 };
 

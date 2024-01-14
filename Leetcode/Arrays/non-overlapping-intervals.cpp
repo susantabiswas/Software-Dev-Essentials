@@ -26,7 +26,9 @@ public:
             // Since all the intervals are sorted by end time, we know that
             // intervals[i] will end later than curr and hence it might get overlapped
             // with many more upcoming intervals, so it's better to delete this instead of
-            // previous one, whose end ends before this
+            // previous one, whose end ends before this.
+            // Also since we are not keeping the ith interval, we don't use its endpt to compare the
+            // next intervals and rather use the current interval (that is not deleted) for comparison.
             if(curr[1] > intervals[i][0]) {
                 ++remove;
             }   

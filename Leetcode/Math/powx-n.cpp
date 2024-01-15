@@ -23,3 +23,24 @@ public:
         }
     }
 };
+
+
+// Way 2
+class Solution {
+public:
+    double myPow(double x, int n) {
+        // base cases
+        if(n == 0)
+            return 1;
+        
+        if(abs(n) == 1)
+            return n == 1 ? x : 1/x;
+        
+        double val = myPow(x, n/2);
+        
+        if(n % 2) // odd power
+            return n > 0 ? x * val * val : 1/x * val * val;
+        
+        return val * val;
+    }
+};

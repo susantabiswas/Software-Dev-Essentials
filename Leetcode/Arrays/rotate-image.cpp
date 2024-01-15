@@ -37,7 +37,29 @@ public:
             ++col_start, ++row_start, --col_end, --row_end;
         }
     }
-    
+
+    // Solution 1: Way 2
+    void rotate(vector<vector<int>>& grid) {
+            int row_s = 0, row_e = grid.size()-1;
+            int col_s = 0, col_e = grid.size()-1;
+            
+            int n = grid.size()-1;
+            
+            while(row_s <= row_e) {
+                
+                // place the elements of current shell layer
+                for(int i = col_s; i < col_e; i++) {
+                    int val = grid[row_s][i]; // top
+                    
+                    grid[row_s][i] = grid[n - i][col_s]; // left
+                    grid[n - i][col_s] = grid[row_e][n - i]; // bottom
+                    grid[row_e][n - i] = grid[i][col_e];
+                    grid[i][col_e] = val;
+                }
+                ++row_s, --row_e, ++col_s, --col_e;
+            }
+        }
+
     // Solution 2
     void rotate(vector<vector<int>>& matrix) {
         const int N = matrix.size();
@@ -50,5 +72,6 @@ public:
         for(int i = 0; i < N; i++)
             reverse(matrix[i].begin(), matrix[i].end());
     }
-    
+
+
 };

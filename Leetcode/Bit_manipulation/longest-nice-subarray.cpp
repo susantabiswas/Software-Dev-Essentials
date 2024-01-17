@@ -19,9 +19,15 @@
     Using sliding window we expand the window and then shrink the window when the window becomes invalid.
     To take away the contribution of previous number from the subarray we can use XOR, as XOR of same bits is 0.
     So XOR of same number with the window_and will reset the contribution of that number.
+
+    Why XOR works? Its because the previous window which was valid had no bit common among any element in the window
     
     Usually in a max len sliding window, we do expansion and then shrink, but here it might get tricky to do that.
     So we first ensure that the window is safe to add the current number by shrinking and then add the current number.
+    The reason is if we do the traditional template where the expansion happens regardless, then we might add numbers 
+    to the window with common bits and later to correct that we can't use a XOR as XOR will straight away remove the bit 
+    even though multiple numbers might have that bit set.
+    When we check first and then the number to the window, we are sure that there won't be any common bits. 
 */
 class Solution {
 public:

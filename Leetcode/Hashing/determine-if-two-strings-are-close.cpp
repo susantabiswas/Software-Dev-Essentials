@@ -2,7 +2,7 @@
     https://leetcode.com/problems/determine-if-two-strings-are-close/
     
     TC: O(n)
-    SC: O(n)
+    SC: O(1), only 26 chars
     
     2 conditions:
     1. any position of char can be changed

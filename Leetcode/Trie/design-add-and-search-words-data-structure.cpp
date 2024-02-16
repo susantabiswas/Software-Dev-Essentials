@@ -6,6 +6,9 @@
     We can use DFS for searching, when we get '.' we do DFS for all the leaves nodes for
     the current level of Trie and check any of the DFS is able to find the complete pattern
     sequence.
+
+    TC:  O(26^L), L is length of string, in worst case there can only be '.' and we might have all the keys avail (26 chars) as leaves
+    SC: O(nL)
 */
 
 class WordDictionary {

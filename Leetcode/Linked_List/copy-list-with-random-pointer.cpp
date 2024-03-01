@@ -17,6 +17,33 @@ public:
 };
 */
 
+// SOLUTION 0: Cleanest
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        unordered_map<Node*, Node*> clone;
+        
+        Node* curr = head;
+        
+        // make clone nodes
+        while(curr) {
+            clone[curr] = new Node(curr->val);
+            curr = curr->next;
+        }
+        
+        // set the random and next ptrs of clones
+        curr = head;
+        while(curr) {
+            clone[curr]->next = curr->next ? clone[curr->next] : nullptr;
+            clone[curr]->random = curr->random ? clone[curr->random] : nullptr;
+            
+            curr = curr->next;
+        }
+        
+        return clone[head];
+    }
+};
+
 class Solution {
 public:
     // Solution 1

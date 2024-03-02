@@ -36,3 +36,41 @@ public:
         return sorted;
     }
 };
+
+/////////////////////////// WAY 2
+class Solution {
+public:
+    int square(int a) {
+        return a * a;
+    }
+    
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int> result(nums.size());
+        
+        int pos = 0, neg = 0;
+        // find the position of 1st positive number (smallest positive)
+        for(; pos < nums.size() && nums[pos] < 0; pos++);
+        
+        // position of smallest negative number
+        neg = pos - 1;
+        
+        // start placing the numbers from smallest -> greatest
+        int i = 0;
+        while(neg >= 0 && pos < nums.size()) {
+            if(square(nums[neg]) < square(nums[pos]))
+                result[i] = square(nums[neg--]);
+            else
+                result[i] = square(nums[pos++]);
+            ++i;
+        }
+        
+        // incase numbers are left
+        while(neg >= 0)
+            result[i++] = square(nums[neg--]);
+
+        while(pos < nums.size())
+            result[i++] = square(nums[pos++]);
+        
+        return result;
+    }
+};

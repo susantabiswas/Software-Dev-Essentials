@@ -3,14 +3,52 @@
     https://leetcode.com/problems/binary-tree-postorder-traversal/
 */
 
+
+/////////////////////////// Clean Solution 
+/*
+    Core Idea: 
+    Post order can be derived from preorder where we take Right and then Left turn, and then reversing the entire order of elements.
+
+    Post Order:
+        1. Do preorder like movement with Right and then Left
+        2. Reverse the order of elements
+
+    Now the above idea can be implemented via 2 ways:
+    1. Stack solution
+    2. Threaded Binary Tree / Morris Traversal
+*/
+
+////// Stack Solution
+vector<int> sol1(TreeNode* root) {
+    vector<int> order;
+    
+    stack<TreeNode*> s;
+    TreeNode* curr = root;
+    
+    while(!s.empty() || curr) {
+        
+        // go right first
+        while(curr) {
+            order.push_back(curr->val);
+            s.push(curr);
+            curr = curr->right;
+        } 
+        
+        curr = s.top();
+        s.pop();
+        
+        // now go left
+        curr = curr->left;
+        
+    }
+    
+    reverse(order.begin(), order.end());
+    return order;
+}
+//////////////////////////////////////////////////////
+
 /**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
+    SOLUTION - Pretty bad
  */
 class Solution {
 public:

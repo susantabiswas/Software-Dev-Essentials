@@ -7,6 +7,34 @@
     
     TC: O(MN)
 */
+/////////////////////////////////////////////////////////// No extra visited array
+class Solution {
+public:
+    void dfs(int row, int col, vector<vector<int>>& grid, int orig_color, int new_color) {
+        // base check
+        if(!(row >= 0 && row < grid.size() && col >= 0 && col < grid[0].size() &&
+          grid[row][col] == orig_color))
+            return;
+        
+        grid[row][col] = new_color;
+        
+        dfs(row+1, col, grid, orig_color, new_color);
+        dfs(row-1, col, grid, orig_color, new_color);
+        dfs(row, col+1, grid, orig_color, new_color);
+        dfs(row, col-1, grid, orig_color, new_color);
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int orig_color = image[sr][sc];
+
+        // only makes sense to iterate the neighbors and start pt if the color is different
+        if(orig_color != color)
+            dfs(sr, sc, image, orig_color, color);
+        return image;
+    }
+};
+
+/////////////////////////////////////////////////////////// with visited array
 class Solution {
 public:
     // For doing DFS

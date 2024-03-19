@@ -7,6 +7,19 @@
     1. Iterate through the elements
         1.1 For each element, check if the counterpart is present or not
         1.2 If present return true
+
+    Best Solution
+    TC: O(n)
+    SC: O(n)
+
+    Solution 1
+    - We can do an inorder traversal of BST and save the elements, inorder of BST ensures that
+    we will be traversing in sorted order.
+    - Once we have the sorted order of elements, we perform the classic 2 sum solution using two pointers.
+
+    Solution 2
+    - Perform any traversal and save the elements
+    - Perform 2 sum using hashing
 */
 /**
  * Definition for a binary tree node.
